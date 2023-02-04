@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../model_list_file.dart';
 
-class NouveauCompteImportateur extends StatefulWidget {
-  const NouveauCompteImportateur({Key? key}) : super(key: key);
+class NouveauImportateur extends StatefulWidget {
+  const NouveauImportateur({Key? key}) : super(key: key);
 
   @override
-  State<NouveauCompteImportateur> createState() => _NouveauCompteImportateurState();
+  State<NouveauImportateur> createState() => _NouveauImportateurState();
 }
 
-class _NouveauCompteImportateurState extends State<NouveauCompteImportateur> {
+class _NouveauImportateurState extends State<NouveauImportateur> {
 
 
 
@@ -25,6 +25,7 @@ class _NouveauCompteImportateurState extends State<NouveauCompteImportateur> {
         elevation: 10,
         centerTitle: true,
         toolbarHeight: MediaQuery.of(context).size.height*0.06,
+        //toolbarHeight: 40,
         title:
         Column(
           // crossAxisAlignment: CrossAxisAlignment.end,
@@ -33,7 +34,7 @@ class _NouveauCompteImportateurState extends State<NouveauCompteImportateur> {
               Row(
                   children: [
 
-                    Text('NOUVEAU DOSSIER',
+                    Text('NOUVEAU IMPORTATEUR',
                       style: TextStyle(fontSize: 15,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
@@ -55,40 +56,10 @@ class _NouveauCompteImportateurState extends State<NouveauCompteImportateur> {
       body:
       Column(
         children: [
-          // Container(
-          //   padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
-          //   //height: 50,
-          //   color: Colors.blue,
-          //
-          //   child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.end,
-          //       children: [
-          //
-          //         SizedBox(height: 10,),
-          //
-          //         Card(
-          //           child: Row(
-          //             //crossAxisAlignment: CrossAxisAlignment.end,
-          //               mainAxisAlignment: MainAxisAlignment.end,
-          //
-          //               children: [
-          //                 IconButton(onPressed: () {},
-          //                     icon: Icon(Icons.arrow_drop_down_outlined,
-          //                         color: Colors.black)),
-          //
-          //                 //const Spacer(),
-          //
-          //                 IconButton(onPressed: () {},
-          //                     icon: Icon(Icons.playlist_add,
-          //                         color: Colors.black)),
-          //               ]),
-          //         ),
-          //
-          //       ]),
-          //
-          // ),
 
-          //Autre Mise en former
+          SizedBox(height: 15,),
+
+
 
           Container(
             padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
@@ -97,6 +68,7 @@ class _NouveauCompteImportateurState extends State<NouveauCompteImportateur> {
               child: TextFormField(
                 //controller: usernameController,
                 style: TextStyle (fontSize: 17) ,
+
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(10),
                     prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
@@ -109,7 +81,7 @@ class _NouveauCompteImportateurState extends State<NouveauCompteImportateur> {
               ),
             ),
           ),
-          SizedBox(height: 12,),
+          SizedBox(height: 15,),
 
           Container(
             padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
@@ -123,13 +95,17 @@ class _NouveauCompteImportateurState extends State<NouveauCompteImportateur> {
                     prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
 
                     ),
-                    labelText: "Numero du compte",
+                    labelText: "Numero du Compte",
                     hintText: "  "
                 ),
                 keyboardType: TextInputType.text,
               ),
             ),
           ),
+
+
+
+
 
 
 

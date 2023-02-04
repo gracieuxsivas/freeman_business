@@ -30,14 +30,16 @@ class _VoirEvolutionState extends State<VoirEvolution> {
               child: (
               OutlinedButton.icon(
 
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/recherche_du_compte');
+                  },
                   style: OutlinedButton.styleFrom( backgroundColor: Colors.white,
                     shape: StadiumBorder(),
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                     //side: BorderSide(width: 2, color: Colors.white),
                   ),
                   icon: Icon (Icons.keyboard_arrow_right,size: 30,
-                              color: Colors.grey,),
+                              color: Colors.black,),
                   label: Text("Recherche du compte",
                               style: TextStyle(color: Colors.grey,),))
               ),
@@ -312,7 +314,7 @@ class _VoirEvolutionState extends State<VoirEvolution> {
 
             ),
             SizedBox(
-              height: 40,
+              height: MediaQuery.of(context).size.height*0.05,
               width: double.infinity,//<= Match parent
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(

@@ -11,13 +11,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
-  bool isLoading = false;
-  bool _validate = false;
-  bool _validateUsername = false;
-  bool _isHidden = true;
-
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  // bool isLoading = false;
+  // bool _validate = false;
+  // bool _validateUsername = false;
+  // bool _isHidden = true;
+  //
+  // final usernameController = TextEditingController();
+  // final passwordController = TextEditingController();
 
 
 
@@ -52,7 +52,7 @@ class _LoginState extends State<Login> {
 
                Card(
                  child: TextFormField(
-                   controller: usernameController,
+                   //controller: usernameController,
                    style: TextStyle (fontSize: 20) ,
                    decoration: InputDecoration(
                        contentPadding: EdgeInsets.all(10),
@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
                //L'AUTRE ZONE DE SAISIE
                Card(
                  child: TextFormField(
-                   controller: passwordController,
+                  // controller: passwordController,
                    style: TextStyle (fontSize: 20) ,
                    obscureText: true,
                    decoration: InputDecoration(
@@ -111,46 +111,46 @@ class _LoginState extends State<Login> {
                          onPressed: (){
                            //Verifier si les champs de saisi ne sont pas vide
 
-                           usernameController.text.isEmpty
-                           ? _validateUsername = true
-                               : _validateUsername = false;
-                            passwordController.text.isEmpty
-                            ? _validate = true
-                                : _validate = false;
+                           // usernameController.text.isEmpty
+                           // ? _validateUsername = true
+                           //     : _validateUsername = false;
+                           //  passwordController.text.isEmpty
+                           //  ? _validate = true
+                           //      : _validate = false;
                             // isLoading=true;
 
-                           if(usernameController.text.isNotEmpty &&
-                               passwordController.text.isNotEmpty)
-                             {
-                                var username = usernameController.text;
-                                var password = passwordController.text;
-
-                                User.getConnexionUtilisateur(username, password)
-                                  .then((data)
-                                  {
-                                    List<User> userdata = data;
-
-                                    if(userdata.length > 0)
-                                      {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                          content: Text("Connexion réussie avec succès"),
-                                        ));
-
-                                        //REDIRECTION VERS LA PAGE D'ACCEUIL
-                                        Navigator.of(context).pushNamed("/accueil");
-                                      }
-                                    else
-                                      {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                          content: Text("Echec de connexion"),
-                                        ));
-                                      }
-
-                                  });
-
-                             }
+                           // if(usernameController.text.isNotEmpty &&
+                           //     passwordController.text.isNotEmpty)
+                             // {
+                             //    //var username = usernameController.text;
+                             //   // var password = passwordController.text;
+                             //
+                             //    // User.getConnexionUtilisateur(username, password)
+                             //    //   .then((data)
+                             //      {
+                             //        List<User> userdata = data;
+                             //
+                             //        if(userdata.length > 0)
+                             //          {
+                             //            ScaffoldMessenger.of(context)
+                             //                .showSnackBar(const SnackBar(
+                             //              content: Text("Connexion réussie avec succès"),
+                             //            ));
+                             //
+                             //            //REDIRECTION VERS LA PAGE D'ACCEUIL
+                                       Navigator.of(context).pushNamed("/accueil");
+                             //          }
+                             //        else
+                             //          {
+                             //            ScaffoldMessenger.of(context)
+                             //                .showSnackBar(const SnackBar(
+                             //              content: Text("Echec de connexion"),
+                             //            ));
+                             //          }
+                             //
+                             //      });
+                             //
+                             // }
 
 
                        },

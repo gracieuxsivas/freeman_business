@@ -14,7 +14,7 @@ class _RechercheDuCompteState extends State<RechercheDuCompte> {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.blue[700],
-        title: Text("Evolution"),
+        title: Text("Recherche du compte"),
         centerTitle: true,
         elevation: 0,
         actions: [

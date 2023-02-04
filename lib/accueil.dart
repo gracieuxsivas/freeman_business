@@ -21,10 +21,10 @@ class _AccueilState extends State<Accueil> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 32,
+        toolbarHeight: MediaQuery.of(context).size.height*0.05,
 
       ),
-      backgroundColor: Colors.grey[300],
+     // backgroundColor: Colors.grey[300],
       body: 
       Center(
         child: SingleChildScrollView(
@@ -45,8 +45,9 @@ class _AccueilState extends State<Accueil> {
                       color: Colors.white,
                      padding: EdgeInsets.all(5),
                       margin: EdgeInsets.all(5),
-                      height: 140,
-                      width: 120,
+
+                      height: MediaQuery.of(context).size.height*0.20,
+                      width: MediaQuery.of(context).size.width*0.33,
 
                       child:
                         Column(
@@ -111,8 +112,8 @@ class _AccueilState extends State<Accueil> {
                                 color: Colors.white,
                                 padding: EdgeInsets.all(2),
                                 margin: EdgeInsets.all(5),
-                                height: 140,
-                                width: 120,
+                                height: MediaQuery.of(context).size.height*0.20,
+                                width: MediaQuery.of(context).size.width*0.33,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -168,8 +169,8 @@ class _AccueilState extends State<Accueil> {
                         color: Colors.white,
                         padding: EdgeInsets.all(5),
                         margin: EdgeInsets.all(5),
-                        height: 140,
-                        width: 120,
+                        height: MediaQuery.of(context).size.height*0.20,
+                        width: MediaQuery.of(context).size.width*0.33,
 
                         child:
                         Column(
@@ -217,8 +218,8 @@ class _AccueilState extends State<Accueil> {
                         color: Colors.white,
                         padding: EdgeInsets.all(5),
                         margin: EdgeInsets.all(5),
-                        height: 140,
-                        width: 120,
+                        height: MediaQuery.of(context).size.height*0.20,
+                        width: MediaQuery.of(context).size.width*0.33,
 
                         child:
                         Column(
@@ -273,15 +274,16 @@ class _AccueilState extends State<Accueil> {
                         color: Colors.white,
                         padding: EdgeInsets.all(5),
                         margin: EdgeInsets.all(5),
-                        height: 140,
-                        width: 120,
+
+                        height: MediaQuery.of(context).size.height*0.20,
+                        width: MediaQuery.of(context).size.width*0.33,
 
                         child:
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CircleAvatar(
-                              backgroundColor: Colors.blue,
+                              backgroundColor: Colors.grey[700],
                               radius: 40,
                               child: IconButton(
                                 padding: EdgeInsets.zero,
@@ -322,8 +324,9 @@ class _AccueilState extends State<Accueil> {
                         color: Colors.white,
                         padding: EdgeInsets.all(5),
                         margin: EdgeInsets.all(5),
-                        height: 140,
-                        width: 120,
+
+                        height: MediaQuery.of(context).size.height*0.20,
+                        width: MediaQuery.of(context).size.width*0.33,
 
                         child:
                         Column(
@@ -332,7 +335,7 @@ class _AccueilState extends State<Accueil> {
                           children: [
 
                             CircleAvatar(
-                              backgroundColor: Colors.orange,
+                              backgroundColor: Colors.pink[800],
                               radius: 40,
                               child: IconButton(
                                 padding: EdgeInsets.zero,
@@ -377,15 +380,16 @@ class _AccueilState extends State<Accueil> {
                         color: Colors.white,
                         padding: EdgeInsets.all(5),
                         margin: EdgeInsets.all(5),
-                        height: 140,
-                        width: 120,
+
+                        height: MediaQuery.of(context).size.height*0.20,
+                        width: MediaQuery.of(context).size.width*0.33,
 
                         child:
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CircleAvatar(
-                              backgroundColor: Colors.blue,
+                              backgroundColor: Colors.blue[900],
                               radius: 40,
                               child: IconButton(
                                 padding: EdgeInsets.zero,
@@ -425,8 +429,9 @@ class _AccueilState extends State<Accueil> {
                         color: Colors.white,
                         padding: EdgeInsets.all(5),
                         margin: EdgeInsets.all(5),
-                        height: 140,
-                        width: 120,
+
+                        height: MediaQuery.of(context).size.height*0.20,
+                        width: MediaQuery.of(context).size.width*0.33,
 
                         child:
                         Column(

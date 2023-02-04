@@ -24,7 +24,8 @@ class _AjouterDossierState extends State<AjouterDossier> {
         backgroundColor: Colors.blue,
         elevation: 10,
         centerTitle: true,
-        toolbarHeight: 40,
+        toolbarHeight: MediaQuery.of(context).size.height*0.06,
+        //toolbarHeight: 40,
         title:
         Column(
            // crossAxisAlignment: CrossAxisAlignment.end,
@@ -79,13 +80,18 @@ class _AjouterDossierState extends State<AjouterDossier> {
 
                           //const Spacer(),
 
-                          IconButton(onPressed: () {},
+                          IconButton(onPressed: () {
+                            Navigator.pushNamed(context, '/nouveau_importateur');
+                          },
                               icon: Icon(Icons.playlist_add,
                                   color: Colors.black)),
                         ]),
                   ),
 
                 ]),
+            
+            
+            
 
           ),
 

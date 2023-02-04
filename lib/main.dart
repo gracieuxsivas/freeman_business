@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Dossier/ajouter_dossier.dart';
+import 'package:freeman_business/Dossier/nouveau_importateur.dart';
+import 'package:freeman_business/Importateur/nouveau_compte_Importateur.dart';
+import 'package:freeman_business/VoirEvolution/recherche_du_compte.dart';
 import 'package:freeman_business/accueil.dart';
 import 'package:freeman_business/balance.dart';
 import 'package:freeman_business/banque.dart';
@@ -43,9 +46,14 @@ class MyApp extends StatelessWidget {
         '/livre_de_caisse' : (Context)=>Livre_de_caisse(),
         '/dossierencours' : (Context)=>DossierEncours(),
         '/dossiercloture' : (Context)=>DossierCloture(),
-        '/ajouter_dossier' : (Context)=>AjouterDossier()
+        '/ajouter_dossier' : (Context)=>AjouterDossier(),
+        '/recherche_du_compte':(Context)=>RechercheDuCompte(),
+        '/ajouter_dossier':(Context)=>AjouterDossier(),
+        '/nouveau_importateur':(Context)=>NouveauImportateur(),
+        '/nouveau_compte_mportateur':(Context)=>NouveauCompteImportateur(),
 
-    },
+
+      },
     );
   }
 }

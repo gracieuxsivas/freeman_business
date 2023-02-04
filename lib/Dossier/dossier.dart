@@ -12,6 +12,7 @@ class DossierEncours extends StatefulWidget {
 class _DossierEncoursState extends State<DossierEncours> {
   List<ModelDossier_encours> list_dossier_en_cours= [
     ModelDossier_encours (designation: 'Designatio', charge: '    70', facture: 'Facture', resultat: 'Charge   '),
+
     //ModelDossier_encours (designation: '.........', charge: '888', facture: 'pppppdlkddlllllllll', resultat: '9986645')
 
   ];
@@ -27,7 +28,7 @@ class _DossierEncoursState extends State<DossierEncours> {
         backgroundColor: Colors.blue,
         elevation: 0,
         centerTitle: true,
-        toolbarHeight: 50,
+        toolbarHeight: MediaQuery.of(context).size.height*0.06,
         title:
         Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -43,7 +44,9 @@ class _DossierEncoursState extends State<DossierEncours> {
                 ),
 
                 const Spacer(),
-                IconButton(onPressed: () {},
+                IconButton(onPressed: () {
+                  Navigator.pushNamed(context, '/ajouter_dossier');
+                },
                     icon: Icon(Icons.add,
                         color: Colors.white)),
               ]),
@@ -53,14 +56,14 @@ class _DossierEncoursState extends State<DossierEncours> {
             ]),
       ),
 
-      backgroundColor: Colors.grey[300],
+      //backgroundColor: Colors.grey[300],
 
       body:
       Column(
         children: [
           Container(
             padding: EdgeInsets.fromLTRB(10, 4, 10, 0),
-            height: 50,
+            height: MediaQuery.of(context).size.height*0.06,
             color: Colors.blue,
 
 
@@ -134,6 +137,8 @@ class _DossierEncoursState extends State<DossierEncours> {
                     '${encours.resultat}')).toList()
               ),
             ),
+
+
           )
 
           // ListView(
@@ -176,7 +181,7 @@ class _DossierClotureState extends State<DossierCloture> {
         elevation: 0,
         backgroundColor: Colors.blue,
         centerTitle: true,
-        toolbarHeight: 50,
+        toolbarHeight: MediaQuery.of(context).size.height*0.06,
         title:
         Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -201,13 +206,14 @@ class _DossierClotureState extends State<DossierCloture> {
 
             ]),
       ),
-      backgroundColor: Colors.grey[300],
+      //backgroundColor: Colors.grey[300],
 
 
       body:
       Container(
         padding: EdgeInsets.fromLTRB(10, 2, 10, 0),
-        height: 50,
+        height: MediaQuery.of(context).size.height*0.05,
+
         //height: 125,
         color: Colors.blue,
 

@@ -8,9 +8,11 @@ class Importateur extends StatefulWidget {
 }
 
 class _ImportateurState extends State<Importateur> {
-  List<String> importateursList= [
-    'Importateurs ici',
-  ];
+
+  // List<String> importateursList= [
+  //   'Importateurs ici',
+  // ];
+
   @override
   Widget build(BuildContext context) {
     //final double height= MediaQuery.of(context).size.height;
@@ -23,7 +25,7 @@ class _ImportateurState extends State<Importateur> {
          elevation: 0,
          backgroundColor: Colors.blue,
          centerTitle: true,
-         toolbarHeight: 50,
+         toolbarHeight: MediaQuery.of(context).size.height*0.06,
          title:
          Column(
 
@@ -41,7 +43,10 @@ class _ImportateurState extends State<Importateur> {
                      icon: Icon(Icons.search,
                          color: Colors.white)),
                  const Spacer(),
-                 IconButton(onPressed: () {},
+                 IconButton(onPressed: () {
+                   //Navigator.PushNamed(context, routeName)
+                   Navigator.pushNamed(context, '/nouveau_compte_importateur');
+                 },
                      icon: Icon(Icons.add,
                          color: Colors.white)),
                ]),
@@ -155,8 +160,8 @@ class _ImportateurState extends State<Importateur> {
               Card(
                 child: Column(
 
-                  children:  importateursList.map((encours) => Text(encours),
-                  ).toList(),
+                  // children:  importateursList.map((encours) => Text(encours),
+                  // ).toList(),
 
                 ),
               ),
@@ -165,8 +170,8 @@ class _ImportateurState extends State<Importateur> {
 
           Card(
             child: ListTile(
-              title: Text("Title here"),
-              subtitle: Text("Description"),
+              title: Text("........"),
+              //subtitle: Text("Description"),
             ),
           )
         ],
