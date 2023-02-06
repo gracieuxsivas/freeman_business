@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freeman_business/Models/Users.dart';
+import 'package:freeman_business/Models/users.dart';
+import 'package:freeman_business/utilits/toast_print.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -11,13 +12,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
-  // bool isLoading = false;
-  // bool _validate = false;
-  // bool _validateUsername = false;
-  // bool _isHidden = true;
+  bool isLoading = false;
+  bool _validate = false;
+  bool _validateUsername = false;
+  bool _isHidden = true;
   //
-  // final usernameController = TextEditingController();
-  // final passwordController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
 
 
@@ -52,7 +53,7 @@ class _LoginState extends State<Login> {
 
                Card(
                  child: TextFormField(
-                   //controller: usernameController,
+                   controller: usernameController,
                    style: TextStyle (fontSize: 20) ,
                    decoration: InputDecoration(
                        contentPadding: EdgeInsets.all(10),
@@ -71,7 +72,7 @@ class _LoginState extends State<Login> {
                //L'AUTRE ZONE DE SAISIE
                Card(
                  child: TextFormField(
-                  // controller: passwordController,
+                  controller: passwordController,
                    style: TextStyle (fontSize: 20) ,
                    obscureText: true,
                    decoration: InputDecoration(
@@ -119,50 +120,57 @@ class _LoginState extends State<Login> {
                            //      : _validate = false;
                             // isLoading=true;
 
-                           // if(usernameController.text.isNotEmpty &&
-                           //     passwordController.text.isNotEmpty)
-                             // {
-                             //    //var username = usernameController.text;
-                             //   // var password = passwordController.text;
-                             //
-                             //    // User.getConnexionUtilisateur(username, password)
-                             //    //   .then((data)
-                             //      {
-                             //        List<User> userdata = data;
-                             //
-                             //        if(userdata.length > 0)
-                             //          {
-                             //            ScaffoldMessenger.of(context)
-                             //                .showSnackBar(const SnackBar(
-                             //              content: Text("Connexion réussie avec succès"),
-                             //            ));
-                             //
-                             //            //REDIRECTION VERS LA PAGE D'ACCEUIL
+                           setState(() {
+                             isLoading = true;
+                           });
+
+                           if(usernameController.text.isNotEmpty &&
+                               passwordController.text.isNotEmpty)
+                             {
+
+                                var username = usernameController.text;
+                                var password = passwordController.text;
+
+                                Users.getConnexionUsers(username, password)
+                                  .then((data)
+                                  {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                    List<Users> userdata = data;
+                                    if(userdata.length > 0)
+                                      {
+                                        //enregistrement session utilisateur
+                                        Users.saveUserPrefs(userdata.first);
+
+                                        ToastPrint.success("Connexion réussie");
+
+                                        //REDIRECTION VERS LA PAGE D'ACCEUIL
                                        Navigator.of(context).pushNamed("/accueil");
-                             //          }
-                             //        else
-                             //          {
-                             //            ScaffoldMessenger.of(context)
-                             //                .showSnackBar(const SnackBar(
-                             //              content: Text("Echec de connexion"),
-                             //            ));
-                             //          }
-                             //
-                             //      });
-                             //
-                             // }
+                                      }
+                                    else
+                                      {
+                                        ToastPrint.error("Mot de passe ou nom d'utilisateur incorrect");
+                                      }
+
+                                  });
+
+                             }
 
 
                        },
                          //color: Colors.lightBlueAccent,
-                         child: Text(
+                         child:isLoading?CircularProgressIndicator(): Text(
                            "Connecté",
                            style: TextStyle(fontSize: 19, color: Colors.white),),
                        ),
-                     )
+                     ),
+
                    ],
                  ),
-               )
+               ),
+
+
 
              ],
            ),
