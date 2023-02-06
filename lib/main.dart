@@ -11,6 +11,7 @@ import 'package:freeman_business/Importateur/importateur.dart';
 import 'package:freeman_business/livre_de_caisse.dart';
 import 'package:freeman_business/Operations/operation.dart';
 import 'package:freeman_business/resultat.dart';
+import 'package:freeman_business/splashScreen.dart';
 import 'package:freeman_business/try.dart';
 import 'package:freeman_business/VoirEvolution/voir_evolution.dart';
 import 'login.dart';
@@ -32,8 +33,9 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/login' ,
+      initialRoute: '/splash' ,
       routes: {
+        '/splash':(context)=>SplashScreen(),
         '/login':(context)=>Login(),
         '/accueil':(context)=>Accueil(),
         '/evolution': (context)=>VoirEvolution(),
