@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:freeman_business/Models/groupeCompte.dart';
 import 'package:freeman_business/Models/users.dart';
 
 class Accueil extends StatefulWidget {
@@ -15,35 +16,30 @@ class _AccueilState extends State<Accueil> {
 
   //var items =  ['Dossiers en cours', 'Dossier cloturés'];
   String nomUtilisateur = "",service = "";
-  double solde =0;
-
+  double soldeCaisse =0,soldeBanque =0,soldeImporateur =0,soldeFournisseur = 0;
+  bool isLoading =false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    //verification de la mis a jour
-    //checkForUpdate();
-    // InAppUpdate.checkForUpdate().then((info) {
-    //   setState(() {
-    //     _updateInfo = info;
-    //   });
-    // }).catchError((e) {
-    //   showSnack(e.toString());
-    // });
-
-
     Users.getCurrentUsers().then((value) async{
       Users comptes = value;
-
-
       setState(() {
         nomUtilisateur = comptes.designationUt!;
         service = comptes.serviceAffe!;
       });
 
     });
+
+    setState(() {
+      isLoading =  true;
+    });
+    GroupeCompte.getSoldeGroupeCompte(GroupeCompte.Banque).then((value) => setState(() {
+      soldeBanque = value;
+      isLoading =  false;
+    }));
   }
 
 

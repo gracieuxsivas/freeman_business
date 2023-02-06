@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:freeman_business/Models/groupeCompte.dart';
+import 'package:freeman_business/widgets/card_acceuil.dart';
 
 class VoirEvolution extends StatefulWidget {
   const VoirEvolution({Key? key}) : super(key: key);
@@ -8,6 +10,42 @@ class VoirEvolution extends StatefulWidget {
 }
 
 class _VoirEvolutionState extends State<VoirEvolution> {
+
+  double soldeCaisse =0,soldeBanque =0,soldeImporateur =0,soldeFournisseur = 0;
+  bool isLoading =false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    setState(() {
+      isLoading =  true;
+    });
+    GroupeCompte.getSoldeGroupeCompte(GroupeCompte.Banque).then((value) => setState(() {
+      soldeBanque = value;
+      isLoading =  false;
+    }));
+    //fournisseur
+    GroupeCompte.getSoldeGroupeCompte(GroupeCompte.Fournisseur).then((value) => setState(() {
+      soldeFournisseur = value;
+      isLoading =  false;
+    }));
+
+    //caaisse
+    GroupeCompte.getSoldeGroupeCompte(GroupeCompte.Caisse).then((value) => setState(() {
+      soldeCaisse = value;
+      isLoading =  false;
+    }));
+    //importateur
+    GroupeCompte.getSoldeGroupeCompte(GroupeCompte.importateur).then((value) => setState(() {
+      soldeImporateur = value;
+      isLoading =  false;
+    }));
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     //final double height= MediaQuery.of(context).size.height;
@@ -45,258 +83,50 @@ class _VoirEvolutionState extends State<VoirEvolution> {
               ),
 
             ),
+            isLoading?CircularProgressIndicator():Container(),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.all(10),
                 children: [
-                  Card(
-                    elevation: 15,
-                    shadowColor: Colors.blue,
-                    child:
-                       // Padding(padding: EdgeInsets.all(10)),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Facturation importateur",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )
-                          ),
-                          Divider(height: 10.0,
-                          color: Colors.grey[700],),
-                          Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween ,
-                            children: [
-                              Text("Facture here",
-                              style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize:9,
-                              ),),
-                              const SizedBox(width:10 ,),
-                              const Icon(Icons.article, size: 40,),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
 
-                  ),
-    //________________________________________________________________
-    //L'AUTRE CARD 2 ICI
-
-                  Card(
-                    elevation: 15,
-                    shadowColor: Colors.blue,
-
-                    child:
-                    // Padding(padding: EdgeInsets.all(10)),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          const Text("Frais de dossier",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )
-                          ),
-                          Divider(height: 10.0,
-                            color: Colors.grey[700],),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween ,
-                            children: [
-                              Text("Plan de voyage here",
-                                style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize:9,
-                                ),),
-                              SizedBox(width:10 ,),
-                              Icon(Icons.today, size: 40,),
-                            ],
-
-
-                          )
-                        ],
-
-
-                      ),
-                    ),
-
+                  CardAcceuil(
+                    titre: "Facturation importateur",
+                    solde: "0",
+                    icon: Icon(Icons.article, size: 40,),
                   ),
 
-                  //________________________________________________________________
-                  //L'AUTRE CARD 3 ICI
-
-                  Card(
-                    elevation: 15,
-                    shadowColor: Colors.blue,
-
-                    child:
-                    // Padding(padding: EdgeInsets.all(10)),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Text("Caisse (Solde)",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )
-                          ),
-                          Divider(height: 10.0,
-                            color: Colors.grey[700],),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween ,
-                            children: [
-                              Text("caisse here",
-                                style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize:9,
-                                ),),
-                              SizedBox(width:10 ,),
-                              Icon(Icons.attach_money, size: 40,),
-                            ],
-
-
-                          )
-                        ],
-
-
-                      ),
-                    ),
-
-                  ),
-                  //________________________________________________________________
-                  //L'AUTRE CARD 4 ICI
-
-                  Card(
-                    elevation: 15,
-                    shadowColor: Colors.blue,
-
-                    child:
-                    // Padding(padding: EdgeInsets.all(10)),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Text("Banque(Solde)",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )
-                          ),
-                          Divider(height: 10.0,
-                            color: Colors.grey[700],),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween ,
-                            children: [
-                              Text("Banque here",
-                                style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize:9,
-                                ),),
-                              SizedBox(width:10 ,),
-                              Icon(Icons.account_balance, size: 40,),
-                            ],
-
-                          )
-                        ],
-
-                      ),
-                    ),
-
-                  ),
-                  //________________________________________________________________
-                  //L'AUTRE CARD 5 ICI
-
-                  Card(
-                    elevation: 15,
-                    shadowColor: Colors.blue,
-
-                    child:
-                    // Padding(padding: EdgeInsets.all(10)),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Text("Importateur",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )
-                          ),
-                          Divider(height: 10.0,
-                            color: Colors.grey[700],),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween ,
-                            children: [
-                              Text("Client here",
-                                style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize:9,
-                                ),),
-                              SizedBox(width:10 ,),
-                              Icon(Icons.shopping_cart, size: 40,),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-
+                  CardAcceuil(
+                    titre: "Frais de dossier",
+                    solde: "0",
+                    icon: Icon(Icons.today, size: 40,),
                   ),
 
-                  //________________________________________________________________
-                  //L'AUTRE CARD 6 ICI
 
-                  Card(
-                    elevation: 15,
-                    shadowColor: Colors.blue,
 
-                    child:
-                    // Padding(padding: EdgeInsets.all(10)),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Text("Fournisseur(Solde)",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )
-                          ),
-                          Divider(height: 10.0,
-                            color: Colors.grey[700],),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween ,
-                            children: [
-                              Text("Fornisseur here",
-                                style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize:9,
-                                ),),
-                              SizedBox(width:10 ,),
-                              Icon(Icons.local_shipping, size: 40,),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
+                  CardAcceuil(
+                    titre: "Caisse (Sode)",
+                    solde: "$soldeCaisse  \$",
+                    icon: Icon(Icons.attach_money, size: 40,),
                   ),
 
-    //_______________________________________________________
-                  //CONTAINER DU BOUTON
+                  CardAcceuil(
+                    titre: "Banque (Sode)",
+                    solde: "$soldeBanque \$",
+                    icon: Icon(Icons.account_balance, size: 40,),
+                  ),
+
+                  CardAcceuil(
+                    titre: "Importateur",
+                    solde: "$soldeImporateur  \$",
+                    icon: Icon(Icons.shopping_cart, size: 40,),
+                  ),
+                  CardAcceuil(
+                    titre: "Fournisseur(Solde)",
+                    solde: "$soldeFournisseur  \$",
+                    icon: Icon(Icons.local_shipping, size: 40,),
+                  ),
+
+
 
                   Container(
                     padding: EdgeInsets.all(30),
