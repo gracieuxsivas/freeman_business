@@ -58,7 +58,6 @@ class _AccueilState extends State<Accueil> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: MediaQuery.of(context).size.height*0.05,
-
       ),
      // backgroundColor: Colors.grey[300],
       body: 
