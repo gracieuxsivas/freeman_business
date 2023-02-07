@@ -35,10 +35,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/splash' ,
       routes: {
-        '/splash':(context)=>SplashScreen(),
+        '/splash':(context)=>const SplashScreen(),
         '/login':(context)=>Login(),
         '/accueil':(context)=>Accueil(),
-        '/evolution': (context)=>VoirEvolution(),
+        '/evolution': (context)=>const VoirEvolution(),
         '/try':(context)=> MyHomePage(),
         '/importateur':(Context)=>Importateur(),
         '/operation' :(Context)=>Operation(),
