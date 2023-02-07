@@ -57,11 +57,30 @@ class GroupeCompte {
     var url = Urls.adresseServeur + "/api/Accueil/GetsoldeGroupeCompte?groupe=$numGroupeCompte";
     var data = await http.get(
         Uri.parse(url));
-    print(data.body);
+    // print(data.body);
     var t ;
     t = json.decode(data.body);
     GroupeCompte groupeCompte = GroupeCompte.fromJson(t);
     return groupeCompte.solde!;
+  }
+
+
+  static Future<double> getFactureImportateur(
+      int parameter) async {
+    var url = Urls.adresseServeur + "/api/Accueil/PvdelePeriode?TypeDePeriode=$parameter";
+    var data = await http.get(
+        Uri.parse(url));
+    // print(data.body);
+    return double.parse(data.body.toString());
+  }
+
+
+  static Future<double> getFraisDossier(
+      int parameter) async {
+    var url = Urls.adresseServeur + "/api/Accueil/PvdelePeriode?TypeDePeriode=$parameter";
+    var data = await http.get(
+        Uri.parse(url));
+    return double.parse(data.body.toString());
   }
 }
 
