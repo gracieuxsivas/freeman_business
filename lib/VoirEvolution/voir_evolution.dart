@@ -11,7 +11,7 @@ class VoirEvolution extends StatefulWidget {
 
 class _VoirEvolutionState extends State<VoirEvolution> {
 
-  double soldeCaisse =0,soldeBanque =0,soldeImporateur =0,soldeFournisseur = 0;
+  double soldeCaisse =0,soldeBanque =0,soldeImporateur =0,soldeFournisseur = 0,sodleFraisDossier =0,facturImportateur=0;
   bool isLoading =false;
 
   @override
@@ -42,6 +42,18 @@ class _VoirEvolutionState extends State<VoirEvolution> {
       soldeImporateur = value;
       isLoading =  false;
     }));
+
+
+     GroupeCompte.getFactureImportateur(2).then((value) => setState(() {
+       facturImportateur = value;
+      isLoading =  false;
+    }));
+     GroupeCompte.getFraisDossier(2).then((value) => setState(() {
+       sodleFraisDossier = value;
+      isLoading =  false;
+    }));
+
+
   }
 
 
@@ -91,13 +103,13 @@ class _VoirEvolutionState extends State<VoirEvolution> {
 
                   CardAcceuil(
                     titre: "Facturation importateur",
-                    solde: "0",
+                    solde: "$facturImportateur \$",
                     icon: Icon(Icons.article, size: 40,),
                   ),
 
                   CardAcceuil(
                     titre: "Frais de dossier",
-                    solde: "0",
+                    solde: "$sodleFraisDossier  \$",
                     icon: Icon(Icons.today, size: 40,),
                   ),
 
