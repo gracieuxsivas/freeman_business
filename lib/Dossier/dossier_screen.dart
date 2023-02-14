@@ -11,19 +11,6 @@ class DossierEncours extends StatefulWidget {
 }
 
 class _DossierEncoursState extends State<DossierEncours> {
-  List<ModelDossier_encours> list_dossier_en_cours= [
-    ModelDossier_encours (designation: 'Designatio', charge: '    70', facture: 'Facture', resultat: 'Charge   '),
-
-    //ModelDossier_encours (designation: '.........', charge: '888', facture: 'pppppdlkddlllllllll', resultat: '9986645')
-
-
-  ];
-
-  // List<Dossier> list_dossier_en_cours= [
-  //   Dossier (codePV: 'Designatio', charge: '    70', facture: 'Facture', resultat: 'Charge   '),
-  //
-  // ];
-  
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +64,7 @@ class _DossierEncoursState extends State<DossierEncours> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-
-                         SizedBox(height: 12,),
-
+                  const SizedBox(height: 12,),
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -110,40 +95,79 @@ class _DossierEncoursState extends State<DossierEncours> {
 
           ),
 
-//LISTE DES DOSSIERS EN COURS
-
-          Card(
-            margin: EdgeInsets.all(5),
-
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Column(
-                children: list_dossier_en_cours.map((encours)
-                => Text(
-                    '${encours.designation}             -'
-                    '${encours.charge}          -     '
-                    '${encours.facture}       -   '
-                    '${encours.resultat}')).toList()
-              ),
-            ),
-
-
-          )
-
-          // ListView(
-          //   padding: EdgeInsets.all(10),
-          //   shrinkWrap: true,
-          //   children: [
-          //     Card(
-          //       child: Column(
-          //
-          //         children:  list_dossier_en_cours.map((encours) => Text(encours)
-          //         ).toList(),
-          //
-          //       ),
-          //     ),
-          //   ]
-          //   ,)
+          Expanded(
+              child: FutureBuilder<List<Dossier>>(
+                  future: Dossier.getDossier(0),
+                  builder: (context, snapshot) {
+                    //Chargement des donnees
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: Container(
+                            margin: const EdgeInsets.all(20),
+                            child:  const CircularProgressIndicator(
+                              color: Colors.blue,
+                            )),
+                      );
+                    }
+                    //quand la methode renvoie les donnees
+                    if (snapshot.data!.length == 0) {
+                      //ci la taille de la liste est 0, on affiche un message : aucune donnee disponible
+                      return Center(
+                        child: Container(
+                          margin: const EdgeInsets.all(20),
+                          child:  Column(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                "aucune donnée disponible",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.italic),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                    //affichage de la liste renvoi par la methode, au cas ou la liste contient des donnees
+                    return ListView.separated(
+                      padding: const EdgeInsets.only(
+                        left: 0,
+                        right: 0,
+                        top: 20,
+                        bottom: 100,
+                      ),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        Dossier dossierObject = snapshot.data![index];
+                        //iteration de la liste
+                        return Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(dossierObject.designationPv!,
+                                style: const TextStyle(fontSize: 11),),
+                              const Spacer(),
+                              Text(dossierObject.charge.toString(),
+                                style: const TextStyle(fontSize: 11),),
+                              const Spacer(),
+                              Text(dossierObject.facturation.toString(),
+                                style: const TextStyle(fontSize: 11),),
+                              const Spacer(),
+                              Text(dossierObject.resultat.toString(),
+                                style: const TextStyle(fontSize: 11),),
+                            ]);
+                        },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return  Divider(
+                          color: Colors.grey[600],
+                          height: 1,
+                        );
+                      },
+                    );
+                  })
+          ),
         ],
       ),
     );

@@ -6,7 +6,7 @@ import 'package:freeman_business/VoirEvolution/recherche_du_compte.dart';
 import 'package:freeman_business/accueil.dart';
 import 'package:freeman_business/balance.dart';
 import 'package:freeman_business/banque.dart';
-import 'package:freeman_business/Dossier/dossier.dart';
+import 'package:freeman_business/Dossier/dossier_screen.dart';
 import 'package:freeman_business/Importateur/importateur.dart';
 import 'package:freeman_business/livre_de_caisse.dart';
 import 'package:freeman_business/Operations/operation.dart';

@@ -52,10 +52,10 @@ class _AccueilState extends State<Accueil> {
     //final double width= MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // appBar: AppBar(
-      //   //toolbarHeight: MediaQuery.of(context).size.height*0.05,
-      // ),
-     // backgroundColor: Colors.grey[300],
+      appBar: AppBar(
+        //toolbarHeight: MediaQuery.of(context).size.height*0.05,
+      ),
+     backgroundColor: Colors.grey[300],
       body: 
       Center(
         child: Column(

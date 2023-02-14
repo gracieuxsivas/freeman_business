@@ -68,15 +68,13 @@ class Dossier {
     return data;
   }
 
-  static Future<Dossier> getDossier(int etat) async {
+  static Future<List<Dossier>> getDossier(int etat) async {
     var url = Urls.adresseServeur + "/api/Dossier/GetleDossier?Etat=$etat";
     var data = await http.get(
         Uri.parse(url));
-    // print(data.body);
-    var t ;
+    var t = [];
     t = json.decode(data.body);
-    Dossier dossier = Dossier.fromJson(t);
-    return dossier;
+    return t.map((e) => Dossier.fromJson(e)).toList();
   }
 }
 
