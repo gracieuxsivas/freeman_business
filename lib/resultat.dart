@@ -117,6 +117,7 @@ class _ResultatState extends State<Resultat> {
 
 
 
+
 //BOTTOM NAVIGATORBAR
 //       bottomNavigationBaRr: BottomNavigationBar(
 //         backgroundColor: Colors.blue,

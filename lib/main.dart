@@ -14,6 +14,7 @@ import 'package:freeman_business/resultat.dart';
 import 'package:freeman_business/splashScreen.dart';
 import 'package:freeman_business/try.dart';
 import 'package:freeman_business/VoirEvolution/voir_evolution.dart';
+import 'Dossier/dossier_cloture.dart';
 import 'login.dart';
 
 void main() {

@@ -11,3 +11,14 @@ class ModelDossier_encours {
 }
 
 
+//MODEL LISTE DOSSIER CLOTURE
+class ModelDossier_cloture {
+  String designation;
+  String charge;
+  String facture;
+  String resultat;
+
+  ModelDossier_cloture({required this.designation, required this.charge, required this.facture, required this.resultat });
+}
+
+

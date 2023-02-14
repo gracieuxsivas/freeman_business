@@ -52,9 +52,9 @@ class _AccueilState extends State<Accueil> {
     //final double width= MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: MediaQuery.of(context).size.height*0.05,
-      ),
+      // appBar: AppBar(
+      //   //toolbarHeight: MediaQuery.of(context).size.height*0.05,
+      // ),
      // backgroundColor: Colors.grey[300],
       body: 
       Center(
@@ -68,7 +68,7 @@ class _AccueilState extends State<Accueil> {
                 ),
                 title: Text(nomUtilisateur,style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                  fontSize: 20
+                  fontSize: 16
                 ),),
                 subtitle: Text(service,style: const TextStyle(
                     fontWeight: FontWeight.bold

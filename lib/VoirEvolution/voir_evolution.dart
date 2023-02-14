@@ -37,6 +37,7 @@ class _VoirEvolutionState extends State<VoirEvolution> {
       soldeCaisse = value;
       isLoading =  false;
     }));
+
     //importateur
     GroupeCompte.getSoldeGroupeCompte(GroupeCompte.importateur).then((value) => setState(() {
       soldeImporateur = value;
@@ -55,7 +56,6 @@ class _VoirEvolutionState extends State<VoirEvolution> {
 
 
   }
-
 
 
   @override
@@ -137,7 +137,6 @@ class _VoirEvolutionState extends State<VoirEvolution> {
                     solde: "$soldeFournisseur  \$",
                     icon: Icon(Icons.local_shipping, size: 40,),
                   ),
-
 
 
                   Container(
