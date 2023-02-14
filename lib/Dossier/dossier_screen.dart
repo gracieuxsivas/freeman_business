@@ -67,13 +67,9 @@ class _DossierEncoursState extends State<DossierEncours> {
                   const SizedBox(height: 12,),
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Designation',
-                          style: TextStyle(fontSize: 15,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),),
-                        const Spacer(),
-                        Text('Charge',
+                        Text('Designation/Charge',
                           style: TextStyle(fontSize: 15,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),),
@@ -143,21 +139,17 @@ class _DossierEncoursState extends State<DossierEncours> {
                       itemBuilder: (context, index) {
                         Dossier dossierObject = snapshot.data![index];
                         //iteration de la liste
-                        return Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                        return ListTile(
+                          title: Text(dossierObject.detailPV.toString(),style: TextStyle(fontSize: 11),),
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(dossierObject.designationPv!,
-                                style: const TextStyle(fontSize: 11),),
-                              const Spacer(),
-                              Text(dossierObject.charge.toString(),
-                                style: const TextStyle(fontSize: 11),),
-                              const Spacer(),
-                              Text(dossierObject.facturation.toString(),
-                                style: const TextStyle(fontSize: 11),),
-                              const Spacer(),
-                              Text(dossierObject.resultat.toString(),
-                                style: const TextStyle(fontSize: 11),),
-                            ]);
+                                Text(dossierObject.charge.toString()),
+                                Text(dossierObject.facturation.toString()),
+                                Text(dossierObject.resultat.toString()),
+                            ],
+                          ),
+                        );
                         },
                       separatorBuilder: (BuildContext context, int index) {
                         return  Divider(
