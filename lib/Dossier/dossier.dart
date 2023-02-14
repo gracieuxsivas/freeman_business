@@ -19,10 +19,7 @@ class _DossierEncoursState extends State<DossierEncours> {
 
   ];
 
-  // List<Dossier> list_dossier_en_cours= [
-  //   Dossier (codePV: 'Designatio', charge: '    70', facture: 'Facture', resultat: 'Charge   '),
   //
-  // ];
   
 
   @override
