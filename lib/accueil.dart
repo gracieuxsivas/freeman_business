@@ -4,6 +4,8 @@ import 'package:focused_menu/modals.dart';
 import 'package:freeman_business/Models/groupeCompte.dart';
 import 'package:freeman_business/Models/users.dart';
 
+import 'Dossier/dossier_screen.dart';
+
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
 
@@ -18,6 +20,7 @@ class _AccueilState extends State<Accueil> {
   String nomUtilisateur = "",service = "";
   double soldeCaisse =0,soldeBanque =0,soldeImporateur =0,soldeFournisseur = 0;
   bool isLoading =false;
+  int etat_dossier=0;
 
   @override
   void initState() {
@@ -52,10 +55,10 @@ class _AccueilState extends State<Accueil> {
     //final double width= MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // appBar: AppBar(
-      //   //toolbarHeight: MediaQuery.of(context).size.height*0.05,
-      // ),
-     // backgroundColor: Colors.grey[300],
+      appBar: AppBar(
+        //toolbarHeight: MediaQuery.of(context).size.height*0.05,
+      ),
+     backgroundColor: Colors.grey[300],
       body: 
       Center(
         child: Column(
@@ -150,11 +153,27 @@ class _AccueilState extends State<Accueil> {
                               onPressed: (){},
                               menuItems: <FocusedMenuItem> [
                               FocusedMenuItem(title: Text("Dosser en cours"),
-                                  onPressed: () {Navigator.pushNamed(context, '/dossierencours');},
+                                  onPressed: () {
+                                  etat_dossier = 0;
+                                  //Navigator.pushNamed(context, '/dossierencours');
+
+                           //ENVOIE DES DATAS TO ANOTHER PAGE
+
+                                  Navigator.push(context,
+                                        MaterialPageRoute(builder:
+                                        (context) => DossierEncours(etat: etat_dossier)));
+                                  },
                                   backgroundColor: Colors.orange[200]),
 
                               FocusedMenuItem(title: Text("Dosser cloturé"),
-                                  onPressed: () {Navigator.pushNamed(context, '/dossiercloture');}),
+                                  onPressed: () {
+                                  etat_dossier = 1;
+                                  //Navigator.pushNamed(context, '/dossiercloture');
+                                    Navigator.push(context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>DossierEncours(etat: etat_dossier,))
+                                    );
+                              }),
                             ],
                               child:
                                     Card(

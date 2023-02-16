@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../Models/dossier.dart';
+import '../Models/dossier.dart';
 import 'model_list_file.dart';
 
 class DossierEncours extends StatefulWidget {
-  const DossierEncours({Key? key}) : super(key: key);
+   int etat;
+  //const DossierEncours({Key? key, required this.etat}) : super(key: key);
+  DossierEncours({ required this.etat});
 
   @override
-  State<DossierEncours> createState() => _DossierEncoursState();
+  State<DossierEncours> createState() => _DossierEncoursState(etat:etat);
 }
 
 class _DossierEncoursState extends State<DossierEncours> {
+  int etat=0;
+  _DossierEncoursState({required this.etat});
   List<ModelDossier_encours> list_dossier_en_cours= [
     ModelDossier_encours (designation: 'Designatio', charge: '    70', facture: 'Facture', resultat: 'Charge   '),
 
@@ -20,7 +25,7 @@ class _DossierEncoursState extends State<DossierEncours> {
   ];
 
   //
-  
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,18 +79,12 @@ class _DossierEncoursState extends State<DossierEncours> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-
-                         SizedBox(height: 12,),
-
+                  const SizedBox(height: 12,),
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Designation',
-                          style: TextStyle(fontSize: 15,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),),
-                        const Spacer(),
-                        Text('Charge',
+                        Text('Designation/Charge',
                           style: TextStyle(fontSize: 15,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),),
@@ -107,40 +106,76 @@ class _DossierEncoursState extends State<DossierEncours> {
 
           ),
 
-//LISTE DES DOSSIERS EN COURS
+          Expanded(
+              child: FutureBuilder<List<Dossier>>(
+                  future: Dossier.getDossier(etat),
+                  builder: (context, snapshot) {
 
-          Card(
-            margin: EdgeInsets.all(5),
-
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Column(
-                children: list_dossier_en_cours.map((encours)
-                => Text(
-                    '${encours.designation}             -'
-                    '${encours.charge}          -     '
-                    '${encours.facture}       -   '
-                    '${encours.resultat}')).toList()
-              ),
-            ),
-
-
-          )
-
-          // ListView(
-          //   padding: EdgeInsets.all(10),
-          //   shrinkWrap: true,
-          //   children: [
-          //     Card(
-          //       child: Column(
-          //
-          //         children:  list_dossier_en_cours.map((encours) => Text(encours)
-          //         ).toList(),
-          //
-          //       ),
-          //     ),
-          //   ]
-          //   ,)
+                    //Chargement des donnees
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: Container(
+                            margin: const EdgeInsets.all(20),
+                            child:  const CircularProgressIndicator(
+                              color: Colors.blue,
+                            )),
+                      );
+                    }
+                    //quand la methode renvoie les donnees
+                    if (snapshot.data!.length == 0) {
+                      //ci la taille de la liste est 0, on affiche un message : aucune donnee disponible
+                      return Center(
+                        child: Container(
+                          margin: const EdgeInsets.all(20),
+                          child:  Column(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                "aucune donnée disponible",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.italic),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                    //affichage de la liste renvoi par la methode, au cas ou la liste contient des donnees
+                    return ListView.separated(
+                      padding: const EdgeInsets.only(
+                        left: 0,
+                        right: 0,
+                        top: 20,
+                        bottom: 100,
+                      ),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        Dossier dossierObject = snapshot.data![index];
+                        //iteration de la liste
+                        return ListTile(
+                          title: Text(dossierObject.detailPV.toString(),style: TextStyle(fontSize: 11),),
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                                Text(dossierObject.charge.toString()),
+                                Text(dossierObject.facturation.toString()),
+                                Text(dossierObject.resultat.toString()),
+                            ],
+                          ),
+                        );
+                        },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return  Divider(
+                          color: Colors.grey[600],
+                          height: 1,
+                        );
+                      },
+                    );
+                  })
+          ),
         ],
       ),
     );
