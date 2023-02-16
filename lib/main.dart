@@ -7,7 +7,7 @@ import 'package:freeman_business/accueil.dart';
 import 'package:freeman_business/balance.dart';
 import 'package:freeman_business/banque.dart';
 import 'package:freeman_business/Dossier/dossier_screen.dart';
-import 'package:freeman_business/Importateur/importateur.dart';
+import 'package:freeman_business/Importateur/importateur_screen.dart';
 import 'package:freeman_business/livre_de_caisse.dart';
 import 'package:freeman_business/Operations/operation.dart';
 import 'package:freeman_business/resultat.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         '/accueil':(context)=>Accueil(),
         '/evolution': (context)=>const VoirEvolution(),
         '/try':(context)=> MyHomePage(),
-        '/importateur':(Context)=>Importateur(),
+       // '/importateur':(Context)=>Importateur(),
         '/operation' :(Context)=>Operation(),
         '/balance' : (Context)=>Balance(),
         '/banque' : (Context)=>Banque(),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:freeman_business/Importateur/importateur_screen.dart';
 import 'package:freeman_business/Models/groupeCompte.dart';
 import 'package:freeman_business/Models/users.dart';
+import 'package:freeman_business/Models/importateursModel.dart';
 
 import 'Dossier/dossier_screen.dart';
 
@@ -21,6 +23,8 @@ class _AccueilState extends State<Accueil> {
   double soldeCaisse =0,soldeBanque =0,soldeImporateur =0,soldeFournisseur = 0;
   bool isLoading =false;
   int etat_dossier=0;
+
+  int import =0;
 
   @override
   void initState() {
@@ -254,7 +258,13 @@ class _AccueilState extends State<Accueil> {
                                         icon: Icon(Icons.group,size: 50,),
                                         color: Colors.white,
                                         onPressed: () {
-                                          Navigator.pushNamed(context, '/importateur');
+                                          //Navigator.pushNamed(context, '/importateur');
+
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                              builder: (context) =>Importateur(import: import))
+                                              //compte==411
+                                          );
                                         },
                                       ),
                                     ),

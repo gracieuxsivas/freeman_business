@@ -76,6 +76,7 @@ class _DossierEncoursState extends State<DossierEncours> {
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
                       children: [
                         Text('Designation/Charge',
                           style: TextStyle(fontSize: 15,

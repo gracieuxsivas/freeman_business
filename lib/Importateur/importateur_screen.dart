@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:freeman_business/Models/importateursModel.dart';
 
 class Importateur extends StatefulWidget {
-  const Importateur({Key? key}) : super(key: key);
+  //const Importateur({Key? key}) : super(key: key);
+  int import;
+  Importateur({ required this.import});
 
   @override
-  State<Importateur> createState() => _ImportateurState();
+  State<Importateur> createState() => _ImportateurState(import:import);
 }
 
 class _ImportateurState extends State<Importateur> {
+  int import=0;
+  _ImportateurState({required this.import});
 
-  // List<String> importateursList= [
-  //   'Importateurs ici',
-  // ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -155,27 +158,86 @@ class _ImportateurState extends State<Importateur> {
           ),
 
 
-          ListView(
-            padding: EdgeInsets.all(10),
-            shrinkWrap: true,
-            children: [
-              Card(
-                child: Column(
+//AFFICHAGE DES DONNEES FROM API
+          Expanded(
+              child: FutureBuilder<List<ImportateurModel>>(
+                  future: ImportateurModel.getImportateurModel(import),
+                  builder: (context, snapshot) {
 
-                  // children:  importateursList.map((encours) => Text(encours),
-                  // ).toList(),
+                    //Chargement des donnees
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: Container(
+                            margin: const EdgeInsets.all(20),
+                            child:  const CircularProgressIndicator(
+                              color: Colors.blue,
+                            )),
+                      );
+                    }
+                    //quand la methode renvoie les donnees
+                    if (snapshot.data!.length == 0) {
 
-                ),
-              ),
-            ]
-            ,),
+                      //si la taille de la liste est 0, on affiche un message : aucune donnee disponible
+                      return Center(
+                        child: Container(
+                          margin: const EdgeInsets.all(20),
+                          child:  Column(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                "aucune donnée disponible",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.italic),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                    //affichage de la liste renvoi par la methode, au cas ou la liste contient des donnees
+                    return ListView.separated(
+                      padding: const EdgeInsets.only(
+                        left: 0,
+                        right: 0,
+                        top: 20,
+                        bottom: 100,
+                      ),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        ImportateurModel importObject = snapshot.data![index];
 
-          Card(
-            child: ListTile(
-              title: Text("........"),
-              //subtitle: Text("Description"),
-            ),
-          )
+                        //iteration de la liste
+                        return ListTile(
+                          title: Text(' ',
+                            //importObject.designationGroupe.toString(),
+                            style: TextStyle(fontSize: 11),),
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(importObject.designationCompte.toString()),
+                              Text(importObject.numCompte.toString()),
+                              Text(importObject.solde.toString()),
+                            ],
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return  Divider(
+                          color: Colors.grey[600],
+                          height: 1,
+                        );
+                      },
+                    );
+                  })
+          ),
+
+
+
+
+
         ],
       ),
 
