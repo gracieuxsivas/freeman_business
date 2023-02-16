@@ -16,13 +16,6 @@ class DossierEncours extends StatefulWidget {
 class _DossierEncoursState extends State<DossierEncours> {
   int etat=0;
   _DossierEncoursState({required this.etat});
-  List<ModelDossier_encours> list_dossier_en_cours= [
-    ModelDossier_encours (designation: 'Designatio', charge: '    70', facture: 'Facture', resultat: 'Charge   '),
-
-    //ModelDossier_encours (designation: '.........', charge: '888', facture: 'pppppdlkddlllllllll', resultat: '9986645')
-
-
-  ];
 
   //
 
@@ -46,18 +39,18 @@ class _DossierEncoursState extends State<DossierEncours> {
               Row(
                   children: [
 
-                Text('DOSSIER EN COURS',
+                 Text(etat==0? 'DOSSIER EN COURS':'DOSSIER CLOTURE',
                   style: TextStyle(fontSize: 15,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
 
                 const Spacer(),
-                IconButton(onPressed: () {
+                    etat==0?IconButton(onPressed: () {
                   Navigator.pushNamed(context, '/ajouter_dossier');
                 },
                     icon: Icon(Icons.add,
-                        color: Colors.white)),
+                        color: Colors.white)):Container(),
               ]),
 
              // SizedBox(height: 10,),
