@@ -1,10 +1,17 @@
 
+/*
+// Example Usage
+Map<String, dynamic> map = jsonDecode(<myJSONString>);
+var myRootNode = Root.fromJson(map);
+*/
+
 import 'dart:convert';
+
+import 'package:freeman_business/utilits/Urls.dart';
 import 'package:http/http.dart' as http;
 import '../utilits/Urls.dart';
 
-
-class ImportateurModel {
+class BalanceModel {
   int? groupeCompte;
   String? designationGroupe;
   int? numCompte;
@@ -13,7 +20,7 @@ class ImportateurModel {
   int? nombre;
   DateTime? dateOperation;
 
-  ImportateurModel(
+  BalanceModel(
       {this.groupeCompte,
         this.designationGroupe,
         this.numCompte,
@@ -22,7 +29,7 @@ class ImportateurModel {
         this.nombre,
         this.dateOperation});
 
-  ImportateurModel.fromJson(Map<String, dynamic> json) {
+  BalanceModel.fromJson(Map<String, dynamic> json) {
     groupeCompte = json['groupeCompte'];
     designationGroupe = json['designationGroupe'];
     numCompte = json['numCompte'];
@@ -44,15 +51,14 @@ class ImportateurModel {
     return data;
   }
 
-  static Future<List<ImportateurModel>> getImportateurModel(int import) async {
-    var url = Urls.adresseServeur + "/api/Balance/GetlaBalanceParGoupe?GroupeCompte=$import";
-    //var url = "http://afrisofttech-003-site37.btempurl.com/api/Balance/GetlaBalanceParGoupe?GroupeCompte=411";
+  static Future<List<BalanceModel>> getBalancedeGroupe() async {
+    var url = Urls.adresseServeur + "/api/Balance/GetlaBalancedeGroupe";
     var data = await http.get(
         Uri.parse(url));
+    print(data.body);
     var t = [];
     t = json.decode(data.body);
-    return t.map((e) => ImportateurModel.fromJson(e)).toList();
+    return t.map((e) => BalanceModel.fromJson(e)).toList();
   }
-
 }
 

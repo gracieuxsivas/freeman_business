@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/importateursModel.dart';
 
+
+
 class Importateur extends StatefulWidget {
   //const Importateur({Key? key}) : super(key: key);
   int import;
@@ -54,20 +56,7 @@ class _ImportateurState extends State<Importateur> {
                          color: Colors.white)),
                ]),
 
-               //SizedBox(height: 10,),
 
-               // Row(children: [
-               //   Text('Designation',
-               //     style: TextStyle(fontSize: 15),),
-               //   const Spacer(),
-               //   Text('Compte',
-               //     style: TextStyle(fontSize: 15),),
-               //   const Spacer(),
-               //   Text('Solde',
-               //     style: TextStyle(fontSize: 15),),
-               // ]),
-
-               // TextFormField(),
              ]),
         ),
 

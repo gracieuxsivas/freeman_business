@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Dossier/model_list_file.dart';
+//import '../Dossier/model_list_file.dart';
 
 class NouveauCompteImportateur extends StatefulWidget {
   const NouveauCompteImportateur({Key? key}) : super(key: key);
@@ -55,38 +55,7 @@ class _NouveauCompteImportateurState extends State<NouveauCompteImportateur> {
       body:
       Column(
         children: [
-          // Container(
-          //   padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
-          //   //height: 50,
-          //   color: Colors.blue,
-          //
-          //   child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.end,
-          //       children: [
-          //
-          //         SizedBox(height: 10,),
-          //
-          //         Card(
-          //           child: Row(
-          //             //crossAxisAlignment: CrossAxisAlignment.end,
-          //               mainAxisAlignment: MainAxisAlignment.end,
-          //
-          //               children: [
-          //                 IconButton(onPressed: () {},
-          //                     icon: Icon(Icons.arrow_drop_down_outlined,
-          //                         color: Colors.black)),
-          //
-          //                 //const Spacer(),
-          //
-          //                 IconButton(onPressed: () {},
-          //                     icon: Icon(Icons.playlist_add,
-          //                         color: Colors.black)),
-          //               ]),
-          //         ),
-          //
-          //       ]),
-          //
-          // ),
+
 
           //Autre Mise en former
 

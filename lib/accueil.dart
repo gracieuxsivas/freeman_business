@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import 'package:freeman_business/Importateur/importateur_screen.dart';
+//import 'package:freeman_business/Importateur/importateur_screen.dart';
 import 'package:freeman_business/Models/groupeCompte.dart';
 import 'package:freeman_business/Models/users.dart';
 import 'package:freeman_business/Models/importateursModel.dart';
 
 import 'Dossier/dossier_screen.dart';
+import 'SCREENS/Importateur/importateur_screen.dart';
+import 'SCREENS/balance_screen.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
@@ -25,6 +27,8 @@ class _AccueilState extends State<Accueil> {
   int etat_dossier=0;
 
   int import =0;
+
+  int bal = 0;
 
   @override
   void initState() {
@@ -370,7 +374,13 @@ class _AccueilState extends State<Accueil> {
                                         icon: Icon(Icons.balance,size: 50,),
                                         color: Colors.white,
                                         onPressed: () {
-                                          Navigator.pushNamed(context, '/balance');
+                                        //  Navigator.pushNamed(context, '/balance');
+
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>Balance())
+
+                                          );
                                         },
                                       ),
                                     ),
