@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'operation_suite.dart';
+
 class Operation extends StatefulWidget {
   const Operation({Key? key}) : super(key: key);
 
@@ -49,7 +51,13 @@ class _OperationState extends State<Operation> {
                               ),
 
                               onPressed: (){
-                                Navigator.pushNamed(context, '/accueil');
+                                //Navigator.pushNamed(context, '/accueil');
+
+                                Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>OperationSuite())
+
+                                );
                               },
                               //color: Colors.blue,
                               child: Text(

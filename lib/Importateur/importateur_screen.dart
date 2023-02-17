@@ -82,46 +82,14 @@ class _ImportateurState extends State<Importateur> {
             color: Colors.blue,
 
 
-            //     decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.only(
-            //     bottomRight: Radius.circular(0),
-            // ),
-            // color: Colors.blue,
-            //         boxShadow: [
-            //           new BoxShadow(
-            //             //________________
-            //             //Reglage OPACITE/
-            //             //_______________
-            //
-            //               color: Colors.blue.withOpacity(0.3),
-            //               offset: new Offset(-10.0, 0.0),
-            //               blurRadius: 20.0,
-            //               spreadRadius: 4.0),
-            //         ]
-            //     ),
+
 
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
 
                   Row(children: [
-                    // Icon(Icons.arrow_back,
-                    //   color: Colors.white,),
-                    // const Spacer(),
-                    // Text('IMPORTATEURS',
-                    //   style: TextStyle(fontSize: 15,
-                    //       color: Colors.white,
-                    //       fontWeight: FontWeight.bold),
-                    // ),
-                    // const Spacer(),
-                    // IconButton(onPressed: () {},
-                    //     icon: Icon(Icons.search,
-                    //         color: Colors.white)),
-                    // const Spacer(),
-                    // IconButton(onPressed: () {},
-                    //     icon: Icon(Icons.add,
-                    //         color: Colors.white)),
-                    // //Icon(Icons.search),
+
 
                   ]),
 
@@ -174,7 +142,8 @@ class _ImportateurState extends State<Importateur> {
                             )),
                       );
                     }
-                    //quand la methode renvoie les donnees
+                    //Quand la methode renvoie les donnees
+
                     if (snapshot.data!.length == 0) {
 
                       //si la taille de la liste est 0, on affiche un message : aucune donnee disponible
