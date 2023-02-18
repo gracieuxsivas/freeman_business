@@ -63,7 +63,9 @@ class _AccueilState extends State<Accueil> {
 
     return Scaffold(
       appBar: AppBar(
-        //toolbarHeight: MediaQuery.of(context).size.height*0.05,
+        title: Text("FREEMAN BUSINESS",style: TextStyle(
+
+        ),),
       ),
      backgroundColor: Colors.grey[300],
       body: 
