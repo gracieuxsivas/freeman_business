@@ -4,7 +4,6 @@ import 'package:focused_menu/modals.dart';
 //import 'package:freeman_business/Importateur/importateur_screen.dart';
 import 'package:freeman_business/Models/groupeCompte.dart';
 import 'package:freeman_business/Models/users.dart';
-import 'package:freeman_business/Models/importateursModel.dart';
 
 import 'Dossier/dossier_screen.dart';
 import 'SCREENS/Importateur/importateur_screen.dart';
@@ -26,7 +25,7 @@ class _AccueilState extends State<Accueil> {
   bool isLoading =false;
   int etat_dossier=0;
 
-  int import =0;
+  int import =411;
 
   int bal = 0;
 

@@ -1,19 +1,26 @@
 
+/*
+// Example Usage
+Map<String, dynamic> map = jsonDecode(<myJSONString>);
+var myRootNode = Root.fromJson(map);
+*/
+
 import 'dart:convert';
+
+import 'package:freeman_business/utilits/Urls.dart';
 import 'package:http/http.dart' as http;
 import '../utilits/Urls.dart';
 
-
-class ImportateurModel {
+class CompteModel {
   int? groupeCompte;
   String? designationGroupe;
   int? numCompte;
   String? designationCompte;
   int? solde;
   int? nombre;
-  DateTime? dateOperation;
+  String ? dateOperation;
 
-  ImportateurModel(
+  CompteModel(
       {this.groupeCompte,
         this.designationGroupe,
         this.numCompte,
@@ -22,7 +29,7 @@ class ImportateurModel {
         this.nombre,
         this.dateOperation});
 
-  ImportateurModel.fromJson(Map<String, dynamic> json) {
+  CompteModel.fromJson(Map<String, dynamic> json) {
     groupeCompte = json['groupeCompte'];
     designationGroupe = json['designationGroupe'];
     numCompte = json['numCompte'];
@@ -44,15 +51,33 @@ class ImportateurModel {
     return data;
   }
 
-  static Future<List<ImportateurModel>> getImportateurModel(int import) async {
+
+  /**
+   * recuperation des balance des comptes
+   */
+  static Future<List<CompteModel>> getBalancedeGroupe() async {
+    var url = Urls.adresseServeur + "/api/Balance/GetlaBalancedeGroupe";
+    print(url);
+    var data = await http.get(
+        Uri.parse(url));
+    print(data.body);
+    var t = [];
+    t = json.decode(data.body);
+    return t.map((e) => CompteModel.fromJson(e)).toList();
+  }
+
+
+  /**
+   *BALANCE DES COMPTE POUR IMPORTATEUR
+   */
+  static Future<List<CompteModel>> getImportateurModel(int import) async {
     var url = Urls.adresseServeur + "/api/Balance/GetlaBalanceParGoupe?GroupeCompte=$import";
-    //var url = "http://afrisofttech-003-site37.btempurl.com/api/Balance/GetlaBalanceParGoupe?GroupeCompte=411";
+    print(url);
     var data = await http.get(
         Uri.parse(url));
     var t = [];
     t = json.decode(data.body);
-    return t.map((e) => ImportateurModel.fromJson(e)).toList();
+    return t.map((e) => CompteModel.fromJson(e)).toList();
   }
-
 }
 

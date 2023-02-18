@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freeman_business/Models/balanceModel.dart';
-import '../Models/balanceModel.dart';
+import 'package:freeman_business/Models/compteModel.dart';
 
 class Balance extends StatefulWidget {
   const Balance({Key? key}) : super(key: key);
@@ -105,8 +104,8 @@ class _BalanceState extends State<Balance> {
 
 
           Expanded(
-              child: FutureBuilder<List<BalanceModel>>(
-                  future: BalanceModel.getBalancedeGroupe(),
+              child: FutureBuilder<List<CompteModel>>(
+                  future: CompteModel.getBalancedeGroupe(),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
@@ -153,7 +152,7 @@ class _BalanceState extends State<Balance> {
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        BalanceModel balanceObject = snapshot.data![index];
+                        CompteModel balanceObject = snapshot.data![index];
 
                         //iteration de la liste
                         return ListTile(

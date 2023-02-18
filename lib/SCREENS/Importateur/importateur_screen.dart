@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freeman_business/Models/importateursModel.dart';
+import 'package:freeman_business/Models/compteModel.dart';
 
 
 
@@ -115,8 +115,8 @@ class _ImportateurState extends State<Importateur> {
 
 //AFFICHAGE DES DONNEES FROM API
           Expanded(
-              child: FutureBuilder<List<ImportateurModel>>(
-                  future: ImportateurModel.getImportateurModel(import),
+              child: FutureBuilder<List<CompteModel>>(
+                  future: CompteModel.getImportateurModel(import),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
@@ -163,7 +163,7 @@ class _ImportateurState extends State<Importateur> {
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        ImportateurModel importObject = snapshot.data![index];
+                        CompteModel importObject = snapshot.data![index];
 
                         //iteration de la liste
                         return ListTile(
