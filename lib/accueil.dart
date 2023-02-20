@@ -4,10 +4,12 @@ import 'package:focused_menu/modals.dart';
 //import 'package:freeman_business/Importateur/importateur_screen.dart';
 import 'package:freeman_business/Models/groupeCompte.dart';
 import 'package:freeman_business/Models/users.dart';
+import 'package:freeman_business/resultat.dart';
 
 import 'Dossier/dossier_screen.dart';
 import 'SCREENS/Importateur/importateur_screen.dart';
 import 'SCREENS/balance_screen.dart';
+import 'SCREENS/banque.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
@@ -25,9 +27,13 @@ class _AccueilState extends State<Accueil> {
   bool isLoading =false;
   int etat_dossier=0;
 
-  int import =411;
-
+  int import =411; //<GROUPE COMPTE IMPORTATEUR
   int bal = 0;
+  int groupeCompteBanque=521;
+  int groupeCompteLivreDeCaisse=572;
+  int resultatParAn=0;
+
+
 
   @override
   void initState() {
@@ -268,7 +274,6 @@ class _AccueilState extends State<Accueil> {
                                           Navigator.push(context,
                                               MaterialPageRoute(
                                               builder: (context) =>Importateur(import: import))
-                                              //compte==411
                                           );
                                         },
                                       ),
@@ -433,7 +438,13 @@ class _AccueilState extends State<Accueil> {
                                         icon: Icon(Icons.temple_hindu,size: 50,),
                                         color: Colors.white,
                                         onPressed: () {
-                                          Navigator.pushNamed(context, '/banque');
+                                         // Navigator.pushNamed(context, '/banque');
+
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>Banque(groupeCompteBanque: groupeCompteBanque))
+                                            //compte==411
+                                          );
                                         },
                                       ),
                                     ),
@@ -487,7 +498,11 @@ class _AccueilState extends State<Accueil> {
                                         icon: Icon(Icons.streetview,size: 50,),
                                         color: Colors.white,
                                         onPressed: () {
-                                          Navigator.pushNamed(context, '/resultat');
+                                          //Navigator.pushNamed(context, '/resultat');
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>Resultat(resultatParAn: resultatParAn))
+                                          );
                                         },
                                       ),
                                     ),
@@ -538,7 +553,15 @@ class _AccueilState extends State<Accueil> {
                                         icon: Icon(Icons.library_books,size: 50,),
                                         color: Colors.white,
                                         onPressed: () {
-                                          Navigator.pushNamed(context, '/livre_de_caisse');
+                                          //Navigator.pushNamed(context, '/livre_de_caisse');
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>Banque(groupeCompteBanque: groupeCompteLivreDeCaisse))
+                                            //compte==411
+                                          );
+
+
+
                                         },
                                       ),
                                     ),

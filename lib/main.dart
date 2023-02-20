@@ -5,10 +5,10 @@ import 'package:freeman_business/Dossier/nouveau_importateur.dart';
 import 'package:freeman_business/VoirEvolution/recherche_du_compte.dart';
 import 'package:freeman_business/accueil.dart';
 import 'package:freeman_business/SCREENS/balance_screen.dart';
-import 'package:freeman_business/banque.dart';
+import 'package:freeman_business/SCREENS/banque.dart';
 import 'package:freeman_business/Dossier/dossier_screen.dart';
 //import 'package:freeman_business/Importateur/importateur_screen.dart';
-import 'package:freeman_business/livre_de_caisse.dart';
+import 'package:freeman_business/SCREENS/livre_de_caisse.dart';
 //import 'package:freeman_business/Operations/operation.dart';
 import 'package:freeman_business/resultat.dart';
 import 'package:freeman_business/splashScreen.dart';
@@ -47,9 +47,9 @@ class MyApp extends StatelessWidget {
        // '/importateur':(Context)=>Importateur(),
         '/operation' :(Context)=>Operation(),
        // '/balance' : (Context)=>Balance(),
-        '/banque' : (Context)=>Banque(),
-        '/resultat' : (Context)=>Resultat(),
-        '/livre_de_caisse' : (Context)=>Livre_de_caisse(),
+       // '/banque' : (Context)=>Banque(),
+      //  '/resultat' : (Context)=>Resultat(),
+        //'/livre_de_caisse' : (Context)=>Livre_de_caisse(),
         //'/dossierencours' : (Context)=>DossierEncours(),
         '/dossiercloture' : (Context)=>DossierCloture(),
         '/ajouter_dossier' : (Context)=>AjouterDossier(),

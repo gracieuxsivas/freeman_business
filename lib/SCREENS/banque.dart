@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:freeman_business/Models/compteModel.dart';
 
+import '../Models/compteModel.dart';
 
-class Importateur extends StatefulWidget {
-  //const Importateur({Key? key}) : super(key: key);
-  int import;
-  Importateur({ required this.import});
+class Banque extends StatefulWidget {
+  //const Banque({Key? key}) : super(key: key);
+  int groupeCompteBanque;
+
+  Banque({required this.groupeCompteBanque});
 
   @override
-  State<Importateur> createState() => _ImportateurState(import:import);
+  State<Banque> createState() => _BanqueState(groupeCompteBanque:groupeCompteBanque);
 }
 
-class _ImportateurState extends State<Importateur> {
-  int import=0;
-  _ImportateurState({required this.import});
-
+class _BanqueState extends State<Banque> {
+  int groupeCompteBanque=0;
+  _BanqueState ({required this.groupeCompteBanque});
 
 
   @override
@@ -23,63 +23,52 @@ class _ImportateurState extends State<Importateur> {
     //final double width= MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.blue,
+        centerTitle: true,
+        toolbarHeight: 50,
+        title:
+        Column(
+
+            crossAxisAlignment: CrossAxisAlignment.end,
+
+            children: [
+              Row(children: [
+                //Icon(Icons.arrow_back),
+                Text('BANQUE',
+                  style: TextStyle(fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+                IconButton(onPressed: () {},
+                    icon: Icon(Icons.search,
+                        color: Colors.white)),
+
+              ]),
+
+              //SizedBox(height: 10,),
+
+
+            ]),
+      ),
       backgroundColor: Colors.grey[300],
 
-       appBar: AppBar(
-         elevation: 0,
-         backgroundColor: Colors.blue,
-         centerTitle: true,
-         toolbarHeight: MediaQuery.of(context).size.height*0.06,
-         title:
-         Column(
-
-
-             children: [
-               Row(children: [
-                 //Icon(Icons.arrow_back),
-                 Text('IMPORTATEURS',
-                   style: TextStyle(fontSize: 15,
-                       color: Colors.white,
-                       fontWeight: FontWeight.bold),
-                 ),
-                 const Spacer(),
-                 IconButton(onPressed: () {},
-                     icon: Icon(Icons.search,
-                         color: Colors.white)),
-                 const Spacer(),
-                 IconButton(onPressed: () {
-                   //Navigator.PushNamed(context, routeName)
-                   Navigator.pushNamed(context, '/nouveau_compte_importateur');
-                 },
-                     icon: Icon(Icons.add,
-                         color: Colors.white)),
-               ]),
-
-
-             ]),
-        ),
-
-
-
       body:
+
       Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(10, 2, 10, 0),
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             height: 40,
             color: Colors.blue,
 
 
-            child: Column(
+                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
 
-                  Row(children: [
-
-
-                  ]),
-
-                  SizedBox(height: 12,),
 
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -100,22 +89,14 @@ class _ImportateurState extends State<Importateur> {
                               fontWeight: FontWeight.bold),),
                       ]),
 
-
-                  //LISTE DES IMPORTATEURS
-
-
                   // TextFormField(),
-                ]
-
-            ),
-
+                ]),
           ),
 
 
-//AFFICHAGE DES DONNEES FROM API
           Expanded(
               child: FutureBuilder<List<CompteModel>>(
-                  future: CompteModel.getImportateurModel(import),
+                  future: CompteModel.getBanqueGroupe(groupeCompteBanque),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
@@ -162,7 +143,7 @@ class _ImportateurState extends State<Importateur> {
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        CompteModel importObject = snapshot.data![index];
+                        CompteModel banqueObject = snapshot.data![index];
 
                         //iteration de la liste
                         return ListTile(
@@ -172,9 +153,9 @@ class _ImportateurState extends State<Importateur> {
                           subtitle: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(importObject.designationCompte.toString()),
-                              Text(importObject.numCompte.toString()),
-                              Text(importObject.solde.toString()),
+                              Text(banqueObject.designationGroupe.toString()),
+                              Text(banqueObject.numCompte.toString()),
+                              Text(banqueObject.solde.toString()),
                             ],
                           ),
                         );
@@ -188,16 +169,8 @@ class _ImportateurState extends State<Importateur> {
                     );
                   })
           ),
-
-
-
-
-
         ],
       ),
-
-
-
 
     );
   }

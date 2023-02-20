@@ -78,6 +78,35 @@ class CompteModel {
     var t = [];
     t = json.decode(data.body);
     return t.map((e) => CompteModel.fromJson(e)).toList();
+
+  }
+
+
+  /**
+   *BALANCE DES COMPTE POUR BANQUE
+   */
+  static Future<List<CompteModel>> getBanqueGroupe(int groupeCompteBanque) async {
+    var url = Urls.adresseServeur + "/api/Balance/GetlaBalanceParGoupe?GroupeCompte=$groupeCompteBanque";
+    print(url);
+    var data = await http.get(
+        Uri.parse(url));
+    var t = [];
+    t = json.decode(data.body);
+    return t.map((e) => CompteModel.fromJson(e)).toList();
+  }
+
+
+  /**
+   *BALANCE DES COMPTE POUR LIVRE DE CAISSE
+   */
+  static Future<List<CompteModel>> getLivreCaisse(int groupeLivreDeCaisse) async {
+    var url = Urls.adresseServeur + "/api/Balance/GetlaBalanceParGoupe?GroupeCompte=$groupeLivreDeCaisse";
+    print(url);
+    var data = await http.get(
+        Uri.parse(url));
+    var t = [];
+    t = json.decode(data.body);
+    return t.map((e) => CompteModel.fromJson(e)).toList();
   }
 }
 
