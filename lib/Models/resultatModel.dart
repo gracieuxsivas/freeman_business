@@ -9,10 +9,10 @@ import '../utilits/Urls.dart';
 
 class ResultatModel {
   String? periode;
-  int? charge;
-  int? produit;
-  int? rsultat;
-  int? rendemnt;
+  double? charge;
+  double? produit;
+  double? rsultat;
+  double? rendemnt;
   int? groupeCompte;
   int? codeExercice;
   String? designationGroupe;
@@ -33,15 +33,15 @@ class ResultatModel {
 
   ResultatModel.fromJson(Map<String, dynamic> json) {
     periode = json['periode'];
-    charge = json['charge'];
-    produit = json['produit'];
-    rsultat = json['rsultat'];
-    rendemnt = json['rendemnt'];
+    charge = double.parse(json['charge'].toString());
+    produit = double.parse(json['produit'].toString());
+    rsultat = double.parse(json['rsultat'].toString());
+    rendemnt = double.parse(json['rendemnt'].toString());
     groupeCompte = json['groupeCompte'];
     codeExercice = json['codeExercice'];
-    designationGroupe = json['designationGroupe'];
-    numCompte = json['numCompte'];
-    designationCompte = json['designationCompte'];
+    designationGroupe = json['designationGroupe'].toString();
+    numCompte = json['numCompte'].toString();
+    designationCompte = json['designationCompte'].toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -60,7 +60,7 @@ class ResultatModel {
   }
 
   static Future<List<ResultatModel>> getResultat(int resultatParAn) async {
-    var url = Urls.adresseServeur + "/api/Resultat/GetlesResultatParExercice?year=2022";
+    var url = Urls.adresseServeur + "/api/Resultat/GetlesResultatParExercice?year=$resultatParAn";
     print(url);
     var data = await http.get(
         Uri.parse(url));

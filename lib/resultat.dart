@@ -18,9 +18,15 @@ class _ResultatState extends State<Resultat> {
   //VARIABLE POUR DATE TIME
   DateTime _selectedyear=DateTime.now();
 //METHODE POUR SHOW DATE PICKER
-  String affichage_annee="Select";
   selectedYear(contect) async {
     print("Selecting year");
+  }
+  int annee = 0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    annee =  _selectedyear.year;
   }
 
   void _selectedYear(BuildContext context){
@@ -49,7 +55,7 @@ class _ResultatState extends State<Resultat> {
 
                 setState(() {
                   _selectedyear =dateTime;
-                  affichage_annee="${dateTime.year}";
+                  annee  =dateTime.year;
                 });
                 // Remember that you need to use dateTime.year to get the year
               },
@@ -112,7 +118,7 @@ class _ResultatState extends State<Resultat> {
                         //mainAxisAlignment: MainAxisAlignment.end,
 
                         children: [
-                          Text('Année : $affichage_annee ', //$_selectedYear
+                          Text('Année : $annee ', //$_selectedYear
                             style: TextStyle(fontSize: 15,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),),
@@ -172,7 +178,7 @@ class _ResultatState extends State<Resultat> {
 
           Expanded(
               child: FutureBuilder<List<ResultatModel>>(
-                  future: ResultatModel.getResultat(resultatParAn),
+                  future: ResultatModel.getResultat(annee),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
