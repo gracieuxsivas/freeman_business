@@ -70,8 +70,8 @@ class _ImportReleveState extends State<ImportReleve> {
     ) {
       String formattedDate=DateFormat("yyy-MM-dd").format(picked);
       setState(() {
-        date_1=formattedDate.toString();
-       //date_2=formattedDate.toString();
+       date_1=formattedDate.toString();
+      // date_2=formattedDate.toString();
       });
       //date_1 = picked.toString();
     }
