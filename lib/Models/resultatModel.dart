@@ -60,7 +60,6 @@ class ResultatModel {
     return data;
   }
 
-
   static Future<List<ResultatModel>> getResultat(int resultatParAn) async {
     var url = Urls.adresseServeur + "/api/Resultat/GetlesResultatParExercice?year=$resultatParAn";
     print(url);
