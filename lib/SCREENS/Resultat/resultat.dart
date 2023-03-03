@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/resultatModel.dart';
+import 'package:freeman_business/SCREENS/Resultat/resultat_par_mois.dart';
 
 class Resultat extends StatefulWidget {
   //const Resultat({Key? key}) : super(key: key);
@@ -14,19 +15,39 @@ class _ResultatState extends State<Resultat> {
 
   _ResultatState({required this.resultatParAn});
   int resultatParAn=0;
+  String mois = "" ;
+
+  double charge= 0, produit=0, rsultat=0;
+
+  //____________________________
+
 
   //VARIABLE POUR DATE TIME
   DateTime _selectedyear=DateTime.now();
+
 //METHODE POUR SHOW DATE PICKER
   selectedYear(contect) async {
     print("Selecting year");
   }
+
   int annee = 0;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     annee =  _selectedyear.year;
+
+    setState(() {
+
+
+    });
+
+    ResultatModel.getResultat(resultatParAn).then((value) => setState((){
+      charge = value as double;
+
+    }));
+
   }
 
   void _selectedYear(BuildContext context){
@@ -47,6 +68,7 @@ class _ResultatState extends State<Resultat> {
               // re-showing the dialog.
               selectedDate: _selectedyear,
               onChanged: (DateTime dateTime) {
+
                 // close the dialog when year is selected.
 
                 Navigator.pop(context);
@@ -99,13 +121,9 @@ class _ResultatState extends State<Resultat> {
             height: 100,
             color: Colors.blue,
 
-
-
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-
-
 
                   SizedBox(height: 5,),
                   Container(
@@ -228,18 +246,34 @@ class _ResultatState extends State<Resultat> {
                         ResultatModel resultatObject = snapshot.data![index];
 
                         //iteration de la liste
-                        return ListTile(
-                          title: Text(' ',
-                            //importObject.designationGroupe.toString(),
-                            style: TextStyle(fontSize: 11),),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(resultatObject.periode.toString()),
-                              Text(resultatObject.charge.toString()),
-                              Text(resultatObject.produit.toString()),
-                              //Text(resultatObject.rsultat.toString()),
-                            ],
+                        return InkWell(
+                          onTap: (){
+                            String mois= " ";
+
+                            setState(() {
+
+                              Navigator.push(context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>ResultatParMois( mois: '', annee: annee,))
+                              );
+
+                            });
+                          },
+
+
+                          child: ListTile(
+                            title: Text(' ',
+                              //importObject.designationGroupe.toString(),
+                              style: TextStyle(fontSize: 11),),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(resultatObject.periode.toString()),
+                                Text(resultatObject.charge.toString()),
+                                Text(resultatObject.produit.toString()),
+                                Text(resultatObject.rsultat.toString()),
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -259,8 +293,6 @@ class _ResultatState extends State<Resultat> {
       ),
 
 
-
-
       bottomNavigationBar: Container(
         height: 40,
         decoration: BoxDecoration(
@@ -268,7 +300,6 @@ class _ResultatState extends State<Resultat> {
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
-
           ),
         ),
         child: Row(
@@ -281,22 +312,26 @@ class _ResultatState extends State<Resultat> {
             ),
 
         //TOTAL CHARGE
-            Text("   ",
+            Text("  $charge ",
               style: TextStyle(fontSize: 15,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
 
 
+
+
             //TOTAL PRODUIT
-            Text("   ",
+
+
+            Text(" $produit  ",
               style: TextStyle(fontSize: 15,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
 
             //TOTAL Resultat
-            Text("   ",
+            Text(" $rsultat  ",
               style: TextStyle(fontSize: 15,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),

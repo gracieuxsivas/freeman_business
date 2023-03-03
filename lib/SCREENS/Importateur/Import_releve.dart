@@ -1,128 +1,98 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/importateur_Releve_model.dart';
-import 'package:freeman_business/Models/resultatModel.dart';
 import 'package:intl/intl.dart';
+import 'package:freeman_business/Models/resultatModel.dart';
 
-import 'Models/importateur_Releve_model.dart';
-
-class ImportRelev extends StatefulWidget {
+class ImportReleve extends StatefulWidget {
   //const Resultat({Key? key}) : super(key: key);
   int Compte;
   //int numCompte;
-
-  ImportRelev({required this.Compte});
+ ImportReleve( String date_1, String date_2 ,   {required this.Compte});
 
   @override
-  State<ImportRelev> createState() => _ImportRelevState(Compte: Compte);
+  State<ImportReleve> createState() => _ImportReleveState(Compte:Compte);
 }
 
-class _ImportRelevState extends State<ImportRelev> {
+class _ImportReleveState extends State<ImportReleve> {
+  int Compte=0;
 
-  _ImportRelevState({required this.Compte});
- // String Compte=0 as String;
-  int Compte = 0;
-
-
-  //____________________________
+  _ImportReleveState ({required this.Compte});
 
 
+  //Variable for date Picker
+  String _dateTime1=DateFormat('yyyy-MM-dd').format(DateTime.now().add(Duration(days: -30)));
+  String _dateTime2=DateFormat('yyyy-MM-dd').format(DateTime.now());
 
-  //VARIABLE POUR DATE TIME
-  String _dateTime=DateFormat('yyyy-MM-dd').format(DateTime.now());
- // DateTime selectedDate = DateTime.now();
-  DateTime selecteddate1=(DateTime.now().month -1) as DateTime;
-  DateTime selecteddate2=DateTime.now();
-//METHODE POUR SHOW DATE PICKER
-  selectedYear(contect) async {
-    print("Selecting date");
-  }
-  String date_1 ="";
+   // DateTime _selecteddate1=DateTime.now();
+   // DateTime  _selecteddate2=DateTime.now();
+
+
+  // dateTime(contect) async {
+  //   print("Selectionnez la date");
+  // }
+
+  String date_1 = "" ;
   String date_2= "";
-
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // annee =  _selecteddate as int;
-    date_1 = selecteddate1.toString() ;
-    date_2 = selecteddate2.toString() ;
+
+    date_1 = _dateTime1 ;
+    date_2 = _dateTime2;
 
     setState(() {
 
 
     });
 
-    // ImportateurReleveModel.getReveveImp(Compte).then((value) => setState((){
-    //   numCompte = value as int;
-    //
-    // }));
 
   }
 
-  // void _selectedYear(BuildContext context){
+//Methode pour Afficher dATE
 
-    // showDialog(
-    //   context: context,
+  //@override
 
-        Future<void> _selectedDate(BuildContext context) async {
-      final DateTime? picked = await showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime(2015, 8),
-          lastDate: DateTime(2101));
-      if (picked != null && picked != selecteddate1) {
-        setState(() {
-          selecteddate1 = picked;
-        });
-      }
+
+  //_______________________________________________
+  Future<void> _showDate(BuildContext) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2015,),
+        lastDate: DateTime(2101),
+    );
+
+    if (picked != null
+
+        //&& picked != date_1
+    ) {
+      String formattedDate=DateFormat("yyy-MM-dd").format(picked);
+      setState(() {
+        date_1=formattedDate.toString();
+       //date_2=formattedDate.toString();
+      });
+      //date_1 = picked.toString();
     }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
   }
-
-      // builder: (BuildContext context) {
-      //   return AlertDialog(
-      //     title: Text("Date"),
-      //     content: Container( // Need to use container to add size constraint.
-      //       width: 300,
-      //       height: 300,
-      //       child: YearPicker(
-      //         initialDate: DateTime.now(),
-      //         firstDate: DateTime(2000),
-      //         lastDate: DateTime(2090),
-      //         // save the selected date to _selectedDate DateTime variable.
-      //         // It's used to set the previous selected date when
-      //         // re-showing the dialog.
-      //         selectedDate: _selecteddate1 ,
-      //
-      //         onChanged: (DateTime dateTime) {
-      //           // close the dialog when year is selected.
-      //
-      //           Navigator.pop(context);
-      //
-      //           // Do something with the dateTime selected.
-      //
-      //           setState(() {
-      //             _dateTime =dateTime as String;
-      //             date_1  =dateTime as String ;
-      //           });
-      //           // Remember that you need to use dateTime.year to get the year
-      //         },
-      //       ),
-      //     ),
-      //   );
-      //
-      //
-      // },
-    //);
+//_________________________________________________
 
 
-
-  }
+  //A REMETTRE
+  // void _showDate (BuildContext context){
+  //   showDatePicker(
+  //       context: context,
+  //       initialDate: DateTime.now(),
+  //       firstDate: DateTime(2000),
+  //       lastDate: DateTime(2500),
+  //
+  //   ).then((value) {
+  //     setState(() {
+  //       date_1= value!.toString();
+  //     });
+  //   });
+  // }
 
 
   @override
@@ -163,8 +133,6 @@ class _ImportRelevState extends State<ImportRelev> {
                 children: [
 
 
-
-
                   SizedBox(height: 5,),
 
                   Card(
@@ -181,7 +149,7 @@ class _ImportRelevState extends State<ImportRelev> {
                           //Display Date
 
                           children: [
-                            Text('Du :  ', //$_selectedYear
+                            Text('Du : $date_1 ', //$_selectedYear
                               style: TextStyle(fontSize: 15,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),),
@@ -191,7 +159,7 @@ class _ImportRelevState extends State<ImportRelev> {
 
                             GestureDetector(
                               onTap: (){
-                                //_selectedDate(context);
+                                _showDate(context);
                                 //     _selectedYear(context);
                               },
 
@@ -199,9 +167,7 @@ class _ImportRelevState extends State<ImportRelev> {
 
                             ),
 
-
-
-                            Text('    Au :  ', //$_selectedYear
+                            Text('    Au : $date_2 ', //$_selectedYear
                               style: TextStyle(fontSize: 15,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),),
@@ -211,14 +177,13 @@ class _ImportRelevState extends State<ImportRelev> {
                             GestureDetector(
                               onTap: (){
 
-                              //  _selectedDate ;
+                                _showDate(context);
 
                               },
 
                               child: const Icon(Icons.calendar_month, size: 40),
 
                             )
-
 
 
                           ]
@@ -230,7 +195,7 @@ class _ImportRelevState extends State<ImportRelev> {
 
                   Row(
 
-                    //crossAxisAlignment: CrossAxisAlignment.end,
+                      //crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text('Date',
@@ -264,7 +229,6 @@ class _ImportRelevState extends State<ImportRelev> {
 
 
                   SizedBox(height: 19,),
-
 
 
                   Row(
@@ -308,11 +272,15 @@ class _ImportRelevState extends State<ImportRelev> {
 
 
 
+
           Expanded(
               child: FutureBuilder<List<ImportateurReleveModel>>(
-                  //future: ImportateurReleveModel.getReleveImp(Compte, date_1, date_2),
+               future: ImportateurReleveModel.getReleveImp(Compte, date_1, date_2),
 
 
+                 // future: ImportateurReleveModel.getReleveImp(date_1),
+
+                  //future: ResultatModel.getResultat(annee),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
@@ -362,18 +330,108 @@ class _ImportRelevState extends State<ImportRelev> {
                         ImportateurReleveModel releveObject = snapshot.data![index];
 
                         //iteration de la liste
-                        return ListTile(
-                          title: Text(' ',
-                            //importObject.designationGroupe.toString(),
-                            style: TextStyle(fontSize: 11),),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(releveObject.numCompte.toString()),
-                              // Text(releveObject.charge.toString()),
-                              // Text(releveObject.produit.toString()),
-                              // Text(releveObject.rsultat.toString()),
-                            ],
+                        return InkWell(
+                          onTap: (){
+                            int Compte =0;
+                            setState(() {
+                              showModalBottomSheet(
+                                  context: context,
+                                  isDismissible: false,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(20),
+                                      topLeft: Radius.circular(20),
+                                    ),
+                                  ),
+                                  builder: (context){
+                                return Container(
+                                  padding: EdgeInsets.all(25),
+                                  child: Column(
+                                    children: [
+                                      Row(children: [
+                                        Text("Libellé",
+                                          style: TextStyle(fontSize: 15,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold)
+                                        ),
+                                          const Spacer(),
+                                          Text('Compte',
+                                            style: TextStyle(fontSize: 15,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),),
+                                          const Spacer(),
+                                          Text('Débit',
+                                            style: TextStyle(fontSize: 15,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),),
+                                          const Spacer(),
+                                          Text('Crédit',
+                                            style: TextStyle(fontSize: 15,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),),
+                                      ],),
+
+                                      // FloatingActionButton(onPressed: (){},
+                                      //   child: Text("Quitter"),),
+
+
+                                      Container(
+
+                                        height: MediaQuery.of(context).size.height*0.30,
+
+
+
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            TextButton(
+                                                onPressed: (){
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text("QUITTER",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold
+                                                ),)),
+
+                                            ElevatedButton(
+                                                onPressed: (){
+
+                                                },
+                                                child: Text("SUPPRIMER",
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight: FontWeight.bold
+                                                  ),
+                                                )),
+
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  height: MediaQuery.of(context).size.height*0.40,
+                                );
+                                  });
+                            });
+                          },
+
+
+                          child: ListTile(
+                            title: Text(' ',
+                              //importObject.designationGroupe.toString(),
+                              style: TextStyle(fontSize: 11),),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(releveObject.dateOperation.toString()),
+                                Text(releveObject.numeroOperation.toString()),
+                                Text(releveObject.details.toString()),
+                                Text(releveObject.debit.toString()),
+                                Text(releveObject.credit.toString()),
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -387,15 +445,8 @@ class _ImportRelevState extends State<ImportRelev> {
                   })
           ),
 
-
-
-
-
-
         ],
       ),
-
-
 
 
       bottomNavigationBar: Container(
@@ -409,7 +460,6 @@ class _ImportRelevState extends State<ImportRelev> {
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(0),
             topRight: Radius.circular(0),
-
 
           ),
         ),
@@ -498,4 +548,4 @@ class _ImportRelevState extends State<ImportRelev> {
 
     );
   }
-//}
+}

@@ -2,27 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/compteModel.dart';
 import 'package:freeman_business/SCREENS/Importateur/Import_releve.dart';
 
+import '../../Models/resultatModel.dart';
+import 'package:freeman_business/SCREENS/Resultat//resultat.dart';
 
-class Importateur extends StatefulWidget {
+
+class ResultatParMois extends StatefulWidget {
   //const Importateur({Key? key}) : super(key: key);
-  int import;
-  Importateur({ required this.import});
+  int annee;
+  String mois;
+
+  ResultatParMois(    { required this.annee, required this.mois,});
 
   @override
-  State<Importateur> createState() => _ImportateurState(import:import);
+  State<ResultatParMois> createState() => _ResultatParMoisState(annee:annee, mois: '');
 }
 
-class _ImportateurState extends State<Importateur> {
-  int import=0;
-  int resultatParAn=0;
-  int Compte=0;
-  // String date_1="";
-  // String date_2="";
-  _ImportateurState({required this.import});
+class _ResultatParMoisState extends State<ResultatParMois> {
 
-  String date_1="";
-  String date_2="";
+  _ResultatParMoisState({required this.annee, required this.mois,});
 
+  int annee=0;
+  String mois =" ";
+
+  DateTime monthyear = DateTime.now();
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    annee= annee;
+    mois = monthyear.month.toString();
+
+    setState(() {
+
+    });
+    // ResultatModel.getResultatParMois(mois, annee).then((value) => setState(() {
+    //
+    // }));
+  }
+
+  Future<void> _showDate(BuildContext) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: monthyear,
+      firstDate: DateTime(2015,),
+      lastDate: DateTime(2101),
+    );
+
+    // if (picked != null
+    //
+    // //&& picked != date_1
+    // ) {
+    //
+    //
+    //   //date_1 = picked.toString();
+    // }
+  }
 
 
   @override
@@ -33,41 +69,28 @@ class _ImportateurState extends State<Importateur> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
 
-       appBar: AppBar(
-         elevation: 0,
-         backgroundColor: Colors.blue,
-         centerTitle: true,
-         toolbarHeight: MediaQuery.of(context).size.height*0.06,
-         title:
-         Column(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.blue,
+        centerTitle: true,
+        toolbarHeight: MediaQuery.of(context).size.height*0.06,
+        title:
+        Column(
+            children: [
+              Row(children: [
+                //Icon(Icons.arrow_back),
+               //Text('${monthyear.month}',
+                  Text(mois,
 
+                  style: TextStyle(fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+              ]),
 
-             children: [
-               Row(children: [
-                 //Icon(Icons.arrow_back),
-                 Text('IMPORTATEURS',
-                   style: TextStyle(fontSize: 15,
-                       color: Colors.white,
-                       fontWeight: FontWeight.bold),
-                 ),
-                 const Spacer(),
-                 IconButton(onPressed: () {},
-                     icon: Icon(Icons.search,
-                         color: Colors.white)),
-                 const Spacer(),
-                 IconButton(onPressed: () {
-                   //Navigator.PushNamed(context, routeName)
-                   Navigator.pushNamed(context, '/nouveau_compte_importateur');
-                 },
-                     icon: Icon(Icons.add,
-                         color: Colors.white)),
-               ]),
-
-
-             ]),
-        ),
-
-
+            ]),
+      ),
 
       body:
       Column(
@@ -77,13 +100,11 @@ class _ImportateurState extends State<Importateur> {
             height: 40,
             color: Colors.blue,
 
-
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
 
                   Row(children: [
-
 
                   ]),
 
@@ -92,37 +113,34 @@ class _ImportateurState extends State<Importateur> {
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text('Designation',
+                        Text('Référence',
                           style: TextStyle(fontSize: 15,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),),
                         const Spacer(),
-                        Text('Compte',
+                        Text('Charge',
                           style: TextStyle(fontSize: 15,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),),
                         const Spacer(),
-                        Text('Solde',
+                        Text('Produit',
                           style: TextStyle(fontSize: 15,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),),
                       ]),
 
-
-
-
                   // TextFormField(),
                 ]
-
             ),
 
           ),
 
 
 //AFFICHAGE DES DONNEES FROM API
+
           Expanded(
-              child: FutureBuilder<List<CompteModel>>(
-                  future: CompteModel.getImportateurModel(import),
+              child: FutureBuilder<List<ResultatModel>>(
+                  future: ResultatModel.getResultatParMois(mois, annee),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
@@ -169,7 +187,7 @@ class _ImportateurState extends State<Importateur> {
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        CompteModel importObject = snapshot.data![index];
+                        ResultatModel resultatParMoisObject = snapshot.data![index];
 
                         //importObject.numCompte
 
@@ -177,14 +195,14 @@ class _ImportateurState extends State<Importateur> {
                         //iteration de la liste
                         return InkWell(
                           onTap: (){
-                            int Compte=0;
+                            //int Compte=0;
                             setState(() {
 
 
-                              Navigator.push(context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>ImportReleve(Compte: Compte, date_1, date_2))
-                              );
+                              // Navigator.push(context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>ImportReleve(Compte: Compte,))
+                              // );
 
                             });
                           },
@@ -195,9 +213,10 @@ class _ImportateurState extends State<Importateur> {
                             subtitle: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(importObject.designationCompte.toString()),
-                                Text(importObject.numCompte.toString()),
-                                Text(importObject.solde.toString()),
+                                Text(resultatParMoisObject.designationCompte.toString()),
+                                Text(resultatParMoisObject.charge.toString()),
+                                Text(resultatParMoisObject.produit.toString()),
+
                               ],
                             ),
                           ),
@@ -214,14 +233,8 @@ class _ImportateurState extends State<Importateur> {
           ),
 
 
-
-
-
         ],
       ),
-
-
-
 
     );
   }

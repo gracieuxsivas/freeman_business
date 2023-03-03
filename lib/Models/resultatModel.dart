@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../utilits/Urls.dart';
 
+
 class ResultatModel {
   String? periode;
   double? charge;
@@ -59,6 +60,7 @@ class ResultatModel {
     return data;
   }
 
+
   static Future<List<ResultatModel>> getResultat(int resultatParAn) async {
     var url = Urls.adresseServeur + "/api/Resultat/GetlesResultatParExercice?year=$resultatParAn";
     print(url);
@@ -68,5 +70,19 @@ class ResultatModel {
     t = json.decode(data.body);
     return t.map((e) => ResultatModel.fromJson(e)).toList();
   }
+
+
+  /**RESULTAT PAR MOIS  */
+
+  static Future<List<ResultatModel>> getResultatParMois(String mois, int annee) async {
+    var url = Urls.adresseServeur + "/api/Resultat/GetlesResultaDetaillePourUnmoiParCodeExercice?moi=$mois&year=$annee";
+    print(url);
+    var data = await http.get(
+        Uri.parse(url));
+    var t = [];
+    t = json.decode(data.body);
+    return t.map((e) => ResultatModel.fromJson(e)).toList();
+  }
+
 }
 

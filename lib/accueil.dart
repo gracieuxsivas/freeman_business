@@ -4,7 +4,7 @@ import 'package:focused_menu/modals.dart';
 //import 'package:freeman_business/Importateur/importateur_screen.dart';
 import 'package:freeman_business/Models/groupeCompte.dart';
 import 'package:freeman_business/Models/users.dart';
-import 'package:freeman_business/resultat.dart';
+import 'package:freeman_business/SCREENS/Resultat/resultat.dart';
 
 import 'Dossier/dossier_screen.dart';
 import 'SCREENS/Importateur/importateur_screen.dart';
@@ -32,6 +32,7 @@ class _AccueilState extends State<Accueil> {
   int groupeCompteBanque=521;
   int groupeCompteLivreDeCaisse=572;
   int resultatParAn=0;
+  int numCompte=0;
 
 
 

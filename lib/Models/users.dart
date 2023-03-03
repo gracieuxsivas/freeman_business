@@ -69,7 +69,6 @@ class Users {
   }
 
 
-
   static saveUserPrefs(Users value) async {
     //enregistrement de la session de l'utilisateur en cours
     final prefs = await SharedPreferences.getInstance();

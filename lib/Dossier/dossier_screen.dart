@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 
 import '../Models/dossier.dart';
 import '../Models/dossier.dart';
+import 'dossier_facturation_screen.dart';
 import 'model_list_file.dart';
 
 class DossierEncours extends StatefulWidget {
@@ -149,15 +152,34 @@ class _DossierEncoursState extends State<DossierEncours> {
                       itemBuilder: (context, index) {
                         Dossier dossierObject = snapshot.data![index];
                         //iteration de la liste
-                        return ListTile(
-                          title: Text(dossierObject.detailPV.toString(),style: TextStyle(fontSize: 11),),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                                Text(dossierObject.charge.toString()),
-                                Text(dossierObject.facturation.toString()),
-                                Text(dossierObject.resultat.toString()),
-                            ],
+                        return FocusedMenuHolder(
+                          menuWidth: MediaQuery.of(context).size.width*0.5,//<= prendre la moitier de la largeur ecran
+                          openWithTap: true,
+                          blurSize: 4,
+
+                        onPressed: (){},
+                        menuItems: [
+                        FocusedMenuItem(title: Text("Factures"), onPressed: (){
+                          Navigator.push(context,
+                            MaterialPageRoute(
+                                builder: (context) =>DossierFacture_scr())
+                        );
+                        }
+                        ),
+
+                        FocusedMenuItem(title: Text("Depense"), onPressed: (){}),
+                        FocusedMenuItem(title: Text("Cloturé"), onPressed: (){}),
+                        ],
+                          child: ListTile(
+                            title: Text(dossierObject.detailPV.toString(),style: TextStyle(fontSize: 11),),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                  Text(dossierObject.charge.toString()),
+                                  Text(dossierObject.facturation.toString()),
+                                  Text(dossierObject.resultat.toString()),
+                              ],
+                            ),
                           ),
                         );
                         },

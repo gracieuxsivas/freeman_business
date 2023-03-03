@@ -151,7 +151,7 @@ class _OperationSuiteState extends State<OperationSuite> {
                         prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
 
                         ),
-                        labelText: "Payement Global",
+                        labelText: "Detail Global",
                         hintText: "  "
                     ),
                     keyboardType: TextInputType.text,
@@ -231,8 +231,9 @@ class _OperationSuiteState extends State<OperationSuite> {
                     ),
                     labelText: "Montant ",
                     hintText: "  "
+
                 ),
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.number,
               ),
             ),
           ),
@@ -256,13 +257,6 @@ class _OperationSuiteState extends State<OperationSuite> {
           label: Text("AJOUTER DETAILS",
           style: TextStyle(color: Colors.black,),
           ))
-
-
-
-
-
-
-
 
 
         ],

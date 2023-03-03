@@ -74,7 +74,6 @@ class GroupeCompte {
     return double.parse(data.body.toString());
   }
 
-
   static Future<double> getFraisDossier(
       int parameter) async {
     var url = Urls.adresseServeur + "/api/Accueil/PvdelePeriode?TypeDePeriode=$parameter";
