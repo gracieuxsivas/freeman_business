@@ -14,7 +14,7 @@ class ResultatParMois extends StatefulWidget {
   ResultatParMois(    { required this.annee, required this.mois,});
 
   @override
-  State<ResultatParMois> createState() => _ResultatParMoisState(annee:annee, mois: '');
+  State<ResultatParMois> createState() => _ResultatParMoisState(annee:annee, mois: mois);
 }
 
 class _ResultatParMoisState extends State<ResultatParMois> {
@@ -22,7 +22,7 @@ class _ResultatParMoisState extends State<ResultatParMois> {
   _ResultatParMoisState({required this.annee, required this.mois,});
 
   int annee=0;
-  String mois =" ";
+  String mois ="";
   DateTime monthyear = DateTime(DateTime.monthsPerYear);
 
 
@@ -30,35 +30,8 @@ class _ResultatParMoisState extends State<ResultatParMois> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    annee= annee;
-    mois = monthyear.month.toString();
-    //mois= mois;
-
-    setState(() {
-
-    });
-    // ResultatModel.getResultatParMois(mois, annee).then((value) => setState(() {
-    //
-    // }));
   }
 
-  Future<void> _showDate(BuildContext) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: monthyear,
-      firstDate: DateTime(2015,),
-      lastDate: DateTime(2101),
-    );
-
-    // if (picked != null
-    //
-    // //&& picked != date_1
-    // ) {
-    //
-    //
-    //   //date_1 = picked.toString();
-    // }
-  }
 
 
   @override
@@ -196,15 +169,6 @@ class _ResultatParMoisState extends State<ResultatParMois> {
                         return InkWell(
                           onTap: (){
                             //int Compte=0;
-                            setState(() {
-
-
-                              // Navigator.push(context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>ImportReleve(Compte: Compte,))
-                              // );
-
-                            });
                           },
                           child: ListTile(
                             title: Text(' ',

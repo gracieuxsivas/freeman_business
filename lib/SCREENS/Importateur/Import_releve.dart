@@ -76,6 +76,28 @@ class _ImportReleveState extends State<ImportReleve> {
       //date_1 = picked.toString();
     }
   }
+
+
+  Future<void> _showDate2(BuildContext) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2015,),
+        lastDate: DateTime(2101),
+    );
+
+    if (picked != null
+
+        //&& picked != date_1
+    ) {
+      String formattedDate=DateFormat("yyy-MM-dd").format(picked);
+      setState(() {
+       date_2=formattedDate.toString();
+      // date_2=formattedDate.toString();
+      });
+      //date_1 = picked.toString();
+    }
+  }
 //_________________________________________________
 
 
@@ -124,7 +146,7 @@ class _ImportReleveState extends State<ImportReleve> {
             padding: EdgeInsets.fromLTRB(10, 7, 10, 0),
             //height: 100,
 
-            height: MediaQuery.of(context).size.height*0.17,
+            //height: MediaQuery.of(context).size.height*0.17,
             //width: MediaQuery.of(context).size.width*0.33,
             color: Colors.white,
 
@@ -177,7 +199,7 @@ class _ImportReleveState extends State<ImportReleve> {
                             GestureDetector(
                               onTap: (){
 
-                                _showDate(context);
+                                _showDate2(context);
 
                               },
 
@@ -197,7 +219,7 @@ class _ImportReleveState extends State<ImportReleve> {
 
                       //crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
+                      children:const [
                         Text('Date',
                           style: TextStyle(fontSize: 15,
                               color: Colors.black,

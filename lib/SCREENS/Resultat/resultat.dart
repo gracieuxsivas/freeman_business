@@ -248,16 +248,10 @@ class _ResultatState extends State<Resultat> {
                         //iteration de la liste
                         return InkWell(
                           onTap: (){
-                            String mois= " ";
-
-                            setState(() {
-
-                              Navigator.push(context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>ResultatParMois( mois: '', annee: annee,))
-                              );
-
-                            });
+                            Navigator.push(context,
+                                MaterialPageRoute(
+                                    builder: (context) =>ResultatParMois( mois: resultatObject.periode.toString(), annee: annee,))
+                            );
                           },
 
 
