@@ -23,8 +23,7 @@ class _ResultatParMoisState extends State<ResultatParMois> {
 
   int annee=0;
   String mois =" ";
-
-  DateTime monthyear = DateTime.now();
+  DateTime monthyear = DateTime(DateTime.monthsPerYear);
 
 
   @override
@@ -33,6 +32,7 @@ class _ResultatParMoisState extends State<ResultatParMois> {
     super.initState();
     annee= annee;
     mois = monthyear.month.toString();
+    //mois= mois;
 
     setState(() {
 
