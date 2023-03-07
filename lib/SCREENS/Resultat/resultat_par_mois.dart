@@ -180,7 +180,6 @@ class _ResultatParMoisState extends State<ResultatParMois> {
                                 Text(resultatParMoisObject.designationCompte.toString()),
                                 Text(resultatParMoisObject.charge.toString()),
                                 Text(resultatParMoisObject.produit.toString()),
-
                               ],
                             ),
                           ),
@@ -195,8 +194,6 @@ class _ResultatParMoisState extends State<ResultatParMois> {
                     );
                   })
           ),
-
-
         ],
       ),
 

@@ -6,17 +6,18 @@ import 'package:freeman_business/Models/resultatModel.dart';
 class ImportReleve extends StatefulWidget {
   //const Resultat({Key? key}) : super(key: key);
   int Compte;
+  String NumOperation;
   //int numCompte;
- ImportReleve( String date_1, String date_2 ,   {required this.Compte});
+ ImportReleve( String date_1, String date_2 ,   {required this.Compte, required this.NumOperation});
 
   @override
-  State<ImportReleve> createState() => _ImportReleveState(Compte:Compte);
+  State<ImportReleve> createState() => _ImportReleveState(Compte:Compte, NumOperation: '');
 }
 
 class _ImportReleveState extends State<ImportReleve> {
   int Compte=0;
 
-  _ImportReleveState ({required this.Compte});
+  _ImportReleveState ({required this.Compte, required this.NumOperation, });
 
 
   //Variable for date Picker
@@ -33,6 +34,7 @@ class _ImportReleveState extends State<ImportReleve> {
 
   String date_1 = "" ;
   String date_2= "";
+  String NumOperation ="";
 
   @override
   void initState() {
@@ -100,21 +102,6 @@ class _ImportReleveState extends State<ImportReleve> {
   }
 //_________________________________________________
 
-
-  //A REMETTRE
-  // void _showDate (BuildContext context){
-  //   showDatePicker(
-  //       context: context,
-  //       initialDate: DateTime.now(),
-  //       firstDate: DateTime(2000),
-  //       lastDate: DateTime(2500),
-  //
-  //   ).then((value) {
-  //     setState(() {
-  //       date_1= value!.toString();
-  //     });
-  //   });
-  // }
 
 
   @override
@@ -354,88 +341,178 @@ class _ImportReleveState extends State<ImportReleve> {
                         //iteration de la liste
                         return InkWell(
                           onTap: (){
-                            int Compte =0;
+                            String NumOperation ="";
                             setState(() {
-                              showModalBottomSheet(
-                                  context: context,
-                                  isDismissible: false,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(20),
-                                      topLeft: Radius.circular(20),
-                                    ),
-                                  ),
-                                  builder: (context){
-                                return Container(
-                                  padding: EdgeInsets.all(25),
-                                  child: Column(
-                                    children: [
-                                      Row(children: [
-                                        Text("Libellé",
-                                          style: TextStyle(fontSize: 15,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold)
-                                        ),
-                                          const Spacer(),
-                                          Text('Compte',
-                                            style: TextStyle(fontSize: 15,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),),
-                                          const Spacer(),
-                                          Text('Débit',
-                                            style: TextStyle(fontSize: 15,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),),
-                                          const Spacer(),
-                                          Text('Crédit',
-                                            style: TextStyle(fontSize: 15,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),),
-                                      ],),
+                              // showModalBottomSheet(
+                              //     context: context,
+                              //     isDismissible: false,
+                              //     shape: RoundedRectangleBorder(
+                              //       borderRadius: BorderRadius.only(
+                              //         topRight: Radius.circular(20),
+                              //         topLeft: Radius.circular(20),
+                              //       ),
+                              //     ),
+                              //     builder: (context){
+                              //       Navigator.push(context,
+                              //           MaterialPageRoute(
+                              //               builder: (context) =>ImportReleve(NumOperation: releveObject.numeroOperation.toString(), Compte: Compte,));
+                              //
+                              //
+                              //   return Container(
+                              //     padding: EdgeInsets.all(25),
+                              //     child: Column(
+                              //       children: [
+                              //         Row(children: [
+                              //           Text("Libellé",
+                              //             style: TextStyle(fontSize: 15,
+                              //                 color: Colors.black,
+                              //                 fontWeight: FontWeight.bold)
+                              //           ),
+                              //             const Spacer(),
+                              //             Text('Compte',
+                              //               style: TextStyle(fontSize: 15,
+                              //                   color: Colors.black,
+                              //                   fontWeight: FontWeight.bold),),
+                              //             const Spacer(),
+                              //             Text('Débit',
+                              //               style: TextStyle(fontSize: 15,
+                              //                   color: Colors.black,
+                              //                   fontWeight: FontWeight.bold),),
+                              //             const Spacer(),
+                              //             Text('Crédit',
+                              //               style: TextStyle(fontSize: 15,
+                              //                   color: Colors.black,
+                              //                   fontWeight: FontWeight.bold),),
+                              //         ],),
+                              //
+                              //         //DONNEES FROM APIS
+                              //
+                              //
+                              //
+                              //         Expanded(
+                              //             child: FutureBuilder<List<ImportateurReleveModel>>(
+                              //                 future: ImportateurReleveModel.getDetailReleveOperation(NumOperation),
+                              //                 builder: (context, snapshot) {
+                              //
+                              //                   //Chargement des donnees
+                              //                   if (!snapshot.hasData) {
+                              //                     return Center(
+                              //                       child: Container(
+                              //                           margin: const EdgeInsets.all(20),
+                              //                           child:  const CircularProgressIndicator(
+                              //                             color: Colors.blue,
+                              //                           )),
+                              //                     );
+                              //                   }
+                              //                   //Quand la methode renvoie les donnees
+                              //
+                              //                   if (snapshot.data!.length == 0) {
+                              //
+                              //                     //si la taille de la liste est 0, on affiche un message : aucune donnee disponible
+                              //                     return Center(
+                              //                       child: Container(
+                              //                         margin: const EdgeInsets.all(20),
+                              //                         child:  Column(
+                              //                           // mainAxisAlignment: MainAxisAlignment.center,
+                              //                           children: const [
+                              //                             Text(
+                              //                               "aucune donnée disponible",
+                              //                               textAlign: TextAlign.center,
+                              //                               style: TextStyle(
+                              //                                   fontWeight: FontWeight.normal,
+                              //                                   fontSize: 20,
+                              //                                   fontStyle: FontStyle.italic),
+                              //                             ),
+                              //                           ],
+                              //                         ),
+                              //                       ),
+                              //                     );
+                              //                   }
+                              //                   //affichage de la liste renvoi par la methode, au cas ou la liste contient des donnees
+                              //                   return ListView.separated(
+                              //                     padding: const EdgeInsets.only(
+                              //                       left: 0,
+                              //                       right: 0,
+                              //                       top: 20,
+                              //                       bottom: 100,
+                              //                     ),
+                              //                     itemCount: snapshot.data!.length,
+                              //                     itemBuilder: (context, index) {
+                              //                       ImportateurReleveModel numOpObject = snapshot.data![index];
+                              //
+                              //                       //importObject.numCompte
+                              //
+                              //
+                              //                       //iteration de la liste
+                              //                       return ListTile(
+                              //                         title: Text(' ',
+                              //                           //importObject.designationGroupe.toString(),
+                              //                           style: TextStyle(fontSize: 11),),
+                              //                         subtitle: Row(
+                              //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //                           children: [
+                              //                             Text(numOpObject.detailFacture.toString()),
+                              //                             Text(numOpObject.numCompte.toString()),
+                              //                             Text(numOpObject.debit.toString()),
+                              //                             Text(numOpObject.credit.toString()),
+                              //                           ],
+                              //                         ),
+                              //                       );
+                              //                     },
+                              //                     separatorBuilder: (BuildContext context, int index) {
+                              //                       return  Divider(
+                              //                         color: Colors.grey[600],
+                              //                         height: 1,
+                              //                       );
+                              //                     },
+                              //                   );
+                              //                 })
+                              //         ),
+                              //
+                              //
+                              //         //_________________
+                              //
+                              //
+                              //         Container(
+                              //
+                              //           height: MediaQuery.of(context).size.height*0.30,
+                              //
+                              //           child: Row(
+                              //             crossAxisAlignment: CrossAxisAlignment.end,
+                              //             mainAxisAlignment: MainAxisAlignment.end,
+                              //             children: [
+                              //               TextButton(
+                              //                   onPressed: (){
+                              //                     Navigator.pop(context);
+                              //                   },
+                              //                   child: Text("QUITTER",
+                              //                   style: TextStyle(
+                              //                     fontSize: 14,
+                              //                     fontWeight: FontWeight.bold
+                              //                   ),)),
+                              //
+                              //               ElevatedButton(
+                              //                   onPressed: (){
+                              //
+                              //                   },
+                              //                   child: Text("SUPPRIMER",
+                              //                     style: TextStyle(
+                              //                         fontSize: 14,
+                              //                         fontWeight: FontWeight.bold
+                              //                     ),
+                              //                   )),
+                              //
+                              //             ],
+                              //           ),
+                              //         )
+                              //       ],
+                              //     ),
+                              //     height: MediaQuery.of(context).size.height*0.40,
+                              //   );
+                              //     });
 
-                                      // FloatingActionButton(onPressed: (){},
-                                      //   child: Text("Quitter"),),
 
 
-                                      Container(
-
-                                        height: MediaQuery.of(context).size.height*0.30,
-
-
-
-                                        child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            TextButton(
-                                                onPressed: (){
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text("QUITTER",
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold
-                                                ),)),
-
-                                            ElevatedButton(
-                                                onPressed: (){
-
-                                                },
-                                                child: Text("SUPPRIMER",
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight: FontWeight.bold
-                                                  ),
-                                                )),
-
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  height: MediaQuery.of(context).size.height*0.40,
-                                );
-                                  });
                             });
                           },
 

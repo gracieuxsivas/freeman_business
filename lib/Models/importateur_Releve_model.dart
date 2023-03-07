@@ -77,6 +77,7 @@ class ImportateurReleveModel {
     return data;
   }
 
+  /** RELEVE IMPORTATEUR  */
   static Future<List<ImportateurReleveModel>> getReleveImp(int Compte, String date_1, String  date_2) async {
     var url = Urls.adresseServeur + "/api/Balance/GetDetail?NumCompte=$Compte&Date1=$date_1&Date2=$date_2";
     //var url = Urls.adresseServeur + "/api/Balance/GetDetail?NumCompte=41177&Date1=2022-01-11&Date2=2022-02-24";
@@ -87,5 +88,19 @@ class ImportateurReleveModel {
     t = json.decode(data.body);
     return t.map((e) => ImportateurReleveModel.fromJson(e)).toList();
   }
+
+/** DETAIL OPERATION RELEVE  */
+
+  static Future<List<ImportateurReleveModel>> getDetailReleveOperation(String NumOperation) async {
+    var url = Urls.adresseServeur + "/api/Operation/GetDetail?NumeroOperation=$NumOperation";
+
+    print(url);
+    var data = await http.get(
+        Uri.parse(url));
+    var t = [];
+    t = json.decode(data.body);
+    return t.map((e) => ImportateurReleveModel.fromJson(e)).toList();
+  }
+
 }
 
