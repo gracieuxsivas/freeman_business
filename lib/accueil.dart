@@ -8,8 +8,8 @@ import 'package:freeman_business/SCREENS/Resultat/resultat.dart';
 
 import 'Dossier/dossier_screen.dart';
 import 'SCREENS/Importateur/importateur_screen.dart';
-import 'SCREENS/balance_screen.dart';
-import 'SCREENS/banque.dart';
+import 'SCREENS/Balance/balance_screen.dart';
+import 'SCREENS/Banque/banque.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
@@ -33,6 +33,7 @@ class _AccueilState extends State<Accueil> {
   int groupeCompteLivreDeCaisse=572;
   int resultatParAn=0;
   int numCompte=0;
+  //int BalanceCompte =0;
 
 
 
@@ -384,8 +385,11 @@ class _AccueilState extends State<Accueil> {
                                         //  Navigator.pushNamed(context, '/balance');
 
                                           Navigator.push(context,
+                                              // MaterialPageRoute(
+                                              //     builder: (context) =>Balance())
+
                                               MaterialPageRoute(
-                                                  builder: (context) =>Balance())
+                                              builder: (context) =>Balance())
 
                                           );
                                         },

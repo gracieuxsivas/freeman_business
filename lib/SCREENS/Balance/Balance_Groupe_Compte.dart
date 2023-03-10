@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/compteModel.dart';
-import 'package:freeman_business/SCREENS/Importateur/Import_releve.dart';
 
-
-class Importateur extends StatefulWidget {
-  //const Importateur({Key? key}) : super(key: key);
-  int import;
-  Importateur({ required this.import});
+class BalanceGroupeCompte extends StatefulWidget {
+  //const BalanceGroupeCompte({Key? key}) : super(key: key);
+int GroupeCompte ;
+BalanceGroupeCompte({ required this.GroupeCompte});
 
   @override
-  State<Importateur> createState() => _ImportateurState(import:import);
+  State<BalanceGroupeCompte> createState() => _BalanceGroupeCompteState(GroupeCompte:GroupeCompte);
 }
 
-class _ImportateurState extends State<Importateur> {
-  int import=0;
-  int resultatParAn=0;
-  int Compte=0;
-  // String date_1="";
-  // String date_2="";
-  _ImportateurState({required this.import});
+class _BalanceGroupeCompteState extends State<BalanceGroupeCompte> {
+  _BalanceGroupeCompteState({required this.GroupeCompte});
 
-  String date_1="";
-  String date_2="";
 
+  int GroupeCompte=0;
 
 
   @override
@@ -31,50 +23,46 @@ class _ImportateurState extends State<Importateur> {
     //final double width= MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.blue,
+        centerTitle: true,
+        toolbarHeight: 50,
+        title:
+        Column(
+
+            crossAxisAlignment: CrossAxisAlignment.end,
+
+            children: [
+              Row(children: [
+                //Icon(Icons.arrow_back),
+                Text('GROUPE DE BALANCE',
+                  style: TextStyle(fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+                IconButton(onPressed: () {},
+                    icon: Icon(Icons.search,
+                        color: Colors.white)),
+
+              ]),
+
+              //SizedBox(height: 10,),
+
+            ]),
+      ),
       backgroundColor: Colors.grey[300],
 
-       appBar: AppBar(
-         elevation: 0,
-         backgroundColor: Colors.blue,
-         centerTitle: true,
-         toolbarHeight: MediaQuery.of(context).size.height*0.06,
-         title:
-         Column(
-
-
-             children: [
-               Row(children: [
-                 //Icon(Icons.arrow_back),
-                 Text('IMPORTATEURS',
-                   style: TextStyle(fontSize: 15,
-                       color: Colors.white,
-                       fontWeight: FontWeight.bold),
-                 ),
-                 const Spacer(),
-                 IconButton(onPressed: () {},
-                     icon: Icon(Icons.search,
-                         color: Colors.white)),
-                 const Spacer(),
-                 IconButton(onPressed: () {
-                   //Navigator.PushNamed(context, routeName)
-                   Navigator.pushNamed(context, '/nouveau_compte_importateur');
-                 },
-                     icon: Icon(Icons.add,
-                         color: Colors.white)),
-               ]),
-
-
-             ]),
-        ),
-
-
-
       body:
+
       Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(10, 2, 10, 0),
+            padding: EdgeInsets.fromLTRB(10, 4, 10, 0),
+            // padding: EdgeInsets.fromLTRB(10, 35, 10, 0),
             height: 40,
+            //height: 125,
             color: Colors.blue,
 
 
@@ -82,10 +70,7 @@ class _ImportateurState extends State<Importateur> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
 
-                  Row(children: [
 
-
-                  ]),
 
                   SizedBox(height: 12,),
 
@@ -108,21 +93,20 @@ class _ImportateurState extends State<Importateur> {
                               fontWeight: FontWeight.bold),),
                       ]),
 
-
-
-
                   // TextFormField(),
+
                 ]
 
             ),
 
           ),
 
+          //Donnees Balances From API
 
-//AFFICHAGE DES DONNEES FROM API
+
           Expanded(
               child: FutureBuilder<List<CompteModel>>(
-                  future: CompteModel.getImportateurModel(import),
+                  future: CompteModel.getBalanceGroupeCompte(GroupeCompte),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
@@ -169,36 +153,20 @@ class _ImportateurState extends State<Importateur> {
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        CompteModel importObject = snapshot.data![index];
-
-                        //importObject.numCompte
-
+                        CompteModel balanceObject = snapshot.data![index];
 
                         //iteration de la liste
-                        return InkWell(
-                          onTap: (){
-                            int Compte=0;
-                            setState(() {
-
-                              Navigator.push(context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>ImportReleve(Compte: Compte, date_1, date_2, NumOperation: '',))
-                              );
-
-                            });
-                          },
-                          child: ListTile(
-                            title: Text(' ',
-                              //importObject.designationGroupe.toString(),
-                              style: TextStyle(fontSize: 11),),
-                            subtitle: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(importObject.designationCompte.toString()),
-                                Text(importObject.numCompte.toString()),
-                                Text(importObject.solde.toString()),
-                              ],
-                            ),
+                        return ListTile(
+                          title: Text(' ',
+                            //importObject.designationGroupe.toString(),
+                            style: TextStyle(fontSize: 11),),
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(balanceObject.designationGroupe.toString()),
+                              Text(balanceObject.numCompte.toString()),
+                              Text(balanceObject.solde.toString()),
+                            ],
                           ),
                         );
                       },
@@ -212,14 +180,9 @@ class _ImportateurState extends State<Importateur> {
                   })
           ),
 
-
-
-
-
         ],
+
       ),
-
-
 
 
     );

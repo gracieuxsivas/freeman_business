@@ -254,7 +254,6 @@ class _ResultatState extends State<Resultat> {
                             );
                           },
 
-
                           child: ListTile(
                             title: Text(' ',
                               //importObject.designationGroupe.toString(),

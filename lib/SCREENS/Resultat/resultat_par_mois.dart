@@ -25,7 +25,6 @@ class _ResultatParMoisState extends State<ResultatParMois> {
   String mois ="";
   DateTime monthyear = DateTime(DateTime.monthsPerYear);
 
-
   @override
   void initState() {
     // TODO: implement initState

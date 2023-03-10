@@ -67,6 +67,27 @@ class CompteModel {
   }
 
 
+
+
+
+  /**
+   *BALANCE COMPTE tous
+   */
+  static Future<List<CompteModel>> getBalanceGroupeCompte(int GroupeCompte) async {
+    var url = Urls.adresseServeur + "/api/Balance/GetlaBalanceParGoupe?GroupeCompte=$GroupeCompte";
+    print(url);
+    var data = await http.get(
+        Uri.parse(url));
+    var t = [];
+    t = json.decode(data.body);
+    return t.map((e) => CompteModel.fromJson(e)).toList();
+
+  }
+
+
+
+
+
   /**
    *BALANCE DES COMPTE POUR IMPORTATEUR
    */
@@ -80,6 +101,8 @@ class CompteModel {
     return t.map((e) => CompteModel.fromJson(e)).toList();
 
   }
+
+
 
 
   /**

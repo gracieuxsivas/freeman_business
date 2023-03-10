@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:freeman_business/Models/compteModel.dart';
 
-class Balance extends StatefulWidget {
-  const Balance({Key? key}) : super(key: key);
-//int bal ;
-//Balance({ required this.bal});
+import '../../Models/compteModel.dart';
+
+class Livre_de_caisse extends StatefulWidget {
+  //const Livre_de_caisse({Key? key}) : super(key: key);
+  int groupeLivreDeCaisse;
+  Livre_de_caisse({required this.groupeLivreDeCaisse});
+
 
   @override
-  State<Balance> createState() => _BalanceState();
+  State<Livre_de_caisse> createState() => _Livre_de_caisseState(groupeLivreDeCaisse: groupeLivreDeCaisse);
 }
 
-class _BalanceState extends State<Balance> {
-  //int get bal => bal;
-  //int bal=0;
+class _Livre_de_caisseState extends State<Livre_de_caisse> {
+  int groupeLivreDeCaisse=0;
+  _Livre_de_caisseState ({required this.groupeLivreDeCaisse});
 
 
   @override
@@ -34,7 +36,7 @@ class _BalanceState extends State<Balance> {
             children: [
               Row(children: [
                 //Icon(Icons.arrow_back),
-                Text('GROUPE DE BALANCE',
+                Text('LIVRE DE CAISSE',
                   style: TextStyle(fontSize: 15,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
@@ -45,10 +47,7 @@ class _BalanceState extends State<Balance> {
                         color: Colors.white)),
 
               ]),
-
-              //SizedBox(height: 10,),
-
-
+              
             ]),
       ),
       backgroundColor: Colors.grey[300],
@@ -59,53 +58,41 @@ class _BalanceState extends State<Balance> {
         children: [
           Container(
             padding: EdgeInsets.fromLTRB(10, 4, 10, 0),
-           // padding: EdgeInsets.fromLTRB(10, 35, 10, 0),
             height: 40,
-            //height: 125,
             color: Colors.blue,
 
 
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
 
-
-
-                  SizedBox(height: 12,),
 
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                    Text('Designation',
-                      style: TextStyle(fontSize: 15,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),),
-                    const Spacer(),
-                    Text('Compte',
-                      style: TextStyle(fontSize: 15,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),),
-                    const Spacer(),
-                    Text('Solde',
-                      style: TextStyle(fontSize: 15,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),),
-                  ]),
+                        Text('Designation',
+                          style: TextStyle(fontSize: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),),
+                        const Spacer(),
+                        Text('Compte',
+                          style: TextStyle(fontSize: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),),
+                        const Spacer(),
+                        Text('Solde',
+                          style: TextStyle(fontSize: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),),
+                      ]),
 
-                // TextFormField(),
-
-                ]
-
-            ),
-
+                  // TextFormField(),
+                ]),
           ),
-
-          //Donnees Balances From API
-
 
           Expanded(
               child: FutureBuilder<List<CompteModel>>(
-                  future: CompteModel.getBalancedeGroupe(),
+                  future: CompteModel.getLivreCaisse(groupeLivreDeCaisse),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
@@ -152,7 +139,7 @@ class _BalanceState extends State<Balance> {
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        CompteModel balanceObject = snapshot.data![index];
+                        CompteModel LivreCaisseObject = snapshot.data![index];
 
                         //iteration de la liste
                         return ListTile(
@@ -162,9 +149,9 @@ class _BalanceState extends State<Balance> {
                           subtitle: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(balanceObject.designationGroupe.toString()),
-                              Text(balanceObject.numCompte.toString()),
-                              Text(balanceObject.solde.toString()),
+                              Text(LivreCaisseObject.designationGroupe.toString()),
+                              Text(LivreCaisseObject.numCompte.toString()),
+                              Text(LivreCaisseObject.solde.toString()),
                             ],
                           ),
                         );
@@ -179,11 +166,9 @@ class _BalanceState extends State<Balance> {
                   })
           ),
 
+
         ],
-
       ),
-
-
     );
   }
 }

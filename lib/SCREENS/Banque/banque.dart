@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Models/compteModel.dart';
+import '../../Models/compteModel.dart';
 
 class Banque extends StatefulWidget {
   //const Banque({Key? key}) : super(key: key);

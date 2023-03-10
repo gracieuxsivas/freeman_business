@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/importateur_Releve_model.dart';
+import 'package:freeman_business/SCREENS/Importateur/DetailOperationReleve.dart';
 import 'package:intl/intl.dart';
 import 'package:freeman_business/Models/resultatModel.dart';
 
@@ -7,11 +8,12 @@ class ImportReleve extends StatefulWidget {
   //const Resultat({Key? key}) : super(key: key);
   int Compte;
   String NumOperation;
+
   //int numCompte;
  ImportReleve( String date_1, String date_2 ,   {required this.Compte, required this.NumOperation});
 
   @override
-  State<ImportReleve> createState() => _ImportReleveState(Compte:Compte, NumOperation: '');
+  State<ImportReleve> createState() => _ImportReleveState(Compte:Compte, NumOperation: NumOperation);
 }
 
 class _ImportReleveState extends State<ImportReleve> {
@@ -35,6 +37,8 @@ class _ImportReleveState extends State<ImportReleve> {
   String date_1 = "" ;
   String date_2= "";
   String NumOperation ="";
+  String NumOp="";
+
 
   @override
   void initState() {
@@ -43,12 +47,11 @@ class _ImportReleveState extends State<ImportReleve> {
 
     date_1 = _dateTime1 ;
     date_2 = _dateTime2;
+    NumOperation ="";
 
     setState(() {
 
-
     });
-
 
   }
 
@@ -112,7 +115,7 @@ class _ImportReleveState extends State<ImportReleve> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Relevé de ",
+        title: const Text("Relevé de  ",
           style: TextStyle(
               fontSize:15,
               color: Colors.white,
@@ -341,181 +344,185 @@ class _ImportReleveState extends State<ImportReleve> {
                         //iteration de la liste
                         return InkWell(
                           onTap: (){
-                            String NumOperation ="";
-                            setState(() {
-                              // showModalBottomSheet(
-                              //     context: context,
-                              //     isDismissible: false,
-                              //     shape: RoundedRectangleBorder(
-                              //       borderRadius: BorderRadius.only(
-                              //         topRight: Radius.circular(20),
-                              //         topLeft: Radius.circular(20),
-                              //       ),
-                              //     ),
-                              //     builder: (context){
-                              //       Navigator.push(context,
-                              //           MaterialPageRoute(
-                              //               builder: (context) =>ImportReleve(NumOperation: releveObject.numeroOperation.toString(), Compte: Compte,));
-                              //
-                              //
-                              //   return Container(
-                              //     padding: EdgeInsets.all(25),
-                              //     child: Column(
-                              //       children: [
-                              //         Row(children: [
-                              //           Text("Libellé",
-                              //             style: TextStyle(fontSize: 15,
-                              //                 color: Colors.black,
-                              //                 fontWeight: FontWeight.bold)
-                              //           ),
-                              //             const Spacer(),
-                              //             Text('Compte',
-                              //               style: TextStyle(fontSize: 15,
-                              //                   color: Colors.black,
-                              //                   fontWeight: FontWeight.bold),),
-                              //             const Spacer(),
-                              //             Text('Débit',
-                              //               style: TextStyle(fontSize: 15,
-                              //                   color: Colors.black,
-                              //                   fontWeight: FontWeight.bold),),
-                              //             const Spacer(),
-                              //             Text('Crédit',
-                              //               style: TextStyle(fontSize: 15,
-                              //                   color: Colors.black,
-                              //                   fontWeight: FontWeight.bold),),
-                              //         ],),
-                              //
-                              //         //DONNEES FROM APIS
-                              //
-                              //
-                              //
-                              //         Expanded(
-                              //             child: FutureBuilder<List<ImportateurReleveModel>>(
-                              //                 future: ImportateurReleveModel.getDetailReleveOperation(NumOperation),
-                              //                 builder: (context, snapshot) {
-                              //
-                              //                   //Chargement des donnees
-                              //                   if (!snapshot.hasData) {
-                              //                     return Center(
-                              //                       child: Container(
-                              //                           margin: const EdgeInsets.all(20),
-                              //                           child:  const CircularProgressIndicator(
-                              //                             color: Colors.blue,
-                              //                           )),
-                              //                     );
-                              //                   }
-                              //                   //Quand la methode renvoie les donnees
-                              //
-                              //                   if (snapshot.data!.length == 0) {
-                              //
-                              //                     //si la taille de la liste est 0, on affiche un message : aucune donnee disponible
-                              //                     return Center(
-                              //                       child: Container(
-                              //                         margin: const EdgeInsets.all(20),
-                              //                         child:  Column(
-                              //                           // mainAxisAlignment: MainAxisAlignment.center,
-                              //                           children: const [
-                              //                             Text(
-                              //                               "aucune donnée disponible",
-                              //                               textAlign: TextAlign.center,
-                              //                               style: TextStyle(
-                              //                                   fontWeight: FontWeight.normal,
-                              //                                   fontSize: 20,
-                              //                                   fontStyle: FontStyle.italic),
-                              //                             ),
-                              //                           ],
-                              //                         ),
-                              //                       ),
-                              //                     );
-                              //                   }
-                              //                   //affichage de la liste renvoi par la methode, au cas ou la liste contient des donnees
-                              //                   return ListView.separated(
-                              //                     padding: const EdgeInsets.only(
-                              //                       left: 0,
-                              //                       right: 0,
-                              //                       top: 20,
-                              //                       bottom: 100,
-                              //                     ),
-                              //                     itemCount: snapshot.data!.length,
-                              //                     itemBuilder: (context, index) {
-                              //                       ImportateurReleveModel numOpObject = snapshot.data![index];
-                              //
-                              //                       //importObject.numCompte
-                              //
-                              //
-                              //                       //iteration de la liste
-                              //                       return ListTile(
-                              //                         title: Text(' ',
-                              //                           //importObject.designationGroupe.toString(),
-                              //                           style: TextStyle(fontSize: 11),),
-                              //                         subtitle: Row(
-                              //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              //                           children: [
-                              //                             Text(numOpObject.detailFacture.toString()),
-                              //                             Text(numOpObject.numCompte.toString()),
-                              //                             Text(numOpObject.debit.toString()),
-                              //                             Text(numOpObject.credit.toString()),
-                              //                           ],
-                              //                         ),
-                              //                       );
-                              //                     },
-                              //                     separatorBuilder: (BuildContext context, int index) {
-                              //                       return  Divider(
-                              //                         color: Colors.grey[600],
-                              //                         height: 1,
-                              //                       );
-                              //                     },
-                              //                   );
-                              //                 })
-                              //         ),
-                              //
-                              //
-                              //         //_________________
-                              //
-                              //
-                              //         Container(
-                              //
-                              //           height: MediaQuery.of(context).size.height*0.30,
-                              //
-                              //           child: Row(
-                              //             crossAxisAlignment: CrossAxisAlignment.end,
-                              //             mainAxisAlignment: MainAxisAlignment.end,
-                              //             children: [
-                              //               TextButton(
-                              //                   onPressed: (){
-                              //                     Navigator.pop(context);
-                              //                   },
-                              //                   child: Text("QUITTER",
-                              //                   style: TextStyle(
-                              //                     fontSize: 14,
-                              //                     fontWeight: FontWeight.bold
-                              //                   ),)),
-                              //
-                              //               ElevatedButton(
-                              //                   onPressed: (){
-                              //
-                              //                   },
-                              //                   child: Text("SUPPRIMER",
-                              //                     style: TextStyle(
-                              //                         fontSize: 14,
-                              //                         fontWeight: FontWeight.bold
-                              //                     ),
-                              //                   )),
-                              //
-                              //             ],
-                              //           ),
-                              //         )
-                              //       ],
-                              //     ),
-                              //     height: MediaQuery.of(context).size.height*0.40,
-                              //   );
-                              //     });
+                            //String NumeroOperation ="";
+                            Navigator.push(context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>DetailReleve(NumOp: releveObject.numeroOperation.toString(), Compte: Compte,))
 
-
-
-                            });
+                            //     setState(() {
+                            //
+                            //   // showModalBottomSheet(
+                            //   //     context: context,
+                            //   //     isDismissible: false,
+                            //   //     shape: RoundedRectangleBorder(
+                            //   //       borderRadius: BorderRadius.only(
+                            //   //         topRight: Radius.circular(20),
+                            //   //         topLeft: Radius.circular(20),
+                            //   //       ),
+                            //   //     ),
+                            //   //     builder: (context){
+                            //   //       Navigator.push(context,
+                            //   //           MaterialPageRoute(
+                            //   //               builder: (context) =>ImportReleve(NumOperation: releveObject.numeroOperation.toString(), Compte: Compte,));
+                            //   //
+                            //   //
+                            //   //   return Container(
+                            //   //     padding: EdgeInsets.all(25),
+                            //   //     child: Column(
+                            //   //       children: [
+                            //   //         Row(children: [
+                            //   //           Text("Libellé",
+                            //   //             style: TextStyle(fontSize: 15,
+                            //   //                 color: Colors.black,
+                            //   //                 fontWeight: FontWeight.bold)
+                            //   //           ),
+                            //   //             const Spacer(),
+                            //   //             Text('Compte',
+                            //   //               style: TextStyle(fontSize: 15,
+                            //   //                   color: Colors.black,
+                            //   //                   fontWeight: FontWeight.bold),),
+                            //   //             const Spacer(),
+                            //   //             Text('Débit',
+                            //   //               style: TextStyle(fontSize: 15,
+                            //   //                   color: Colors.black,
+                            //   //                   fontWeight: FontWeight.bold),),
+                            //   //             const Spacer(),
+                            //   //             Text('Crédit',
+                            //   //               style: TextStyle(fontSize: 15,
+                            //   //                   color: Colors.black,
+                            //   //                   fontWeight: FontWeight.bold),),
+                            //   //         ],),
+                            //   //
+                            //   //         //DONNEES FROM APIS
+                            //   //
+                            //   //
+                            //   //
+                            //   //         Expanded(
+                            //   //             child: FutureBuilder<List<ImportateurReleveModel>>(
+                            //   //                 future: ImportateurReleveModel.getDetailReleveOperation(NumOperation),
+                            //   //                 builder: (context, snapshot) {
+                            //   //
+                            //   //                   //Chargement des donnees
+                            //   //                   if (!snapshot.hasData) {
+                            //   //                     return Center(
+                            //   //                       child: Container(
+                            //   //                           margin: const EdgeInsets.all(20),
+                            //   //                           child:  const CircularProgressIndicator(
+                            //   //                             color: Colors.blue,
+                            //   //                           )),
+                            //   //                     );
+                            //   //                   }
+                            //   //                   //Quand la methode renvoie les donnees
+                            //   //
+                            //   //                   if (snapshot.data!.length == 0) {
+                            //   //
+                            //   //                     //si la taille de la liste est 0, on affiche un message : aucune donnee disponible
+                            //   //                     return Center(
+                            //   //                       child: Container(
+                            //   //                         margin: const EdgeInsets.all(20),
+                            //   //                         child:  Column(
+                            //   //                           // mainAxisAlignment: MainAxisAlignment.center,
+                            //   //                           children: const [
+                            //   //                             Text(
+                            //   //                               "aucune donnée disponible",
+                            //   //                               textAlign: TextAlign.center,
+                            //   //                               style: TextStyle(
+                            //   //                                   fontWeight: FontWeight.normal,
+                            //   //                                   fontSize: 20,
+                            //   //                                   fontStyle: FontStyle.italic),
+                            //   //                             ),
+                            //   //                           ],
+                            //   //                         ),
+                            //   //                       ),
+                            //   //                     );
+                            //   //                   }
+                            //   //                   //affichage de la liste renvoi par la methode, au cas ou la liste contient des donnees
+                            //   //                   return ListView.separated(
+                            //   //                     padding: const EdgeInsets.only(
+                            //   //                       left: 0,
+                            //   //                       right: 0,
+                            //   //                       top: 20,
+                            //   //                       bottom: 100,
+                            //   //                     ),
+                            //   //                     itemCount: snapshot.data!.length,
+                            //   //                     itemBuilder: (context, index) {
+                            //   //                       ImportateurReleveModel numOpObject = snapshot.data![index];
+                            //   //
+                            //   //                       //importObject.numCompte
+                            //   //
+                            //   //
+                            //   //                       //iteration de la liste
+                            //   //                       return ListTile(
+                            //   //                         title: Text(' ',
+                            //   //                           //importObject.designationGroupe.toString(),
+                            //   //                           style: TextStyle(fontSize: 11),),
+                            //   //                         subtitle: Row(
+                            //   //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   //                           children: [
+                            //   //                             Text(numOpObject.detailFacture.toString()),
+                            //   //                             Text(numOpObject.numCompte.toString()),
+                            //   //                             Text(numOpObject.debit.toString()),
+                            //   //                             Text(numOpObject.credit.toString()),
+                            //   //                           ],
+                            //   //                         ),
+                            //   //                       );
+                            //   //                     },
+                            //   //                     separatorBuilder: (BuildContext context, int index) {
+                            //   //                       return  Divider(
+                            //   //                         color: Colors.grey[600],
+                            //   //                         height: 1,
+                            //   //                       );
+                            //   //                     },
+                            //   //                   );
+                            //   //                 })
+                            //   //         ),
+                            //   //
+                            //   //
+                            //   //         //_________________
+                            //   //
+                            //   //
+                            //   //         Container(
+                            //   //
+                            //   //           height: MediaQuery.of(context).size.height*0.30,
+                            //   //
+                            //   //           child: Row(
+                            //   //             crossAxisAlignment: CrossAxisAlignment.end,
+                            //   //             mainAxisAlignment: MainAxisAlignment.end,
+                            //   //             children: [
+                            //   //               TextButton(
+                            //   //                   onPressed: (){
+                            //   //                     Navigator.pop(context);
+                            //   //                   },
+                            //   //                   child: Text("QUITTER",
+                            //   //                   style: TextStyle(
+                            //   //                     fontSize: 14,
+                            //   //                     fontWeight: FontWeight.bold
+                            //   //                   ),)),
+                            //   //
+                            //   //               ElevatedButton(
+                            //   //                   onPressed: (){
+                            //   //
+                            //   //                   },
+                            //   //                   child: Text("SUPPRIMER",
+                            //   //                     style: TextStyle(
+                            //   //                         fontSize: 14,
+                            //   //                         fontWeight: FontWeight.bold
+                            //   //                     ),
+                            //   //                   )),
+                            //   //
+                            //   //             ],
+                            //   //           ),
+                            //   //         )
+                            //   //       ],
+                            //   //     ),
+                            //   //     height: MediaQuery.of(context).size.height*0.40,
+                            //   //   );
+                            //   //     });
+                            //
+                            //
+                            // });
+                            );
                           },
-
 
                           child: ListTile(
                             title: Text(' ',
