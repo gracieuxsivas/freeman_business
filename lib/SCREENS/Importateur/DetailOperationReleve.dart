@@ -196,7 +196,6 @@ class _DetailReleveState extends State<DetailReleve> {
         ]
       ),
     );
-
   }
 }
 

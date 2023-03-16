@@ -55,6 +55,5 @@ class ImportReleveOperation {
     t = json.decode(data.body);
     return t.map((e) => ImportReleveOperation.fromJson(e)).toList();
   }
-
 }
 
