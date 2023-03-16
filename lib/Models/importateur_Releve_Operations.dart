@@ -47,7 +47,7 @@ class ImportReleveOperation {
   /** DETAIL OPERATION RELEVE  */
 
   static Future<List<ImportReleveOperation>> getDetailReleveOperation(String NumOp) async {
-    var url = Urls.adresseServeur + "/api/Operation/GetDetail?NumeroOperation= $NumOp";
+    var url = Urls.adresseServeur + "/api/Operation/GetDetail?NumeroOperation=$NumOp";
     print(url);
     var data = await http.get(
         Uri.parse(url));

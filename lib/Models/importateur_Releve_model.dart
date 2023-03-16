@@ -12,15 +12,15 @@ import '../utilits/Urls.dart';
 class ImportateurReleveModel {
   String? numeroOperation;
   String? designationOperation;
-  int? numCompte;
+  String? numCompte;
   String? designationCompte;
   String? details;
   String? lot;
   String? designationLot;
   String? detailFacture;
-  double? debit;
-  double? credit;
-  double? qte;
+  int? debit;
+  int? credit;
+  int? qte;
   int? entree;
   int? solde;
   String? dateOperation;
@@ -99,18 +99,21 @@ class ImportateurReleveModel {
     var t = [];
     t = json.decode(data.body);
     List<ImportateurReleveModel> dataList =  [];
-    for(var e in t){
-
-      ImportateurReleveModel model =
-      ImportateurReleveModel(numCompte: e['numCompte'],
-        designationCompte :e['designationCompte'].toString(),
-        numeroOperation :e['numOperation'].toString(),
-        qte :double.parse(e['qte'].toString()),
-        credit :double.parse(e['credit'].toString()),
-        debit :double.parse(e['debit'].toString()),
-      );
-      dataList.add(model);
-    }return dataList;
+    // for(var e in t){
+    //   ImportateurReleveModel model =
+    //   ImportateurReleveModel(numCompte: e['numCompte'],
+    //     designationCompte :e['designationCompte'].toString(),
+    //     numeroOperation :e['numOperation'].toString(),
+    //     qte :e['qte'],
+    //     credit :e['credit'],
+    //     debit :e['debit'],
+    //   );
+    //   print(model.numeroOperation);
+    //
+    //   dataList.add(model);
+    // }
+    print(dataList.length.toString());
+    return dataList;
   }
 }
 

@@ -80,8 +80,8 @@ class _DetailReleveState extends State<DetailReleve> {
 
           //from api
           Expanded(
-              child: FutureBuilder<List<ImportateurReleveModel>>(
-                  future: ImportateurReleveModel.getDetailReleveOperation(NumOp),
+              child: FutureBuilder<List<ImportReleveOperation>>(
+                  future: ImportReleveOperation.getDetailReleveOperation(NumOp),
                   builder: (context, snapshot) {
                     //Chargement des donnees
                     if (!snapshot.hasData) {
@@ -127,7 +127,7 @@ class _DetailReleveState extends State<DetailReleve> {
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        ImportateurReleveModel numOpsObject = snapshot.data![index];
+                        ImportReleveOperation numOpsObject = snapshot.data![index];
 
                         return ListTile(
                           title: Text(' ',
