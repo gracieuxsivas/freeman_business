@@ -12,15 +12,15 @@ import '../utilits/Urls.dart';
 class ImportateurReleveModel {
   String? numeroOperation;
   String? designationOperation;
-  String? numCompte;
+  int? numCompte;
   String? designationCompte;
   String? details;
   String? lot;
   String? designationLot;
   String? detailFacture;
-  int? debit;
-  int? credit;
-  int? qte;
+  double? debit;
+  double? credit;
+  double? qte;
   int? entree;
   int? solde;
   String? dateOperation;
@@ -92,13 +92,27 @@ class ImportateurReleveModel {
 /** DETAIL OPERATION RELEVE  */
 
   static Future<List<ImportateurReleveModel>> getDetailReleveOperation(String NumOp) async {
-    var url = Urls.adresseServeur + "/api/Operation/GetDetail?NumeroOperation= $NumOp";
+    var url = Urls.adresseServeur + "/api/Operation/GetDetail?NumeroOperation=$NumOp";
     print(url);
     var data = await http.get(
         Uri.parse(url));
     var t = [];
     t = json.decode(data.body);
-    return t.map((e) => ImportateurReleveModel.fromJson(e)).toList();
+    List<ImportateurReleveModel> dataList =  [];
+    for(var e in t){
+
+      print(e['designationCompte']);
+
+      ImportateurReleveModel model =
+      ImportateurReleveModel(numCompte: e['numCompte'],
+        designationCompte :e['designationCompte'].toString(),
+        numeroOperation :e['numOperation'].toString(),
+        qte :double.parse(e['qte'].toString()),
+        credit :double.parse(e['credit'].toString()),
+        debit :double.parse(e['debit'].toString()),
+      );
+      dataList.add(model);
+    }return dataList;
   }
 }
 

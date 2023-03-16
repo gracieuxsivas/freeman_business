@@ -23,17 +23,12 @@ class _DetailReleveState extends State<DetailReleve> {
   _DetailReleveState ({/**required this.Compte,*/ required this.NumOp, });
 
   //int Compte=0;
-  String NumOp="";
+  String NumOp;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-   // NumOp=NumOp;
-
-    setState(() {
-
-    });
   }
 
 
@@ -86,9 +81,10 @@ class _DetailReleveState extends State<DetailReleve> {
           //from api
           Expanded(
               child: FutureBuilder<List<ImportateurReleveModel>>(
-                  future: ImportateurReleveModel.getDetailReleveOperation(NumOp ),
+                  future: ImportateurReleveModel.getDetailReleveOperation(NumOp),
                   builder: (context, snapshot) {
 
+                    print(snapshot.data.toString());
                     //Chargement des donnees
                     if (!snapshot.hasData) {
                       return Center(
@@ -135,9 +131,6 @@ class _DetailReleveState extends State<DetailReleve> {
                       itemBuilder: (context, index) {
                         ImportateurReleveModel numOpsObject = snapshot.data![index];
 
-                        //importObject.numCompte
-
-                        //iteration de la liste
                         return ListTile(
                           title: Text(' ',
                             //importObject.designationGroupe.toString(),
