@@ -101,8 +101,6 @@ class ImportateurReleveModel {
     List<ImportateurReleveModel> dataList =  [];
     for(var e in t){
 
-      print(e['designationCompte']);
-
       ImportateurReleveModel model =
       ImportateurReleveModel(numCompte: e['numCompte'],
         designationCompte :e['designationCompte'].toString(),

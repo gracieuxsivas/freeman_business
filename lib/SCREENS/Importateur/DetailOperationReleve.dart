@@ -83,8 +83,6 @@ class _DetailReleveState extends State<DetailReleve> {
               child: FutureBuilder<List<ImportateurReleveModel>>(
                   future: ImportateurReleveModel.getDetailReleveOperation(NumOp),
                   builder: (context, snapshot) {
-
-                    print(snapshot.data.toString());
                     //Chargement des donnees
                     if (!snapshot.hasData) {
                       return Center(
