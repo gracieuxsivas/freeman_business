@@ -10,7 +10,7 @@ class ImportReleve extends StatefulWidget {
   String NumOperation;
 
   //int numCompte;
- ImportReleve( String date_1, String date_2 ,   {required this.Compte, required this.NumOperation});
+ ImportReleve( String date_1, String date_2 ,   {required this.Compte, required this.NumOperation, required String NomCompte});
 
   @override
   State<ImportReleve> createState() => _ImportReleveState(Compte:Compte, NumOperation: NumOperation);
@@ -344,10 +344,10 @@ class _ImportReleveState extends State<ImportReleve> {
                         //iteration de la liste
                         return InkWell(
                           onTap: (){
-                            //String NumeroOperation ="";
+                           //String NumOp ="";
                             Navigator.push(context,
                                           MaterialPageRoute(
-                                              builder: (context) =>DetailReleve(NumOp: releveObject.numeroOperation.toString(), Compte: Compte,))
+                                              builder: (context) =>DetailReleve(NumOp: releveObject.numeroOperation.toString(), /**Compte: Compte,*/))
 
                             //     setState(() {
                             //

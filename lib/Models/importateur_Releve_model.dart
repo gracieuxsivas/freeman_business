@@ -92,7 +92,7 @@ class ImportateurReleveModel {
 /** DETAIL OPERATION RELEVE  */
 
   static Future<List<ImportateurReleveModel>> getDetailReleveOperation(String NumOp) async {
-    var url = Urls.adresseServeur + "/api/Operation/GetDetail?NumeroOperation=$NumOp";
+    var url = Urls.adresseServeur + "/api/Operation/GetDetail?NumeroOperation= $NumOp";
     print(url);
     var data = await http.get(
         Uri.parse(url));
@@ -100,6 +100,5 @@ class ImportateurReleveModel {
     t = json.decode(data.body);
     return t.map((e) => ImportateurReleveModel.fromJson(e)).toList();
   }
-
 }
 

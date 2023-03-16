@@ -3,31 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/resultatModel.dart';
 import 'package:freeman_business/SCREENS/Resultat/resultat_par_mois.dart';
 
+import '../../Models/importateur_Releve_Operations.dart';
 import '../../Models/importateur_Releve_model.dart';
 
 class DetailReleve extends StatefulWidget {
  // const DetailReleve({Key? key}) : super(key: key);
-  int Compte;
+  //int Compte;
   String NumOp;
   //int numCompte;
 
-  DetailReleve(    {required this.Compte, required this.NumOp});
+  DetailReleve(    {/**required this.Compte,*/ required this.NumOp});
 
   @override
-  State<DetailReleve> createState() => _DetailReleveState(Compte:Compte, NumOp: NumOp);
+  State<DetailReleve> createState() => _DetailReleveState(/**Compte:Compte,*/ NumOp: NumOp);
 }
 
 class _DetailReleveState extends State<DetailReleve> {
 
-  _DetailReleveState ({required this.Compte, required this.NumOp, });
+  _DetailReleveState ({/**required this.Compte,*/ required this.NumOp, });
 
-  int Compte=0;
+  //int Compte=0;
   String NumOp="";
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+   // NumOp=NumOp;
 
     setState(() {
 
@@ -84,7 +86,7 @@ class _DetailReleveState extends State<DetailReleve> {
           //from api
           Expanded(
               child: FutureBuilder<List<ImportateurReleveModel>>(
-                  future: ImportateurReleveModel.getDetailReleveOperation(NumOp, ),
+                  future: ImportateurReleveModel.getDetailReleveOperation(NumOp ),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees

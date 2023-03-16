@@ -182,7 +182,7 @@ class _ImportateurState extends State<Importateur> {
 
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) =>ImportReleve(Compte: Compte, date_1, date_2, NumOperation: '',))
+                                      builder: (context) =>ImportReleve(Compte: Compte, date_1, date_2, NumOperation: '', NomCompte: importObject.designationCompte.toString()))
                               );
 
                             });

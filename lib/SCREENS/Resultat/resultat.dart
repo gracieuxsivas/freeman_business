@@ -193,7 +193,6 @@ class _ResultatState extends State<Resultat> {
           ),
 
 
-
           Expanded(
               child: FutureBuilder<List<ResultatModel>>(
                   future: ResultatModel.getResultat(annee),
