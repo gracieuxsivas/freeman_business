@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/compteModel.dart';
 
+import '../Importateur/Import_releve.dart';
+
 class BalanceGroupeCompte extends StatefulWidget {
   //const BalanceGroupeCompte({Key? key}) : super(key: key);
-int GroupeCompte ;
-BalanceGroupeCompte({ required this.GroupeCompte});
+int NumGroupeCompte ;
+
+  String designationCompte;
+BalanceGroupeCompte( { required this.NumGroupeCompte, required this.designationCompte });
 
   @override
-  State<BalanceGroupeCompte> createState() => _BalanceGroupeCompteState(GroupeCompte:GroupeCompte);
+  State<BalanceGroupeCompte> createState() => _BalanceGroupeCompteState(NumGroupeCompte:NumGroupeCompte, designationCompte:designationCompte);
 }
 
 class _BalanceGroupeCompteState extends State<BalanceGroupeCompte> {
-  _BalanceGroupeCompteState({required this.GroupeCompte});
+  _BalanceGroupeCompteState({required this.NumGroupeCompte, required this.designationCompte});
 
+  int NumGroupeCompte=0;
+  String  designationCompte="";
+  String date_1="";
+  String date_2="";
 
-  int GroupeCompte=0;
 
 
   @override
@@ -36,8 +43,8 @@ class _BalanceGroupeCompteState extends State<BalanceGroupeCompte> {
             children: [
               Row(children: [
                 //Icon(Icons.arrow_back),
-                Text('GROUPE DE BALANCE',
-                  style: TextStyle(fontSize: 15,
+                Text(designationCompte,
+                  style: TextStyle(fontSize: 18,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
@@ -106,7 +113,7 @@ class _BalanceGroupeCompteState extends State<BalanceGroupeCompte> {
 
           Expanded(
               child: FutureBuilder<List<CompteModel>>(
-                  future: CompteModel.getBalanceGroupeCompte(GroupeCompte),
+                  future: CompteModel.getBalanceGroupeCompte(NumGroupeCompte),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
@@ -156,17 +163,29 @@ class _BalanceGroupeCompteState extends State<BalanceGroupeCompte> {
                         CompteModel balanceObject = snapshot.data![index];
 
                         //iteration de la liste
-                        return ListTile(
-                          title: Text(' ',
-                            //importObject.designationGroupe.toString(),
-                            style: TextStyle(fontSize: 11),),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(balanceObject.designationGroupe.toString()),
-                              Text(balanceObject.numCompte.toString()),
-                              Text(balanceObject.solde.toString()),
-                            ],
+                        return InkWell(
+                          onTap: (){
+                            setState(() {
+                              Navigator.push(context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>ImportReleve(Compte: balanceObject.numCompte!.toInt(), date_1, date_2, NumOperation: '',
+                                          NomCompte: balanceObject.designationCompte.toString()))
+                              );
+
+                            });
+                          },
+                          child: ListTile(
+                            title: Text(' ',
+                              //importObject.designationGroupe.toString(),
+                              style: TextStyle(fontSize: 11),),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(balanceObject.designationCompte.toString()),
+                                Text(balanceObject.numCompte.toString()),
+                                Text(balanceObject.solde.toString()),
+                              ],
+                            ),
                           ),
                         );
                       },

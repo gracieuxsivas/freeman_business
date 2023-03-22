@@ -8,18 +8,21 @@ class ImportReleve extends StatefulWidget {
   //const Resultat({Key? key}) : super(key: key);
   int Compte;
   String NumOperation;
+  String NomCompte;
 
   //int numCompte;
- ImportReleve( String date_1, String date_2 ,   {required this.Compte, required this.NumOperation, required String NomCompte});
+ ImportReleve( String date_1, String date_2 ,{required this.Compte, required this.NumOperation, required this.NomCompte});
 
   @override
-  State<ImportReleve> createState() => _ImportReleveState(Compte:Compte, NumOperation: NumOperation);
+  State<ImportReleve> createState() => _ImportReleveState(Compte:Compte, NumOperation: NumOperation, NomCompte:NomCompte);
 }
 
 class _ImportReleveState extends State<ImportReleve> {
   int Compte=0;
 
-  _ImportReleveState ({required this.Compte, required this.NumOperation, });
+  //String NomCompte;
+
+  _ImportReleveState ({required this.Compte, required this.NumOperation, required this.NomCompte, });
 
 
   //Variable for date Picker
@@ -38,6 +41,7 @@ class _ImportReleveState extends State<ImportReleve> {
   String date_2= "";
   String NumOperation ="";
   String NumOp="";
+  String NomCompte="";
 
 
   @override
@@ -115,9 +119,9 @@ class _ImportReleveState extends State<ImportReleve> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Relevé de  ",
+        title: Text('Relevé de $NomCompte',
           style: TextStyle(
-              fontSize:15,
+              fontSize:18,
               color: Colors.white,
               fontWeight: FontWeight.bold  ) ,),
 
@@ -347,7 +351,7 @@ class _ImportReleveState extends State<ImportReleve> {
                            //String NumOp ="";
                             Navigator.push(context,
                                           MaterialPageRoute(
-                                              builder: (context) =>DetailReleve(NumOp: releveObject.numeroOperation.toString(), /**Compte: Compte,*/))
+                                              builder: (context) =>DetailReleve(NumOp: releveObject.numeroOperation.toString()))
 
                             //     setState(() {
                             //
@@ -624,34 +628,25 @@ class _ImportReleveState extends State<ImportReleve> {
                 SizedBox(height: 10,),
 
                 Container(
-                  child: Text(" Debit",
+                  child: Text(" ...",
                     style: TextStyle(fontSize: 16,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-
 
                 Container(
-                  child: Text(" Credit",
+                  child: Text("Solde",
                     style: TextStyle(fontSize: 16,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-
-
-
-
               ],
             ),
-
-
           ],
         ),
-
       ),
-
     );
   }
 }

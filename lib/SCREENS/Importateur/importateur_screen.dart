@@ -22,6 +22,7 @@ class _ImportateurState extends State<Importateur> {
 
   String date_1="";
   String date_2="";
+  String NomCompte ="";
 
 
 
@@ -40,7 +41,6 @@ class _ImportateurState extends State<Importateur> {
          toolbarHeight: MediaQuery.of(context).size.height*0.06,
          title:
          Column(
-
 
              children: [
                Row(children: [
@@ -177,14 +177,12 @@ class _ImportateurState extends State<Importateur> {
                         //iteration de la liste
                         return InkWell(
                           onTap: (){
-                            int Compte=0;
                             setState(() {
-
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) =>ImportReleve(Compte: Compte, date_1, date_2, NumOperation: '', NomCompte: importObject.designationCompte.toString()))
+                                      builder: (context) =>ImportReleve(Compte: importObject.numCompte!.toInt(), date_1, date_2, NumOperation: '',
+                                          NomCompte: importObject.designationCompte.toString()))
                               );
-
                             });
                           },
                           child: ListTile(

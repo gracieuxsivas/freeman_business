@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Models/compteModel.dart';
+import '../Importateur/Import_releve.dart';
 
 class Banque extends StatefulWidget {
   //const Banque({Key? key}) : super(key: key);
@@ -15,6 +16,9 @@ class Banque extends StatefulWidget {
 class _BanqueState extends State<Banque> {
   int groupeCompteBanque=0;
   _BanqueState ({required this.groupeCompteBanque});
+
+  String date_1="";
+  String date_2="";
 
 
   @override
@@ -146,17 +150,29 @@ class _BanqueState extends State<Banque> {
                         CompteModel banqueObject = snapshot.data![index];
 
                         //iteration de la liste
-                        return ListTile(
-                          title: Text(' ',
-                            //importObject.designationGroupe.toString(),
-                            style: TextStyle(fontSize: 11),),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(banqueObject.designationGroupe.toString()),
-                              Text(banqueObject.numCompte.toString()),
-                              Text(banqueObject.solde.toString()),
-                            ],
+                        return InkWell(
+                          onTap: (){
+                            setState(() {
+                              Navigator.push(context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>ImportReleve(Compte: banqueObject.numCompte!.toInt(), date_1, date_2, NumOperation: '',
+                                          NomCompte: banqueObject.designationCompte.toString()))
+                              );
+
+                            });
+                          },
+                          child: ListTile(
+                            title: Text(' ',
+                              //importObject.designationGroupe.toString(),
+                              style: TextStyle(fontSize: 11),),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(banqueObject.designationCompte.toString()),
+                                Text(banqueObject.numCompte.toString()),
+                                Text(banqueObject.solde.toString()),
+                              ],
+                            ),
                           ),
                         );
                       },

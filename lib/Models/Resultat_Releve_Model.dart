@@ -7,9 +7,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../utilits/Urls.dart';
 
-import '../utilits/Urls.dart';
-
-class ImportateurReleveModel {
+class ResultatReleveModel {
   String? numeroOperation;
   String? designationOperation;
   String? numCompte;
@@ -23,9 +21,9 @@ class ImportateurReleveModel {
   int? qte;
   int? entree;
   int? solde;
-  String? dateOperation;
+  String ? dateOperation;
 
-  ImportateurReleveModel(
+  ResultatReleveModel(
       {this.numeroOperation,
         this.designationOperation,
         this.numCompte,
@@ -41,7 +39,7 @@ class ImportateurReleveModel {
         this.solde,
         this.dateOperation});
 
-  ImportateurReleveModel.fromJson(Map<String, dynamic> json) {
+  ResultatReleveModel.fromJson(Map<String, dynamic> json) {
     numeroOperation = json['numeroOperation'];
     designationOperation = json['designationOperation'];
     numCompte = json['numCompte'];
@@ -77,44 +75,18 @@ class ImportateurReleveModel {
     return data;
   }
 
-  /** RELEVE IMPORTATEUR  */
-  static Future<List<ImportateurReleveModel>> getReleveImp(int Compte, String date_1, String  date_2) async {
-    var url = Urls.adresseServeur + "/api/Balance/GetDetail?NumCompte=$Compte&Date1=$date_1&Date2=$date_2";
-    //var url = Urls.adresseServeur + "/api/Balance/GetDetail?NumCompte=41177&Date1=2022-01-11&Date2=2022-02-24";
+  /**
+   *RELEVE_RESULTAT_PAR_MOIS
+   */
+  static Future<List<ResultatReleveModel>> getResultatParMoisReleve(String? Compte, String mois, int annee) async {
+
+    var url = Urls.adresseServeur + "/api/Balance/GetDetailResultatDuMoiParCodeExercice?NumCompte=$Compte&moi=$mois&year=$annee";
     print(url);
     var data = await http.get(
         Uri.parse(url));
     var t = [];
     t = json.decode(data.body);
-    return t.map((e) => ImportateurReleveModel.fromJson(e)).toList();
-  }
-
-/** DETAIL OPERATION RELEVE  */
-
-//NON UTILISE??????????????????????????????????????????????????????????????????????????????????????
-  static Future<List<ImportateurReleveModel>> getDetailReleveOperation(String NumOp) async {
-    var url = Urls.adresseServeur + "/api/Operation/GetDetail?NumeroOperation=$NumOp";
-    print(url);
-    var data = await http.get(
-        Uri.parse(url));
-    var t = [];
-    t = json.decode(data.body);
-    List<ImportateurReleveModel> dataList =  [];
-    // for(var e in t){
-    //   ImportateurReleveModel model =
-    //   ImportateurReleveModel(numCompte: e['numCompte'],
-    //     designationCompte :e['designationCompte'].toString(),
-    //     numeroOperation :e['numOperation'].toString(),
-    //     qte :e['qte'],
-    //     credit :e['credit'],
-    //     debit :e['debit'],
-    //   );
-    //   print(model.numeroOperation);
-    //
-    //   dataList.add(model);
-    // }
-    print(dataList.length.toString());
-    return dataList;
+    return t.map((e) => ResultatReleveModel.fromJson(e)).toList();
   }
 }
 

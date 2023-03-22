@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Models/compteModel.dart';
+import '../Importateur/Import_releve.dart';
 
 class Livre_de_caisse extends StatefulWidget {
   //const Livre_de_caisse({Key? key}) : super(key: key);
@@ -15,6 +16,10 @@ class Livre_de_caisse extends StatefulWidget {
 class _Livre_de_caisseState extends State<Livre_de_caisse> {
   int groupeLivreDeCaisse=0;
   _Livre_de_caisseState ({required this.groupeLivreDeCaisse});
+
+  String date_1="";
+  String date_2="";
+
 
 
   @override
@@ -142,17 +147,29 @@ class _Livre_de_caisseState extends State<Livre_de_caisse> {
                         CompteModel LivreCaisseObject = snapshot.data![index];
 
                         //iteration de la liste
-                        return ListTile(
-                          title: Text(' ',
-                            //importObject.designationGroupe.toString(),
-                            style: TextStyle(fontSize: 11),),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(LivreCaisseObject.designationGroupe.toString()),
-                              Text(LivreCaisseObject.numCompte.toString()),
-                              Text(LivreCaisseObject.solde.toString()),
-                            ],
+                        return InkWell(
+                          onTap: (){
+                            setState(() {
+                              Navigator.push(context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>ImportReleve(Compte: LivreCaisseObject.numCompte!.toInt(), date_1, date_2, NumOperation: '',
+                                          NomCompte: LivreCaisseObject.designationCompte.toString()))
+                              );
+
+                            });
+                          },
+                          child: ListTile(
+                            title: Text(' ',
+                              //importObject.designationGroupe.toString(),
+                              style: TextStyle(fontSize: 11),),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(LivreCaisseObject.designationCompte.toString()),
+                                Text(LivreCaisseObject.numCompte.toString()),
+                                Text(LivreCaisseObject.solde.toString()),
+                              ],
+                            ),
                           ),
                         );
                       },

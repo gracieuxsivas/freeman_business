@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/compteModel.dart';
 import 'package:freeman_business/SCREENS/Importateur/Import_releve.dart';
+import 'package:freeman_business/SCREENS/Resultat/resultat_par_mois_releve.dart';
 
 import '../../Models/resultatModel.dart';
 import 'package:freeman_business/SCREENS/Resultat//resultat.dart';
@@ -25,12 +26,17 @@ class _ResultatParMoisState extends State<ResultatParMois> {
   String mois ="";
   DateTime monthyear = DateTime(DateTime.monthsPerYear);
 
+  String date_1="";
+  String date_2="";
+
+  String get numCompte => "";
+  //int numCompte=0;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
-
 
 
   @override
@@ -167,15 +173,29 @@ class _ResultatParMoisState extends State<ResultatParMois> {
                         //iteration de la liste
                         return InkWell(
                           onTap: (){
-                            //int Compte=0;
+                            setState(() {
+
+                              Navigator.push(context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>ResultatParMoisReleve(
+                                          Compte: resultatParMoisObject.numCompte,
+                                          mois: resultatParMoisObject.periode.toString(),
+                                          annee: annee,
+                                          NomCompte: resultatParMoisObject.designationCompte.toString(),
+                                          date_1, date_2,
+                                      ))
+                              );
+
+                            });
                           },
                           child: ListTile(
                             title: Text(' ',
-                              //importObject.designationGroupe.toString(),
+                              //resultatParMoisObject.charge.toString(),
                               style: TextStyle(fontSize: 11),),
                             subtitle: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Text(resultatParMoisObject.numCompte.toString()),
                                 Text(resultatParMoisObject.designationCompte.toString()),
                                 Text(resultatParMoisObject.charge.toString()),
                                 Text(resultatParMoisObject.produit.toString()),

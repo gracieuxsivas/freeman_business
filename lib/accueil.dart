@@ -10,6 +10,7 @@ import 'Dossier/dossier_screen.dart';
 import 'SCREENS/Importateur/importateur_screen.dart';
 import 'SCREENS/Balance/balance_screen.dart';
 import 'SCREENS/Banque/banque.dart';
+import 'SCREENS/Livre_de_caisse/livre_de_caisse.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
@@ -30,9 +31,11 @@ class _AccueilState extends State<Accueil> {
   int import =411; //<GROUPE COMPTE IMPORTATEUR
   int bal = 0;
   int groupeCompteBanque=521;
-  int groupeCompteLivreDeCaisse=572;
+  int groupeLivreDeCaisse=571;
   int resultatParAn=0;
   int numCompte=0;
+
+
   //int BalanceCompte =0;
 
 
@@ -561,8 +564,8 @@ class _AccueilState extends State<Accueil> {
                                           //Navigator.pushNamed(context, '/livre_de_caisse');
                                           Navigator.push(context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>Banque(groupeCompteBanque: groupeCompteLivreDeCaisse))
-                                            //compte==411
+                                                  builder: (context) =>Livre_de_caisse(groupeLivreDeCaisse: groupeLivreDeCaisse,))
+
                                           );
 
 

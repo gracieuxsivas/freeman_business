@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/compteModel.dart';
 
+import 'Balance_Groupe_Compte.dart';
+
 class Balance extends StatefulWidget {
-  const Balance({Key? key}) : super(key: key);
+ // const Balance({Key? key}) : super(key: key);
+  //late int NumGroupeCompte;
+
 
 
   @override
@@ -12,7 +16,9 @@ class Balance extends StatefulWidget {
 class _BalanceState extends State<Balance> {
   _BalanceState();
 
+   String designationCompte ="";
 
+  //int NumGroupeCompte=0;
 
   @override
   Widget build(BuildContext context) {
@@ -154,17 +160,28 @@ class _BalanceState extends State<Balance> {
                         CompteModel balanceObject = snapshot.data![index];
 
                         //iteration de la liste
-                        return ListTile(
-                          title: Text(' ',
-                            //importObject.designationGroupe.toString(),
-                            style: TextStyle(fontSize: 11),),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(balanceObject.designationGroupe.toString()),
-                              Text(balanceObject.numCompte.toString()),
-                              Text(balanceObject.solde.toString()),
-                            ],
+                        return InkWell(
+                          onTap: (){
+                            Navigator.push(context,
+                                MaterialPageRoute(
+                                builder: (context) =>BalanceGroupeCompte( NumGroupeCompte: balanceObject.groupeCompte!.toInt(),
+                                                                          designationCompte: balanceObject.designationGroupe.toString(),
+                                                        ))
+                            );
+                          },
+
+                          child: ListTile(
+                            title: Text(' ',
+                              //importObject.designationGroupe.toString(),
+                              style: TextStyle(fontSize: 11),),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(balanceObject.designationGroupe.toString()),
+                                Text(balanceObject.groupeCompte.toString()),
+                                Text(balanceObject.solde.toString()),
+                              ],
+                            ),
                           ),
                         );
                       },

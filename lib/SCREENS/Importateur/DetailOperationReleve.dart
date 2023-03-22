@@ -50,7 +50,6 @@ class _DetailReleveState extends State<DetailReleve> {
 
             child:  Column(
               children: [
-
                 Row(children: [
                   Text("Libellé",
                       style: TextStyle(fontSize: 15,

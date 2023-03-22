@@ -73,8 +73,8 @@ class CompteModel {
   /**
    *BALANCE COMPTE tous
    */
-  static Future<List<CompteModel>> getBalanceGroupeCompte(int GroupeCompte) async {
-    var url = Urls.adresseServeur + "/api/Balance/GetlaBalanceParGoupe?GroupeCompte=$GroupeCompte";
+  static Future<List<CompteModel>> getBalanceGroupeCompte(int NumGroupeCompte) async {
+    var url = Urls.adresseServeur + "/api/Balance/GetlaBalanceParGoupe?GroupeCompte=$NumGroupeCompte";
     print(url);
     var data = await http.get(
         Uri.parse(url));
@@ -83,8 +83,6 @@ class CompteModel {
     return t.map((e) => CompteModel.fromJson(e)).toList();
 
   }
-
-
 
 
 
@@ -131,5 +129,24 @@ class CompteModel {
     t = json.decode(data.body);
     return t.map((e) => CompteModel.fromJson(e)).toList();
   }
+
+
+  /**
+   *RESULTAT PAR MOIS RELEVE
+   */
+  static Future<List<CompteModel>> getResultatParMoisReleve(int Compte, String mois, int annee) async {
+
+    var url = Urls.adresseServeur + "/api/Balance/GetDetailResultatDuMoiParCodeExercice?NumCompte=$Compte&moi=$mois&year=$annee";
+    print(url);
+    var data = await http.get(
+        Uri.parse(url));
+    var t = [];
+    t = json.decode(data.body);
+    return t.map((e) => CompteModel.fromJson(e)).toList();
+  }
 }
+
+
+
+
 

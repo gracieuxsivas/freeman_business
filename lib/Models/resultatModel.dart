@@ -83,5 +83,18 @@ class ResultatModel {
     return t.map((e) => ResultatModel.fromJson(e)).toList();
   }
 
+
+  /** RELEVE RESULTAT PAR MOIS  */
+
+  static Future<List<ResultatModel>> getReleveResultatParMois() async {
+    var url = Urls.adresseServeur + "/api/Resultat/GetlesResultatDetaillePourLeMoiActulle";
+    print(url);
+    var data = await http.get(
+        Uri.parse(url));
+    var t = [];
+    t = json.decode(data.body);
+    return t.map((e) => ResultatModel.fromJson(e)).toList();
+  }
+
 }
 
