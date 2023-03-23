@@ -215,7 +215,6 @@ class _ResultatParMoisState extends State<ResultatParMois> {
           ),
         ],
       ),
-
     );
   }
 }
