@@ -2,23 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 
-import '../Models/dossier.dart';
-import '../Models/dossier.dart';
+//import '../Models/dossier_PV_Model.dart';
+//import '../Models/dossier_PV_Model.dart';
+import '../../Models/dossier_PV_Model.dart';
+import 'ajouter_sous_dossier.dart';
 import 'dossier_facturation_screen.dart';
 import 'model_list_file.dart';
 
-class DossierEncours extends StatefulWidget {
-   int etat;
+class DossierPV extends StatefulWidget {
+   String numDossier;
+   String designationDossier;
   //const DossierEncours({Key? key, required this.etat}) : super(key: key);
-  DossierEncours({ required this.etat});
+   DossierPV({ required this.numDossier, required this.designationDossier});
 
   @override
-  State<DossierEncours> createState() => _DossierEncoursState(etat:etat);
+  State<DossierPV> createState() => _DossierPVState(numDossier:numDossier, designationDossier:designationDossier);
 }
 
-class _DossierEncoursState extends State<DossierEncours> {
-  int etat=0;
-  _DossierEncoursState({required this.etat});
+class _DossierPVState extends State<DossierPV> {
+  //int etat=0;
+
+  _DossierPVState({required this.numDossier, required this.designationDossier});
+  String numDossier="";
+  String designationDossier="";
 
   //
 
@@ -42,18 +48,19 @@ class _DossierEncoursState extends State<DossierEncours> {
               Row(
                   children: [
 
-                 Text(etat==0? 'DOSSIER EN COURS':'DOSSIER CLOTURE',
-                  style: TextStyle(fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                 Text(designationDossier
                 ),
 
                 const Spacer(),
-                    etat==0?IconButton(onPressed: () {
-                  Navigator.pushNamed(context, '/ajouter_dossier');
+                   // etat==0?
+                    IconButton(onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context)=>AjouterDossier()));
+                  //Navigator.pushNamed(context, '/ajouter_dossier');
                 },
                     icon: Icon(Icons.add,
-                        color: Colors.white)):Container(),
+                        color: Colors.white))
+                        //:Container(),
               ]),
 
              // SizedBox(height: 10,),
@@ -104,8 +111,8 @@ class _DossierEncoursState extends State<DossierEncours> {
           ),
 
           Expanded(
-              child: FutureBuilder<List<Dossier>>(
-                  future: Dossier.getDossier(etat),
+              child: FutureBuilder<List<DossierPVmod>>(
+                  future: DossierPVmod.getPVDossier(numDossier),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees
@@ -150,7 +157,7 @@ class _DossierEncoursState extends State<DossierEncours> {
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        Dossier dossierObject = snapshot.data![index];
+                        DossierPVmod dossierObject = snapshot.data![index];
                         //iteration de la liste
                         return FocusedMenuHolder(
                           menuWidth: MediaQuery.of(context).size.width*0.5,//<= prendre la moitier de la largeur ecran
@@ -168,7 +175,7 @@ class _DossierEncoursState extends State<DossierEncours> {
                         ),
 
                         FocusedMenuItem(title: Text("Depense"), onPressed: (){}),
-                        FocusedMenuItem(title: Text("Cloturé"), onPressed: (){}),
+                       // FocusedMenuItem(title: Text("Cloturé"), onPressed: (){}),
                         ],
                           child: ListTile(
                             title: Text(dossierObject.detailPV.toString(),style: TextStyle(fontSize: 11),),
@@ -179,6 +186,7 @@ class _DossierEncoursState extends State<DossierEncours> {
                                   Text(dossierObject.facturation.toString()),
                                   Text(dossierObject.resultat.toString()),
                               ],
+
                             ),
                           ),
                         );

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'model_list_file.dart';
 
-class NouveauImportateur extends StatefulWidget {
-  const NouveauImportateur({Key? key}) : super(key: key);
+class ModifierDossier extends StatefulWidget {
+  const ModifierDossier({Key? key}) : super(key: key);
 
   @override
-  State<NouveauImportateur> createState() => _NouveauImportateurState();
+  State<ModifierDossier> createState() => _ModifierDossierState();
 }
 
-class _NouveauImportateurState extends State<NouveauImportateur> {
+class _ModifierDossierState extends State<ModifierDossier> {
 
 
 
@@ -34,7 +34,7 @@ class _NouveauImportateurState extends State<NouveauImportateur> {
               Row(
                   children: [
 
-                    Text('NOUVEAU IMPORTATEUR',
+                    Text('MODIFIER DOSSIER',
                       style: TextStyle(fontSize: 15,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
@@ -74,41 +74,13 @@ class _NouveauImportateurState extends State<NouveauImportateur> {
                     prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
 
                     ),
-                    labelText: "Libelé",
+                    labelText: "Designation",
                     hintText: "  "
                 ),
                 keyboardType: TextInputType.text,
               ),
             ),
           ),
-          SizedBox(height: 15,),
-
-          Container(
-            padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
-            child: Card(
-
-              child: TextFormField(
-                //controller: usernameController,
-                style: TextStyle (fontSize: 17) ,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10),
-                    prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
-
-                    ),
-                    labelText: "Numero du Compte",
-                    hintText: "  "
-                ),
-                keyboardType: TextInputType.text,
-              ),
-            ),
-          ),
-
-
-
-
-
-
-
 
         ],
       ),

@@ -6,7 +6,9 @@ import 'package:freeman_business/Models/groupeCompte.dart';
 import 'package:freeman_business/Models/users.dart';
 import 'package:freeman_business/SCREENS/Resultat/resultat.dart';
 
-import 'Dossier/dossier_screen.dart';
+//import 'Dossier/dossier_screen.dart';
+import 'SCREENS/Dossier/DossierPrincipal.dart';
+import 'SCREENS/Dossier/dossier_screen.dart';
 import 'SCREENS/Importateur/importateur_screen.dart';
 import 'SCREENS/Balance/balance_screen.dart';
 import 'SCREENS/Banque/banque.dart';
@@ -27,6 +29,7 @@ class _AccueilState extends State<Accueil> {
   double soldeCaisse =0,soldeBanque =0,soldeImporateur =0,soldeFournisseur = 0;
   bool isLoading =false;
   int etat_dossier=0;
+
 
   int import =411; //<GROUPE COMPTE IMPORTATEUR
   int bal = 0;
@@ -174,24 +177,24 @@ class _AccueilState extends State<Accueil> {
                               menuItems: <FocusedMenuItem> [
                               FocusedMenuItem(title: Text("Dosser en cours"),
                                   onPressed: () {
-                                  etat_dossier = 0;
+                                  etat_dossier = 1;
                                   //Navigator.pushNamed(context, '/dossierencours');
 
                            //ENVOIE DES DATAS TO ANOTHER PAGE
 
                                   Navigator.push(context,
                                         MaterialPageRoute(builder:
-                                        (context) => DossierEncours(etat: etat_dossier)));
+                                        (context) => DossierPrinc(etat: etat_dossier)));
                                   },
                                   backgroundColor: Colors.orange[200]),
 
                               FocusedMenuItem(title: Text("Dosser cloturé"),
                                   onPressed: () {
-                                  etat_dossier = 1;
+                                  etat_dossier = 0;
                                   //Navigator.pushNamed(context, '/dossiercloture');
                                     Navigator.push(context,
                                         MaterialPageRoute(
-                                            builder: (context) =>DossierEncours(etat: etat_dossier,))
+                                            builder: (context) =>DossierPrinc(etat: etat_dossier,))
                                     );
                               }),
                             ],

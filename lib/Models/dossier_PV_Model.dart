@@ -8,7 +8,12 @@ import 'dart:convert';
 import '../utilits/Urls.dart';
 import 'package:http/http.dart' as http;
 
-class Dossier {
+/*
+// Example Usage
+Map<String, dynamic> map = jsonDecode(<myJSONString>);
+var myRootNode = Root.fromJson(map);
+*/
+class DossierPVmod {
   String? codePV;
   String? designationPv;
   String? numCompte;
@@ -22,21 +27,20 @@ class Dossier {
   int? resultat;
   String? datePv;
 
-  Dossier(
-      {this.codePV,
-        this.designationPv,
-        this.numCompte,
-        this.compte,
-        this.charge,
-        this.numeroDeclaration,
-        this.plaque,
-        this.autreNumero,
-        this.detailPV,
-        this.facturation,
-        this.resultat,
-        this.datePv});
+  DossierPVmod({this.codePV,
+    this.designationPv,
+    this.numCompte,
+    this.compte,
+    this.charge,
+    this.numeroDeclaration,
+    this.plaque,
+    this.autreNumero,
+    this.detailPV,
+    this.facturation,
+    this.resultat,
+    this.datePv});
 
-  Dossier.fromJson(Map<String, dynamic> json) {
+  DossierPVmod.fromJson(Map<String, dynamic> json) {
     codePV = json['codePV'];
     designationPv = json['designationPv'];
     numCompte = json['numCompte'];
@@ -68,13 +72,15 @@ class Dossier {
     return data;
   }
 
-  static Future<List<Dossier>> getDossier(int etat) async {
-    var url = Urls.adresseServeur + "/api/Dossier/GetleDossier?Etat=$etat";
+  static Future<List<DossierPVmod>> getPVDossier(String numDossier) async {
+    var url = Urls.adresseServeur +
+        "/api/Dossier/GetleDossierParDossier?NumDossier=$numDossier";
     var data = await http.get(
         Uri.parse(url));
     var t = [];
     t = json.decode(data.body);
-    return t.map((e) => Dossier.fromJson(e)).toList();
+    return t.map((e) => DossierPVmod.fromJson(e)).toList();
   }
 }
+
 
