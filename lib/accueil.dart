@@ -184,7 +184,7 @@ class _AccueilState extends State<Accueil> {
 
                                   Navigator.push(context,
                                         MaterialPageRoute(builder:
-                                        (context) => DossierPrinc(etat: etat_dossier)));
+                                        (context) => DossierPrinc(etat: etat_dossier, designation: '',)));
                                   },
                                   backgroundColor: Colors.orange[200]),
 
@@ -194,7 +194,7 @@ class _AccueilState extends State<Accueil> {
                                   //Navigator.pushNamed(context, '/dossiercloture');
                                     Navigator.push(context,
                                         MaterialPageRoute(
-                                            builder: (context) =>DossierPrinc(etat: etat_dossier,))
+                                            builder: (context) =>DossierPrinc(etat: etat_dossier, designation: '',))
                                     );
                               }),
                             ],
