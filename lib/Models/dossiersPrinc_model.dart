@@ -45,4 +45,24 @@ class Dossier {
     return t.map((e) => Dossier.fromJson(e)).toList();
   }
 
+
+  /*
+  enregistrement dossier
+   */
+  static Future<String> enregistrement(Dossier dossier) async {
+    //envoi des donnees au serveur
+    var data = await http.post(
+      Uri.parse(Urls.adresseServeur + "/api/Dossier/Create"),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: jsonEncode(dossier.toJson()),
+    );
+
+    print(data.statusCode.toString());
+
+    return data.statusCode.toString();
+  }
+
 }

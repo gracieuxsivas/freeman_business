@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freeman_business/Models/dossiersPrinc_model.dart';
 
 import 'DossierPrincipal.dart';
 import 'model_list_file.dart';
@@ -15,6 +16,7 @@ class _NouveauDossierState extends State<NouveauDossier> {
 
   int etat=0;
   String designation= "";
+  bool isLoading = false;
 
 
   @override
@@ -46,9 +48,26 @@ class _NouveauDossierState extends State<NouveauDossier> {
 
                     const Spacer(),
                     IconButton(onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => DossierPrinc(etat: etat, designation: _designation.text,) )
-                      );
+                      Dossier dossier = Dossier(idDossier: 0,numDossier: "4434",designationDossier:
+                      _designation.text.toString(),etat: true);
+                      setState(() {
+                        isLoading = true;
+                      });
+                      Dossier.enregistrement(dossier).then((value){
+                        setState(() {
+                          isLoading = false;
+                        });
+                       if(value == "200"){
+                         //enregistrement reussie avec success
+                         Navigator.of(context).pop();
+                       }else{
+                         //echec d'eregistrement
+                       }
+                      });
+
+                      // Navigator.push(context, MaterialPageRoute(
+                      //     builder: (context) => DossierPrinc(etat: etat, designation: _designation.text,) )
+                      // );
                     },
                         icon: Icon(Icons.save,
                             color: Colors.white)),
@@ -89,6 +108,8 @@ class _NouveauDossierState extends State<NouveauDossier> {
               ),
             ),
           ),
+
+          isLoading?CircularProgressIndicator():Container()
 
         ],
       ),
