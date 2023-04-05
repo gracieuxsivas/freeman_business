@@ -65,4 +65,21 @@ class Dossier {
     return data.statusCode.toString();
   }
 
+
+  static Future<String> ModidicationDossier(Dossier Mod_dossier) async {
+    //envoi des donnees au serveur
+    var data = await http.post(
+      Uri.parse(Urls.adresseServeur + "/api/Dossier/Update"),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: jsonEncode(Mod_dossier.toJson()),
+    );
+
+    print(data.statusCode.toString());
+
+    return data.statusCode.toString();
+  }
+
 }

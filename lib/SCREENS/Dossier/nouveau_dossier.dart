@@ -57,6 +57,8 @@ class _NouveauDossierState extends State<NouveauDossier> {
                         setState(() {
                           isLoading = false;
                         });
+
+                        //REPONSE SERVEUR:>>
                        if(value == "200"){
                          //enregistrement reussie avec success
                          Navigator.of(context).pop();

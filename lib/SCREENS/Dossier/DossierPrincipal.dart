@@ -31,6 +31,7 @@ class _DossierPrincState extends State<DossierPrinc> {
 
   //String numDossier="";
   //get numDossier => numDossier;
+  String text="";
 
   //
 
@@ -186,8 +187,33 @@ class _DossierPrincState extends State<DossierPrinc> {
                           },
                           child: GestureDetector(
                             onLongPress: (){
+
+                              // showDialog(
+                              //     context: context,
+                              //     builder: (context) =>SimpleDialog(
+                              //       children: [
+                              //         TextField(
+                              //           onChanged: (value){
+                              //             setState(() {
+                              //               text=value;
+                              //             });
+                              //           },
+                              //         ),
+                              //         IconButton(onPressed: (){
+                              //           setState(() {
+                              //              dossierObject=text as Dossier;
+                              //           });
+                              //         },
+                              //             icon: Icon(Icons.save, color: Colors.black,))
+                              //       ],
+                              //
+                              //     ),
+                              // );
+
+
+
                               Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => ModifierDossier() )
+                                  builder: (context) => ModifierDossier(designationDossier:dossierObject.designationDossier.toString() ) )
                               );
                             },
                             child: ListTile(

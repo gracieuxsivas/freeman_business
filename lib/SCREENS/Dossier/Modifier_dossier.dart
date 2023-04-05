@@ -1,15 +1,30 @@
 import 'package:flutter/material.dart';
 
+import '../../Models/dossiersPrinc_model.dart';
 import 'model_list_file.dart';
 
 class ModifierDossier extends StatefulWidget {
-  const ModifierDossier({Key? key}) : super(key: key);
+   String designationDossier;
+
+  ModifierDossier( {required this.designationDossier});
+  //const ModifierDossier({Key? key}) : super(key: key);
 
   @override
-  State<ModifierDossier> createState() => _ModifierDossierState();
+  State<ModifierDossier> createState() => _ModifierDossierState(designationDossier:designationDossier);
 }
 
 class _ModifierDossierState extends State<ModifierDossier> {
+
+
+  _ModifierDossierState({required this.designationDossier});
+
+
+  TextEditingController _designation= new TextEditingController();
+
+  int etat=0;
+  bool isLoading = false;
+  String designationDossier ="";
+  String text="";
 
 
 
@@ -41,7 +56,40 @@ class _ModifierDossierState extends State<ModifierDossier> {
                     ),
 
                     const Spacer(),
-                    IconButton(onPressed: () {},
+                    IconButton(onPressed: () {
+
+
+                      Dossier Mod_dossier = Dossier(idDossier: 0,numDossier: "4434",designationDossier:
+                      _designation.text.toString(),etat: true);
+
+                      //________
+                      // TextField(
+                      //   onChanged: (value){
+                      //     setState(() {
+                      //       designationDossier=value;
+                      //     });
+                      //   },
+                      //
+                      // );
+                      //______
+
+                      setState(() {
+                        isLoading = true;
+                      });
+                      Dossier.ModidicationDossier(Mod_dossier).then((value){
+                        setState(() {
+                          text=value;
+                          isLoading = false;
+                        });
+                        if(value == "200"){
+                          //enregistrement reussie avec success
+                          Navigator.of(context).pop();
+                        }else{
+                          //echec d'eregistrement
+                        }
+                      });
+
+                    },
                         icon: Icon(Icons.save,
                             color: Colors.white)),
                   ]),
@@ -59,14 +107,12 @@ class _ModifierDossierState extends State<ModifierDossier> {
 
           SizedBox(height: 15,),
 
-
-
           Container(
             padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
             child: Card(
 
               child: TextFormField(
-                //controller: usernameController,
+                controller: _designation,
                 style: TextStyle (fontSize: 17) ,
 
                 decoration: InputDecoration(
@@ -74,8 +120,9 @@ class _ModifierDossierState extends State<ModifierDossier> {
                     prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
 
                     ),
+                    border: OutlineInputBorder(),
                     labelText: "Designation",
-                    hintText: "  "
+                    hintText: "${designationDossier}"
                 ),
                 keyboardType: TextInputType.text,
               ),
