@@ -4,27 +4,35 @@ import '../../Models/dossiersPrinc_model.dart';
 import 'model_list_file.dart';
 
 class ModifierDossier extends StatefulWidget {
-   String designationDossier;
-
-  ModifierDossier( {required this.designationDossier});
+  Dossier dossier;
+  ModifierDossier( {required this.dossier});
   //const ModifierDossier({Key? key}) : super(key: key);
 
   @override
-  State<ModifierDossier> createState() => _ModifierDossierState(designationDossier:designationDossier);
+  State<ModifierDossier> createState() => _ModifierDossierState(dossier: dossier);
 }
 
 class _ModifierDossierState extends State<ModifierDossier> {
 
 
-  _ModifierDossierState({required this.designationDossier});
+  Dossier dossier;
+
+  _ModifierDossierState({required this.dossier});
 
 
   TextEditingController _designation= new TextEditingController();
 
   int etat=0;
   bool isLoading = false;
-  String designationDossier ="";
   String text="";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _designation.text = dossier.designationDossier!;
+  }
 
 
 
@@ -59,30 +67,18 @@ class _ModifierDossierState extends State<ModifierDossier> {
                     IconButton(onPressed: () {
 
 
-                      Dossier Mod_dossier = Dossier(idDossier: 0,numDossier: "4434",designationDossier:
-                      _designation.text.toString(),etat: true);
-
-                      //________
-                      // TextField(
-                      //   onChanged: (value){
-                      //     setState(() {
-                      //       designationDossier=value;
-                      //     });
-                      //   },
-                      //
-                      // );
-                      //______
+                      dossier.designationDossier = _designation.text.toString();
 
                       setState(() {
                         isLoading = true;
                       });
-                      Dossier.ModidicationDossier(Mod_dossier).then((value){
+                      Dossier.ModidicationDossier(dossier).then((value){
                         setState(() {
                           text=value;
                           isLoading = false;
                         });
                         if(value == "200"){
-                          //enregistrement reussie avec success
+                          //modification reussie avec success
                           Navigator.of(context).pop();
                         }else{
                           //echec d'eregistrement
@@ -101,8 +97,7 @@ class _ModifierDossierState extends State<ModifierDossier> {
 
       backgroundColor: Colors.grey[300],
 
-      body:
-      Column(
+      body: Column(
         children: [
 
           SizedBox(height: 15,),
@@ -122,12 +117,14 @@ class _ModifierDossierState extends State<ModifierDossier> {
                     ),
                     border: OutlineInputBorder(),
                     labelText: "Designation",
-                    hintText: "${designationDossier}"
+                    hintText: ""
                 ),
                 keyboardType: TextInputType.text,
               ),
             ),
           ),
+          isLoading?CircularProgressIndicator():Container()
+
 
         ],
       ),
