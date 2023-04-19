@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/Posts/AjouterSousDossier_Model.dart';
 
-import 'model_list_file.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
 
 class AjouterDossier extends StatefulWidget {
   const AjouterDossier({Key? key}) : super(key: key);
@@ -19,6 +21,42 @@ class _AjouterDossierState extends State<AjouterDossier> {
   TextEditingController _Date= new TextEditingController();
   TextEditingController _Reference= new TextEditingController();
   TextEditingController _commentaire= new TextEditingController();
+
+  // List<String> items= <String>[
+  //   'Boss Tabula', 'Declarant ADA', 'Declarant Deplick', 'Boss Manu', 'Compte papa Noble',
+  //   'Compte papa Nzanzu Ouganda', 'Compte Honorable Honorable Sambuka', 'Compte Compte Honorable Honorable Sambuka',
+  //   'Boss Kiyonga', 'Boss Japhete', 'Compte Kapele', 'Boss Muhamed', 'PDG John Bati', 'PDG Kisule',
+  //   'PDG GRACE', 'Coopec la semence', 'Charge Feri', 'DGI kasindi', 'Boss Kitha', 'Receveur Dede Konzi'
+  // ];
+  // String dropdownValue ='Boss Tabula';
+
+
+  List Importlist = [];
+  //String dropdownValue ='Boss tabubula';
+  int num_compte= 41002;
+
+
+//Methode pour Api get import
+  Future getComptes() async {
+    final Url = "http://afrisofttech-003-site37.btempurl.com/api/Compte/listedeCompteParGroupe?groupeCompte=411";
+
+    http.Response response = await http.get(Uri.parse(Url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        Importlist = jsonData;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getComptes();
+  }
+
+  var dropdownvalue;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +87,10 @@ class _AjouterDossierState extends State<AjouterDossier> {
                     const Spacer(),
                     IconButton(onPressed: () {
                       SousDossier dossierPV = SousDossier(
+                        compte:"0",
+                        codePV: "0",
+                        etat: "",
+                        numDossier: "0",
                         plaque: _NumPlaque.text.toString(),
                         numeroDeclaration: _NumDeclaration.text.toString(),
                         autreNumero: _AutreNumero.text.toString(),
@@ -91,40 +133,37 @@ class _AjouterDossierState extends State<AjouterDossier> {
       Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
+            padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
+            
             //height: 50,
-            color: Colors.blue,
+           // color: Colors.blue,
 
+            child: Card(
 
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
+//DROPDWN BUTTON
 
-                  SizedBox(height: 10,),
-
-                  Card(
-                    child: Row(
-                        //crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-
-                        children: [
-                          IconButton(onPressed: () {},
-                              icon: Icon(Icons.arrow_drop_down_outlined,
-                                  color: Colors.black)),
-
-                          //const Spacer(),
-
-                          IconButton(onPressed: () {
-                            Navigator.pushNamed(context, '/nouveau_importateur');
-                          },
-                              icon: Icon(Icons.playlist_add,
-                                  color: Colors.black)),
-                        ]),
-                  ),
-
-                ]),
+              child: DropdownButton(
+                hint: Text('Importateurs'),
+                isExpanded: true,
+                //alignment: Alignment.center,
+                items: Importlist.map((item) {
+                  return DropdownMenuItem(
+                    value: item['designationCompte'].toString(),
+                    child: Text(item['designationCompte'].toString()),
+                  );
+                }).toList(),
+                onChanged: (newVal) {
+                  setState(() {
+                    dropdownvalue = newVal;
+                  });
+                },
+                value: dropdownvalue,
+              ),
+            ),
 
           ),
+
+          SizedBox(height: 12,),
 
           //Autre Mise en former
 
@@ -135,10 +174,10 @@ class _AjouterDossierState extends State<AjouterDossier> {
               child: TextFormField(
                 controller: _NumPlaque,
                 style: TextStyle (fontSize: 17) ,
+
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(10),
                     prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
-
                     ),
                     border: OutlineInputBorder(),
                     labelText: "Numero Plaque",
@@ -153,7 +192,6 @@ class _AjouterDossierState extends State<AjouterDossier> {
           Container(
             padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
             child: Card(
-
               child: TextFormField(
                 controller: _NumDeclaration,
                 style: TextStyle (fontSize: 17) ,
@@ -207,11 +245,20 @@ class _AjouterDossierState extends State<AjouterDossier> {
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(10),
                     prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
+                      child:
+                      IconButton(onPressed: () { },
+                          icon: Icon(Icons.calendar_month,
+                              color: Colors.grey,))
+
+                      // Icon(
+                      //   Icons.calendar_month,
+                      //   color: Colors.grey,
+                      // ),
 
                     ),
-                   // border: OutlineInputBorder(),
+                   border: OutlineInputBorder(),
                     labelText: "Date ",
-                    hintText: "  "
+                    hintText: "  ",
                 ),
                 keyboardType: TextInputType.text,
               ),

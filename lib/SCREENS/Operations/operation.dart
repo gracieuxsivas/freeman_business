@@ -13,6 +13,7 @@ class _OperationState extends State<Operation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.blue[700],
         title: Text("Operation"),

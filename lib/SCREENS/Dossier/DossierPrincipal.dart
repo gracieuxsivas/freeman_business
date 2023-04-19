@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import 'package:freeman_business/SCREENS/Dossier/dossier_screen.dart';
+import 'package:freeman_business/SCREENS/Dossier/dossier_PV_screen.dart';
 
 //import '../Models/dossier_PV_Model.dart';
 //import '../Models/dossier_PV_Model.dart';
@@ -14,12 +14,19 @@ import 'nouveau_dossier.dart';
 
 class DossierPrinc extends StatefulWidget {
   int etat;
-  String designation;
+
+  Dossier dossier = Dossier(idDossier: 0,numDossier: '', designationDossier: '', etat: false);
   //const DossierEncours({Key? key, required this.etat}) : super(key: key);
-  DossierPrinc({ required this.etat, required this.designation});
+  DossierPrinc({ required this.etat,
+
+    //required this.dossier
+  });
 
   @override
-  State<DossierPrinc> createState() => _DossierPrincState(etat:etat, designation:designation);
+  State<DossierPrinc> createState() => _DossierPrincState(etat:etat,
+      //designation:designation,
+      //dossier:dossier
+  );
 }
 
 class _DossierPrincState extends State<DossierPrinc> {
@@ -27,14 +34,20 @@ class _DossierPrincState extends State<DossierPrinc> {
   String designation= "";
 
 
-  _DossierPrincState({required this.etat, required this.designation});
+  Dossier dossier = Dossier(idDossier: 0,numDossier: '', designationDossier: '', etat: false);
+
+  _DossierPrincState({required this.etat,
+   // required this.designation,
+    //required this.dossier
+  });
 
   //String numDossier="";
   //get numDossier => numDossier;
   String text="";
+  bool isLoading = false;
+
 
   //
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +75,8 @@ class _DossierPrincState extends State<DossierPrinc> {
                     ),
 
                     const Spacer(),
-                    etat==1?IconButton(onPressed: () {
+                    etat==1?IconButton(
+                        onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(
                               builder: (context) =>NouveauDossier())
@@ -207,50 +221,46 @@ class _DossierPrincState extends State<DossierPrinc> {
 
                               //DONNEES ENREGISTREES
 
-
-
                               trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                                 children: [
+
+                      //DIALOG POUR CLOTURER >>>>>>>>>>>>>>>>>>>>>>>
+
                                   IconButton(onPressed: (){
 
-                                    // showAlertDialog(BuildContext context) {
-                                    //
-                                    //   // set up the button
-                                    //   Widget okButton = TextButton(
-                                    //     child: Text("OK"),
-                                    //     onPressed: () { },
-                                    //   );
-                                    //
-                                    //   // set up the AlertDialog
-                                    //   AlertDialog
-                                    //   alert = AlertDialog(
-                                    //     title: Text("My title"),
-                                    //     content: Text("This is my message."),
-                                    //     actions: [
-                                    //       okButton,
-                                    //     ],
-                                    //   );
-                                    //
-                                    //   // show the dialog
-                                    //   showDialog(
-                                    //     context: context,
-                                    //     builder: (BuildContext context) {
-                                    //       return alert;
-                                    //     },
-                                    //   );
-                                    // }
 
-                                    //____________________
 
                                     Widget okButton = TextButton(
                                       child: Text("OK"),
-                                      onPressed: () { },
+                                      onPressed: () {
+
+                                        // Dossier dossier = Dossier(idDossier: 0,numDossier: "4434",designationDossier:
+                                        // dossierObject.designationDossier.toString(),etat: true);
+                                        // setState(() {
+                                        //isLoading = true;
+                                        // });
+                                        dossier.etat=false;
+                                        Dossier.CloturerDossier(dossier).then((value){
+                                          setState(() {
+                                            isLoading = false;
+                                          });
+
+                                          //REPONSE SERVEUR:>>
+                                          if(value == "200"){
+                                            //enregistrement reussie avec success
+                                            Navigator.of(context).pop();
+                                          }else{
+                                            //echec d'eregistrement
+                                          }
+                                        });
+
+                                      },
                                     );
                                     AlertDialog
                                     alert = AlertDialog(
                                       title: Text("Cloturer"),
-                                      content: Text("Voulez-vous cloturer ce dossier?,", ),
+                                      content: Text("Voulez-vous cloturer ce dossier $designation", ),
                                       actions: [
                                         okButton,
                                       ],
@@ -261,14 +271,6 @@ class _DossierPrincState extends State<DossierPrinc> {
                                       builder: (BuildContext context) {
                                         return alert;
                                       }
-                                      // => AlertDialog(
-                                      //   // title: Text('Cloturer'),
-                                      //   // content: Text(
-                                      //   //   'Voulez-vous cloturer ce dossier?',
-                                      //   // ),
-                                      //
-                                      // ),
-
 
                                     );
 

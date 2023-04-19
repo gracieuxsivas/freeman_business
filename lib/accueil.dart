@@ -6,9 +6,10 @@ import 'package:freeman_business/Models/groupeCompte.dart';
 import 'package:freeman_business/Models/users.dart';
 import 'package:freeman_business/SCREENS/Resultat/resultat.dart';
 
-//import 'Dossier/dossier_screen.dart';
+//import 'Dossier/dossier_PV_screen.dart';
+import 'Models/dossiersPrinc_model.dart';
 import 'SCREENS/Dossier/DossierPrincipal.dart';
-import 'SCREENS/Dossier/dossier_screen.dart';
+import 'SCREENS/Dossier/dossier_PV_screen.dart';
 import 'SCREENS/Importateur/importateur_screen.dart';
 import 'SCREENS/Balance/balance_screen.dart';
 import 'SCREENS/Banque/banque.dart';
@@ -17,8 +18,10 @@ import 'SCREENS/Livre_de_caisse/livre_de_caisse.dart';
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
 
+
   @override
   State<Accueil> createState() => _AccueilState();
+
 }
 
 class _AccueilState extends State<Accueil> {
@@ -37,6 +40,7 @@ class _AccueilState extends State<Accueil> {
   int groupeLivreDeCaisse=571;
   int resultatParAn=0;
   int numCompte=0;
+  late final Dossier dossier;
 
 
   //int BalanceCompte =0;
@@ -178,13 +182,14 @@ class _AccueilState extends State<Accueil> {
                               FocusedMenuItem(title: Text("Dosser en cours"),
                                   onPressed: () {
                                   etat_dossier = 1;
-                                  //Navigator.pushNamed(context, '/dossierencours');
 
                            //ENVOIE DES DATAS TO ANOTHER PAGE
-
                                   Navigator.push(context,
                                         MaterialPageRoute(builder:
-                                        (context) => DossierPrinc(etat: etat_dossier, designation: '',)));
+                                        (context) => DossierPrinc(etat: etat_dossier
+                                          //dossier: dossier,
+                                          //designation: '',
+                                        )));
                                   },
                                   backgroundColor: Colors.orange[200]),
 
@@ -194,7 +199,10 @@ class _AccueilState extends State<Accueil> {
                                   //Navigator.pushNamed(context, '/dossiercloture');
                                     Navigator.push(context,
                                         MaterialPageRoute(
-                                            builder: (context) =>DossierPrinc(etat: etat_dossier, designation: '',))
+                                            builder: (context) =>DossierPrinc(etat: etat_dossier
+                                              //dossier: dossier,
+                                              //designation: '',
+                                            ))
                                     );
                               }),
                             ],

@@ -5,6 +5,7 @@ import 'package:focused_menu/modals.dart';
 //import '../Models/dossier_PV_Model.dart';
 //import '../Models/dossier_PV_Model.dart';
 import '../../Models/dossier_PV_Model.dart';
+import '../../try.dart';
 import 'ajouter_sous_dossier.dart';
 import 'dossier_facturation_screen.dart';
 import 'model_list_file.dart';
@@ -88,7 +89,12 @@ class _DossierPVState extends State<DossierPV> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       
                       children: [
-                        Text('Designation/Charge',
+                        Text('Designation',
+                          style: TextStyle(fontSize: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),),
+                        const Spacer(),
+                        Text('Charge',
                           style: TextStyle(fontSize: 15,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),),
@@ -178,10 +184,11 @@ class _DossierPVState extends State<DossierPV> {
                        // FocusedMenuItem(title: Text("Cloturé"), onPressed: (){}),
                         ],
                           child: ListTile(
-                            title: Text(dossierObject.detailPV.toString(),style: TextStyle(fontSize: 11),),
+                            title: Text(dossierObject.codePV.toString(),style: TextStyle(fontSize: 11),),
                             subtitle: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                  Text(dossierObject.detailPV.toString()),
                                   Text(dossierObject.charge.toString()),
                                   Text(dossierObject.facturation.toString()),
                                   Text(dossierObject.resultat.toString()),

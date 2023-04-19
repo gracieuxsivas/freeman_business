@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:freeman_business/accueil.dart';
 import 'package:freeman_business/SCREENS/Balance/balance_screen.dart';
 import 'package:freeman_business/SCREENS/Banque/banque.dart';
-//import 'package:freeman_business/Dossier/dossier_screen.dart';
+//import 'package:freeman_business/Dossier/dossier_PV_screen.dart';
 //import 'package:freeman_business/Importateur/importateur_screen.dart';
 import 'package:freeman_business/SCREENS/Livre_de_caisse/livre_de_caisse.dart';
 //import 'package:freeman_business/Operations/operation.dart';
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         '/login':(context)=>Login(),
         '/accueil':(context)=>Accueil(),
         '/evolution': (context)=>const VoirEvolution(),
-        '/try':(context)=> MyHomePage(),
+       // '/try':(context)=> TryClass(numCompte: 411,),
        // '/importateur':(Context)=>Importateur(),
         '/operation' :(Context)=>Operation(),
        // '/balance' : (Context)=>Balance(),

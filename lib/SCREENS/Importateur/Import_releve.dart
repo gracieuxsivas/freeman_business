@@ -287,8 +287,6 @@ class _ImportReleveState extends State<ImportReleve> {
           //DONNEES FROM API HERE
 
 
-
-
           Expanded(
               child: FutureBuilder<List<ImportateurReleveModel>>(
                future: ImportateurReleveModel.getReleveImp(Compte, date_1, date_2),

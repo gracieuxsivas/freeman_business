@@ -193,6 +193,7 @@ class _OperationSuiteState extends State<OperationSuite> {
 
           Container(
             padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
+
             child: Card(
 
               child: TextFormField(

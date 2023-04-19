@@ -14,11 +14,9 @@ class ModifierDossier extends StatefulWidget {
 
 class _ModifierDossierState extends State<ModifierDossier> {
 
-
   Dossier dossier;
 
   _ModifierDossierState({required this.dossier});
-
 
   TextEditingController _designation= new TextEditingController();
 
@@ -65,7 +63,6 @@ class _ModifierDossierState extends State<ModifierDossier> {
 
                     const Spacer(),
                     IconButton(onPressed: () {
-
 
                       dossier.designationDossier = _designation.text.toString();
 

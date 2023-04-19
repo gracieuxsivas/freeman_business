@@ -78,6 +78,8 @@ class _ImportRelevState extends State<ImportRelev> {
       }
     }
 
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -123,6 +125,10 @@ class _ImportRelevState extends State<ImportRelev> {
 
 
   }
+  // List<String> items= <String>[
+  //   'Siva', 'Safi', 'Patience', 'Joel', 'Mado', 'Solange', 'Son'
+  // ];
+  // String dropdownValue ='Siva';
 
 
   @override
@@ -161,6 +167,23 @@ class _ImportRelevState extends State<ImportRelev> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
+                  // DropdownButton<String>(
+                  //   onChanged: (String? newValue){
+                  //     setState((){
+                  //       dropdownValue = newValue!;
+                  //     });
+                  //     dropdownValue = newValue!;
+                  //   },
+                  //   value: dropdownValue,
+                  //   items: items.map<DropdownMenuItem<String>>(
+                  //       (String value) {
+                  //         return DropdownMenuItem<String>(
+                  //           value: value,
+                  //           child: Text(value),
+                  //         );
+                  //       }
+                  //   ).toList(),
+                  // ),
 
 
 

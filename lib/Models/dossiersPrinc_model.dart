@@ -47,7 +47,7 @@ class Dossier {
 
 
   /*
-  enregistrement dossier
+  enregistrement NOUVEAU DOSSIER
    */
   static Future<String> enregistrement(Dossier dossier) async {
     //envoi des donnees au serveur
@@ -81,5 +81,23 @@ class Dossier {
 
     return data.statusCode.toString();
   }
+
+
+  static Future<String> CloturerDossier(Dossier Clot_dossier) async {
+    //envoi des donnees au serveur
+    var data = await http.post(
+      Uri.parse(Urls.adresseServeur + "/api/Dossier/Cloturer"),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: jsonEncode(Clot_dossier.toJson()),
+    );
+
+    print(data.statusCode.toString());
+
+    return data.statusCode.toString();
+  }
+
 
 }
