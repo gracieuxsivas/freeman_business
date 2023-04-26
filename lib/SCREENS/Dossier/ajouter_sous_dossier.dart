@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:intl/intl.dart';
+
 class AjouterDossier extends StatefulWidget {
   const AjouterDossier({Key? key}) : super(key: key);
 
@@ -15,6 +17,8 @@ class AjouterDossier extends StatefulWidget {
 bool isLoading = false;
 
 class _AjouterDossierState extends State<AjouterDossier> {
+
+  TextEditingController _importateurs= new TextEditingController();
   TextEditingController _NumPlaque= new TextEditingController();
   TextEditingController _NumDeclaration= new TextEditingController();
   TextEditingController _AutreNumero= new TextEditingController();
@@ -55,7 +59,7 @@ class _AjouterDossierState extends State<AjouterDossier> {
     super.initState();
     getComptes();
   }
-
+  //DateTime _dateTime= DateTime.now();
   var dropdownvalue;
 
   @override
@@ -142,22 +146,47 @@ class _AjouterDossierState extends State<AjouterDossier> {
 
 //DROPDWN BUTTON
 
-              child: DropdownButton(
-                hint: Text('Importateurs'),
-                isExpanded: true,
-                //alignment: Alignment.center,
-                items: Importlist.map((item) {
-                  return DropdownMenuItem(
-                    value: item['designationCompte'].toString(),
-                    child: Text(item['designationCompte'].toString()),
-                  );
-                }).toList(),
-                onChanged: (newVal) {
-                  setState(() {
-                    dropdownvalue = newVal;
-                  });
-                },
-                value: dropdownvalue,
+            //________________________________________
+              child: TextFormField(
+                controller: _importateurs,
+                style: TextStyle (fontSize: 17) ,
+
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(10),
+                    prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
+
+                      child: DropdownButton(
+                        hint: Text('Importateurs'),
+                        isExpanded: true,
+                        //alignment: Alignment.center,
+                        items: Importlist.map((item) {
+                          return DropdownMenuItem(
+                            value: item['designationCompte'].toString(),
+                            child: Text(item['designationCompte'].toString()),
+                          );
+                        }).toList(),
+                        onChanged: (newVal) {
+                          setState(() {
+                            dropdownvalue = newVal;
+                          });
+
+                          if (Importlist != null){
+                            _importateurs.text=dropdownvalue;
+                          }
+                        },
+                        value: dropdownvalue,
+
+                      ),
+                    ),
+                    border: OutlineInputBorder(),
+                    labelText: "Importateurs",
+                    hintText: " "
+                ),
+                keyboardType: TextInputType.text,
+
+                //____________________________________________
+
+
               ),
             ),
 
@@ -234,7 +263,6 @@ class _AjouterDossierState extends State<AjouterDossier> {
 
            SizedBox(height: 12,),
 
-
           Container(
             padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
 
@@ -245,20 +273,27 @@ class _AjouterDossierState extends State<AjouterDossier> {
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(10),
                     prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
-                      child:
-                      IconButton(onPressed: () { },
-                          icon: Icon(Icons.calendar_month,
-                              color: Colors.grey,))
 
-                      // Icon(
-                      //   Icons.calendar_month,
-                      //   color: Colors.grey,
-                      // ),
+                      child:
+                      IconButton(onPressed: () async{
+                        DateTime? pickeddate= await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2050),
+                          );
+                        if (pickeddate != null) {
+                          _Date.text = DateFormat('yyyy-MM-dd').format(pickeddate);
+                        }
+                      },
+                          icon: Icon(Icons.calendar_month,
+                              color: Colors.grey,
+                              size: 35 ,))
 
                     ),
                    border: OutlineInputBorder(),
                     labelText: "Date ",
-                    hintText: "  ",
+                    hintText: " ",
                 ),
                 keyboardType: TextInputType.text,
               ),
@@ -280,6 +315,7 @@ class _AjouterDossierState extends State<AjouterDossier> {
                     prefixIcon: Padding (padding: EdgeInsets.only(left: 20, right: 15),
 
                     ),
+
                     border: OutlineInputBorder(),
                     labelText: "Reference ",
                     hintText: "  "
@@ -289,9 +325,7 @@ class _AjouterDossierState extends State<AjouterDossier> {
             ),
           ),
 
-
           SizedBox(height: 12,),
-
 
           Container(
             padding: EdgeInsets.fromLTRB(5, 4, 5, 0),
@@ -315,7 +349,6 @@ class _AjouterDossierState extends State<AjouterDossier> {
           ),
 
          isLoading?CircularProgressIndicator():Container()
-
         ],
       ),
     );
