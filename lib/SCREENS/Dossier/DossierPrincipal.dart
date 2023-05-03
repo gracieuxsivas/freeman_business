@@ -229,8 +229,6 @@ class _DossierPrincState extends State<DossierPrinc> {
 
                                   IconButton(onPressed: (){
 
-
-
                                     Widget okButton = TextButton(
                                       child: Text("OK"),
                                       onPressed: () {

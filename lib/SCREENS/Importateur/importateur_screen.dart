@@ -51,7 +51,12 @@ class _ImportateurState extends State<Importateur> {
                        fontWeight: FontWeight.bold),
                  ),
                  const Spacer(),
-                 IconButton(onPressed: () {},
+                 IconButton(onPressed: () {
+                   Navigator.push(context,
+                       MaterialPageRoute(
+                           builder: (context) =>Importateur(import: import))
+                   );
+                 },
                      icon: Icon(Icons.search,
                          color: Colors.white)),
                  const Spacer(),
@@ -63,11 +68,8 @@ class _ImportateurState extends State<Importateur> {
                          color: Colors.white)),
                ]),
 
-
              ]),
         ),
-
-
 
       body:
       Column(
@@ -77,13 +79,11 @@ class _ImportateurState extends State<Importateur> {
             height: 40,
             color: Colors.blue,
 
-
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
 
                   Row(children: [
-
 
                   ]),
 
@@ -107,9 +107,6 @@ class _ImportateurState extends State<Importateur> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold),),
                       ]),
-
-
-
 
                   // TextFormField(),
                 ]
@@ -210,15 +207,8 @@ class _ImportateurState extends State<Importateur> {
                   })
           ),
 
-
-
-
-
         ],
       ),
-
-
-
 
     );
   }

@@ -101,20 +101,12 @@ class CustomSearchDelegate extends SearchDelegate{
           title: Text(result),
         );
 
-
       },
     );
     throw UnimplementedError();
   }
 }
-  // @override
-  // List<Widget> buildActions (BuidContext context) {}
-  //
-  // @override
-  // List<Widget> buildLeading (BuidContext context) {}
-  //
-  // @override
-  // List<Widget> buildSuggestions (BuidContext context) {}
+
 
 
 
