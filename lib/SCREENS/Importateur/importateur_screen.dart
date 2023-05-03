@@ -24,8 +24,6 @@ class _ImportateurState extends State<Importateur> {
   String date_2="";
   String NomCompte ="";
 
-
-
   @override
   Widget build(BuildContext context) {
     //final double height= MediaQuery.of(context).size.height;
