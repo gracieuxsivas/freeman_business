@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:freeman_business/Models/dossiersPrinc_model.dart';
 
 //import '../Models/dossier_PV_Model.dart';
 //import '../Models/dossier_PV_Model.dart';
@@ -11,21 +12,22 @@ import 'dossier_facturation_screen.dart';
 import 'model_list_file.dart';
 
 class DossierPV extends StatefulWidget {
-   String numDossier;
-   String designationDossier;
-  //const DossierEncours({Key? key, required this.etat}) : super(key: key);
-   DossierPV({ required this.numDossier, required this.designationDossier});
+
+   Dossier dossier;
+
+   //const DossierEncours({Key? key, required this.etat}) : super(key: key);
+   DossierPV({ required this.dossier});
 
   @override
-  State<DossierPV> createState() => _DossierPVState(numDossier:numDossier, designationDossier:designationDossier);
+  State<DossierPV> createState() => _DossierPVState(dossier:dossier);
 }
 
 class _DossierPVState extends State<DossierPV> {
   //int etat=0;
 
-  _DossierPVState({required this.numDossier, required this.designationDossier});
-  String numDossier="";
-  String designationDossier="";
+  Dossier dossier;
+
+  _DossierPVState({required this.dossier});
 
   //
 
@@ -49,14 +51,14 @@ class _DossierPVState extends State<DossierPV> {
               Row(
                   children: [
 
-                 Text(designationDossier
+                 Text(dossier.designationDossier!
                 ),
 
                 const Spacer(),
                    // etat==0?
                     IconButton(onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context)=>AjouterDossier()));
+                          MaterialPageRoute(builder: (context)=>AjouterDossier(dossier:dossier)));
                   //Navigator.pushNamed(context, '/ajouter_dossier');
                 },
                     icon: Icon(Icons.add,
@@ -118,7 +120,7 @@ class _DossierPVState extends State<DossierPV> {
 
           Expanded(
               child: FutureBuilder<List<DossierPVmod>>(
-                  future: DossierPVmod.getPVDossier(numDossier),
+                  future: DossierPVmod.getPVDossier(dossier.numDossier!),
                   builder: (context, snapshot) {
 
                     //Chargement des donnees

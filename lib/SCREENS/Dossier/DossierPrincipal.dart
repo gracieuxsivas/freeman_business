@@ -191,8 +191,8 @@ class _DossierPrincState extends State<DossierPrinc> {
                               Navigator.push(context,
                                   MaterialPageRoute(
                                       builder: (context) =>DossierPV(
-                                          numDossier: dossierObject.numDossier.toString(),
-                                          designationDossier:dossierObject.designationDossier.toString()
+                                          dossier: dossierObject,
+                                          // designationDossier:dossierObject.designationDossier.toString()
                                           //Compte: importObject.numCompte!.toInt(), date_1, date_2, NumOperation: '',
                                           //NomCompte: importObject.designationCompte.toString()
                                       ))
