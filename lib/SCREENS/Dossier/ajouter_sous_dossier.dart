@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freeman_business/Models/Posts/AjouterSousDossier_Model.dart';
+import 'package:freeman_business/Models/dossiersPrinc_model.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -8,16 +9,19 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 
 class AjouterDossier extends StatefulWidget {
-  const AjouterDossier({Key? key}) : super(key: key);
+  Dossier dossier;
+  AjouterDossier({Key? key,required this.dossier}) : super(key: key);
 
   @override
-  State<AjouterDossier> createState() => _AjouterDossierState();
+  State<AjouterDossier> createState() => _AjouterDossierState(dossier:dossier);
 }
 
 bool isLoading = false;
 
 class _AjouterDossierState extends State<AjouterDossier> {
 
+  Dossier dossier;
+  _AjouterDossierState({required this.dossier});
   TextEditingController _importateurs= new TextEditingController();
   TextEditingController _NumPlaque= new TextEditingController();
   TextEditingController _NumDeclaration= new TextEditingController();
@@ -94,7 +98,7 @@ class _AjouterDossierState extends State<AjouterDossier> {
                         compte:"0",
                         codePV: "0",
                         etat: "",
-                        numDossier: "0",
+                        numDossier: dossier.numDossier,
                         plaque: _NumPlaque.text.toString(),
                         numeroDeclaration: _NumDeclaration.text.toString(),
                         autreNumero: _AutreNumero.text.toString(),
